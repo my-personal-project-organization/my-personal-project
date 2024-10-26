@@ -1,14 +1,16 @@
 <div
   *ngIf="isOpen()"
-  class="fixed inset-0 flex items-center justify-center z-50"
+  class="fixed inset-0 z-50 flex items-center justify-center"
 >
   <div
-    class="bg-gray-800 p-6 rounded-lg shadow-md max-w-md w-full"
+    class="w-full max-w-md rounded-lg bg-white p-6 shadow-md dark:bg-gray-800"
     (click)="$event.stopPropagation()"
     (keyup.enter)="$event.preventDefault()"
     aria-hidden="true"
   >
-    <h2 class="text-2xl font-semibold mb-4 text-white">{{ title() }}</h2>
+    <h2 class="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
+      {{ title() }}
+    </h2>
     <ng-content></ng-content>
     <div class="mt-6 flex flex-row-reverse justify-between gap-4">
       <ui-button
@@ -20,21 +22,21 @@
         [disabled]="confirmButtonDisabled()"
       ></ui-button>
       @if (!hideCancelButton()) {
-      <ui-button
-        (btnClick)="closed.emit()"
-        [type]="'button'"
-        [text]="cancelButtonText()"
-        color="danger"
-        size="medium"
-        [disabled]="cancelButtonDisabled()"
-      ></ui-button>
+        <ui-button
+          (btnClick)="closed.emit()"
+          [type]="'button'"
+          [text]="cancelButtonText()"
+          color="danger"
+          size="medium"
+          [disabled]="cancelButtonDisabled()"
+        ></ui-button>
       }
     </div>
   </div>
 </div>
 <div
   *ngIf="isOpen()"
-  class="fixed inset-0 bg-black opacity-50"
+  class="fixed inset-0 bg-white/50 dark:bg-black/50"
   (click)="closed.emit()"
   (keyup.enter)="closed.emit()"
   tabindex="3"

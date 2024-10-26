@@ -1,18 +1,18 @@
-<div class="relative inline-block text-left w-full">
+<div class="relative inline-block w-full text-left">
   <div>
     <button
       type="button"
-      class="inline-flex justify-center w-full rounded-md border border-gray-600 shadow-sm px-4 py-2 bg-gray-800 text-sm font-medium text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-red-500"
+      class="inline-flex w-full justify-center rounded-md border border-gray-600 bg-white px-4 py-2 text-sm font-medium text-gray-900 shadow-sm hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-gray-900 dark:border-gray-400 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600 dark:focus:ring-offset-gray-800"
       id="options-menu"
       aria-haspopup="true"
       aria-expanded="true"
       (click)="onCLickToggleDropdown()"
-      data-test="dropdown-button"
+      data-testid="dropdown-button"
     >
       {{ optionSelected || placeholder() }}
       <svg
         *ngIf="!isOpen"
-        class="-mr-1 ml-2 h-5 w-5 text-gray-400"
+        class="-mr-1 ml-2 h-5 w-5 text-gray-400 dark:text-gray-500"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -26,7 +26,7 @@
       </svg>
       <svg
         *ngIf="isOpen"
-        class="-mr-1 ml-2 h-5 w-5 text-gray-400"
+        class="-mr-1 ml-2 h-5 w-5 text-gray-400 dark:text-gray-500"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
         fill="currentColor"
@@ -41,25 +41,25 @@
     </button>
   </div>
   @if (isOpen) {
-  <div
-    class="z-50 cursor-pointer origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none"
-    role="menu"
-    aria-orientation="vertical"
-    aria-labelledby="options-menu"
-  >
-    <div class="py-1" role="none">
-      @for (option of options(); track $index) {
-      <a
-        class="text-gray-300 block px-4 py-2 text-sm hover:bg-gray-700 hover:text-white"
-        role="menuitem"
-        (click)="onClickSelectOption(option)"
-        (keypress.enter)="onClickSelectOption(option)"
-        data-test="dropdown-option"
-        [tabindex]="$index + 1"
-        >{{ option }}</a
-      >
-      }
+    <div
+      class="absolute right-0 z-50 mt-2 w-56 origin-top-right cursor-pointer rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700 dark:ring-gray-300"
+      role="menu"
+      aria-orientation="vertical"
+      aria-labelledby="options-menu"
+    >
+      <div class="py-1" role="none">
+        @for (option of options(); track $index) {
+          <a
+            class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-gray-100"
+            role="menuitem"
+            (click)="onClickSelectOption(option)"
+            (keypress.enter)="onClickSelectOption(option)"
+            data-testid="dropdown-option"
+            [tabindex]="$index + 1"
+            >{{ option }}</a
+          >
+        }
+      </div>
     </div>
-  </div>
   }
 </div>
