@@ -7,6 +7,9 @@ import { expect } from '@storybook/jest';
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
   title: 'DropdownComponent',
+  parameters: {
+    layout: 'centered',
+  },
   argTypes: {
     options: { control: 'select' },
     placeholder: { control: 'text' },
@@ -52,5 +55,16 @@ export const WithCustomPlaceholder: Story = {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Choose an option/gi)).toBeTruthy();
     expect(canvas.getByRole('button')).toBeTruthy();
+  },
+};
+
+export const WithFullWidth: Story = {
+  parameters: {
+    layout: 'padded',
+  },
+  args: {
+    options: ['Option 1', 'Option 2', 'Option 3'],
+    placeholder: 'Choose an option',
+    selectedOption: null,
   },
 };

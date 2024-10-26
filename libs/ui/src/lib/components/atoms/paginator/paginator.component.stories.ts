@@ -7,6 +7,9 @@ import { expect } from '@storybook/jest';
 const meta: Meta<PaginatorComponent> = {
   component: PaginatorComponent,
   title: 'PaginatorComponent',
+  parameters: {
+    layout: 'padded',
+  },
   argTypes: {
     currentPage: { control: 'number' },
     pageSize: { control: 'number' },
