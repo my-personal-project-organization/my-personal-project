@@ -431,7 +431,7 @@ import { CommonModule } from '@angular/common';
       <div class="container">
         <!--  WELCOME  -->
         <div id="welcome">
-          <h1>
+          <h1 class="bg-green-400">
             <span> Hello there, </span>
             Welcome my-personal-project 👋
           </h1>
