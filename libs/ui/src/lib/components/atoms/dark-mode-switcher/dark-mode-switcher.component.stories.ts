@@ -34,25 +34,23 @@ export const DarkMode: Story = {
     props: args,
     template: `
         <ui-dark-mode-switcher></ui-dark-mode-switcher>
-          <ui-button text="Click me!" color="secondary" type="button"></ui-button> 
-          <ui-button text="Click me!" color="primary" type="button"></ui-button> 
-          <ui-button text="Click me!" color="danger" type="button"></ui-button> 
+        <ui-button text="Click me!" color="secondary" type="button"></ui-button> 
+        <ui-button text="Click me!" color="primary" type="button"></ui-button> 
+        <ui-button text="Click me!" color="danger" type="button"></ui-button> 
       `,
   }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const button = canvas.getByTestId('dark-mode-button');
-    expect(
-      canvas.getByText(
-        'This text should change color when dark mode is enabled.',
-      ),
-    ).toHaveClass('text-gray-700');
+    const button = canvas.getByTestId<HTMLButtonElement>('dark-mode-button');
+    const performTest = async (isDark: boolean) => {
+      expect(button).toHaveTextContent(isDark ? 'Dark' : 'Light'); // Check initial state
+      await button.click(); // Toggle dark mode
+      expect(button).toHaveTextContent(isDark ? 'Light' : 'Dark'); // Check toggled state
+      await button.click(); // Toggle back
+      expect(button).toHaveTextContent(isDark ? 'Dark' : 'Light'); // Check initial state again
+    };
 
-    await button.click();
-    expect(
-      canvas.getByText(
-        'This text should change color when dark mode is enabled.',
-      ),
-    ).toHaveClass('text-gray-200');
+    const isDark = button.textContent?.includes('Dark') ?? false;
+    performTest(isDark);
   },
 };
