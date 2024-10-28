@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "nx run my-personal-project:serve:development",
-    "storybook": "nx run ui:storybook"
+    "storybook": "nx run ui:storybook",
+    "localize": "nx run my-personal-project:build:production --localize && npx serve dist/apps/my-personal-project/browser"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "@angular/cli": "~18.2.0",
     "@angular/compiler-cli": "~18.2.0",
     "@angular/language-service": "~18.2.0",
+    "@angular/localize": "^18.2.0",
     "@eslint/js": "^9.8.0",
     "@nx/angular": "19.8.6",
     "@nx/devkit": "19.8.6",

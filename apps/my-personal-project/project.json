@@ -5,15 +5,26 @@
   "prefix": "app",
   "sourceRoot": "apps/my-personal-project/src",
   "tags": [],
+  "i18n": {
+    "sourceLocale": "en-US",
+    "locales": {
+      "es": "apps/my-personal-project/src/locales/messages.es.json"
+    }
+  },
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/my-personal-project",
         "index": "apps/my-personal-project/src/index.html",
         "browser": "apps/my-personal-project/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js",
+          "@angular/localize/init"
+        ],
         "tsConfig": "apps/my-personal-project/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -22,8 +33,12 @@
             "input": "apps/my-personal-project/public"
           }
         ],
-        "styles": ["apps/my-personal-project/src/styles.scss"],
-        "scripts": []
+        "styles": [
+          "apps/my-personal-project/src/styles.scss"
+        ],
+        "scripts": [],
+        "localize": true,
+        "i18nMissingTranslation": "error"
       },
       "configurations": {
         "production": {
@@ -45,6 +60,16 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true
+        },
+        "en": {
+          "localize": [
+            "en"
+          ]
+        },
+        "es": {
+          "localize": [
+            "es"
+          ]
         }
       },
       "defaultConfiguration": "production"
@@ -57,6 +82,9 @@
         },
         "development": {
           "buildTarget": "my-personal-project:build:development"
+        },
+        "es": {
+          "buildTarget": "my-personal-project:build:development,es"
         }
       },
       "defaultConfiguration": "development"
@@ -64,7 +92,9 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "my-personal-project:build"
+        "buildTarget": "my-personal-project:build",
+        "outputPath": "apps/my-personal-project/src/locales",
+        "format": "json"
       }
     },
     "lint": {
@@ -72,7 +102,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/my-personal-project/jest.config.ts"
       }
