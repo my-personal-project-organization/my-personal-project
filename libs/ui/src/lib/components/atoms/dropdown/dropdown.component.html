@@ -42,7 +42,7 @@
   </div>
   @if (isOpen) {
     <div
-      class="absolute right-0 z-50 mt-2 w-56 origin-top-right cursor-pointer rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700 dark:ring-gray-300"
+      class="absolute right-0 z-50 mt-2 w-full origin-top-right cursor-pointer rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-700 dark:ring-gray-300"
       role="menu"
       aria-orientation="vertical"
       aria-labelledby="options-menu"
@@ -54,7 +54,7 @@
             role="menuitem"
             (click)="onClickSelectOption(option)"
             (keypress.enter)="onClickSelectOption(option)"
-            data-testid="dropdown-option"
+            data-testid="dropdown-menu-item"
             [tabindex]="$index + 1"
             >{{ option }}</a
           >

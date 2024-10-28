@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DropdownComponent } from './dropdown.component';
 
 import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
@@ -13,8 +14,12 @@ const meta: Meta<DropdownComponent> = {
   argTypes: {
     options: { control: 'select' },
     placeholder: { control: 'text' },
-    selectedOption: { control: 'text' },
   },
+  decorators: [
+    moduleMetadata({
+      imports: [ReactiveFormsModule, FormsModule],
+    }),
+  ],
 };
 export default meta;
 type Story = StoryObj<DropdownComponent>;
@@ -23,8 +28,23 @@ export const Default: Story = {
   args: {
     options: ['Option 1', 'Option 2', 'Option 3'],
     placeholder: 'Select an option',
-    selectedOption: null,
   },
+  render: (args) => ({
+    props: {
+      ...args,
+      ngModel: null,
+    },
+    template: `
+        <form (ngSubmit)="onSubmit()">
+          <ui-dropdown
+            [(ngModel)]="ngModel"
+            name="myDropdown"
+            [options]="options"
+            [placeholder]="placeholder"
+          />
+        </form>
+      `,
+  }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Select an option/gi)).toBeTruthy();
@@ -36,24 +56,26 @@ export const WithSelectedOption: Story = {
   args: {
     options: ['Option 1', 'Option 2', 'Option 3'],
     placeholder: 'Select an option',
-    selectedOption: 'Option 2',
   },
+  render: (args) => ({
+    props: {
+      ...args,
+      formControl: new FormControl<string>('Option 2'),
+    },
+    template: `
+        <form (ngSubmit)="onSubmit()">
+          <ui-dropdown
+            [formControl]="formControl"
+            name="myDropdown"
+            [options]="options"
+            [placeholder]="placeholder"
+          />
+        </form>
+      `,
+  }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Option 2/gi)).toBeTruthy();
-    expect(canvas.getByRole('button')).toBeTruthy();
-  },
-};
-
-export const WithCustomPlaceholder: Story = {
-  args: {
-    options: ['Option 1', 'Option 2', 'Option 3'],
-    placeholder: 'Choose an option',
-    selectedOption: null,
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    expect(canvas.getByText(/Choose an option/gi)).toBeTruthy();
     expect(canvas.getByRole('button')).toBeTruthy();
   },
 };
@@ -65,6 +87,31 @@ export const WithFullWidth: Story = {
   args: {
     options: ['Option 1', 'Option 2', 'Option 3'],
     placeholder: 'Choose an option',
-    selectedOption: null,
+  },
+  render: (args) => ({
+    props: {
+      ...args,
+      ngModel: null,
+    },
+    template: `
+        <form (ngSubmit)="onSubmit()">
+          <ui-dropdown
+            [(ngModel)]="ngModel"
+            name="myDropdown"
+            [options]="options"
+            [placeholder]="placeholder"
+          />
+        </form>
+      `,
+  }),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    expect(canvas.getByText(/Choose an option/gi)).toBeTruthy();
+    expect(canvas.getByTestId('dropdown-button')).toBeTruthy();
+    canvas.getByTestId('dropdown-button').click();
+    expect(canvas.getAllByTestId('dropdown-menu-item')).toHaveLength(3);
+    canvas.getAllByTestId('dropdown-menu-item')?.[2]?.click();
+    expect(canvas.getByText(/Option 3/gi)).toBeTruthy();
+    expect(canvas.getByRole('button')).toBeTruthy();
   },
 };

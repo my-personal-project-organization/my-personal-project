@@ -7,6 +7,7 @@
       (keypress.enter)="onPreviousPage()"
       tabindex="0"
       class="relative inline-flex items-center rounded-md border border-gray-600 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 hover:text-gray-900 dark:border-gray-400 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white"
+      data-testid="paginator-go-previous-page-btn"
     >
       Previous
     </a>
@@ -15,24 +16,30 @@
       (keypress.enter)="onNextPage()"
       tabindex="1"
       class="relative ml-3 inline-flex items-center rounded-md border border-gray-600 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 hover:text-gray-900 dark:border-gray-400 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white"
+      data-testid="paginator-go-next-page-btn"
     >
       Next
     </a>
   </div>
 
   <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
-    <div>
+    <div data-testid="paginator-info">
       <p class="text-sm text-gray-500 dark:text-gray-400">
         Showing
-        <span class="font-medium">{{ from }}</span>
+        <span class="font-medium" data-testid="paginator-info-from">{{
+          from
+        }}</span>
         to
-        <span class="font-medium">{{ to }}</span>
+        <span class="font-medium" data-testid="paginator-info-to">{{
+          to
+        }}</span>
       </p>
     </div>
     <div>
       <nav
-        class="isolate inline-flex -space-x-px rounded-md shadow-sm"
+        class="isolate inline-flex cursor-pointer -space-x-px rounded-md shadow-sm"
         aria-label="Pagination"
+        data-testid="paginator-pagination"
       >
         <a
           (click)="onFirstPage()"
@@ -80,6 +87,7 @@
 
         <span
           class="relative inline-flex items-center border border-gray-600 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-900 dark:border-gray-400 dark:bg-gray-600 dark:text-gray-400"
+          data-testid="paginator-pagination-current-page"
           >{{ currentPage() + 1 }}</span
         >
         <a
@@ -103,14 +111,34 @@
             />
           </svg>
         </a>
+        <a
+          (click)="onLastPage()"
+          class="relative inline-flex items-center rounded-r-md border border-gray-600 bg-gray-100 px-2 py-2 text-sm font-medium text-gray-900 hover:bg-gray-200 hover:text-gray-900 focus:z-20 dark:border-gray-400 dark:bg-gray-600 dark:text-gray-400 dark:hover:bg-gray-500 dark:hover:text-white"
+        >
+          <span class="sr-only">Last</span>
+          <svg
+            class="h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 11-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414zM11 4a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 11-1.414-1.414L14.586 10 11 6.414a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </a>
       </nav>
     </div>
     <div>
       <ui-dropdown
         [options]="pageSizeOptions"
+        [(ngModel)]="pageSize"
         placeholder="Page size"
-        [selectedOption]="pageSize().toString()"
         (selectionChange)="onPageSizeChange($event)"
+        data-testid="paginator-page-size-dropdown"
       ></ui-dropdown>
     </div>
   </div>

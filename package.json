@@ -5,6 +5,8 @@
   "scripts": {
     "start": "nx run my-personal-project:serve:development",
     "storybook": "nx run ui:storybook",
+    "build-storybook": "nx run ui:build-storybook",
+    "chromatic": "npx chromatic --project-token=chpt_43bff0fc4bc5b49  --exit-zero-on-changes --only-changed --allow-console-errors",
     "localize": "nx run my-personal-project:build:production --localize && npx serve dist/apps/my-personal-project/browser"
   },
   "private": true,
@@ -58,6 +60,7 @@
     "@typescript-eslint/utils": "^8.0.0",
     "angular-eslint": "^18.3.0",
     "autoprefixer": "^10.4.0",
+    "chromatic": "^11.16.1",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-playwright": "^1.6.2",

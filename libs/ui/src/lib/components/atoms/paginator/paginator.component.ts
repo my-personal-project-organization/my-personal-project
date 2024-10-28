@@ -2,15 +2,17 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
+  model,
   output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DropdownComponent } from '../dropdown/dropdown.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'ui-paginator',
   standalone: true,
-  imports: [CommonModule, DropdownComponent],
+  imports: [CommonModule, DropdownComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './paginator.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -19,11 +21,14 @@ export class PaginatorComponent {
   /** Current page number  */
   currentPage = input.required<number>();
   /** Number of items per page  */
-  pageSize = input.required<number>();
+  pageSize = model.required<number>();
+  // pageSize = input.required<number>();
+  /** Total number of items  */
+  totalItems = input.required<number>();
   /** Event emitted when the current page changes */
   pageChange = output<number>();
   /** Event emitted when the number of items per page changes */
-  pageSizeChange = output<number>();
+  // pageSizeChange = output<number>();
 
   // * Variables
   pageSizeOptions = ['10', '20', '30'];
@@ -80,7 +85,17 @@ export class PaginatorComponent {
    * @param {string} newPageSize - The new page size that is selected by the user.
    */
   onPageSizeChange(newPageSize: string) {
-    this.pageSizeChange.emit(parseInt(newPageSize, 10));
+    console.log(newPageSize);
+    // this.pageSizeChange.emit(parseInt(newPageSize, 10));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /**
+   * The `onLastPage` function emits an event to change the page to the last page and scrolls to the
+   * top of the window smoothly.
+   */
+  onLastPage() {
+    this.pageChange.emit(Math.ceil(this.totalItems() / this.pageSize()) - 1);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
