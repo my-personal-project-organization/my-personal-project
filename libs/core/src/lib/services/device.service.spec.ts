@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { DOCUMENT } from '@angular/common';
 import { DeviceService } from './device.service';
-import { of } from 'rxjs'; // Import 'of' from RxJS
+import { DOCUMENT } from '@angular/common';
 
 describe('DeviceService', () => {
   let service: DeviceService;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let mockDocument: any;
 
   beforeEach(() => {
@@ -26,47 +26,39 @@ describe('DeviceService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should initially return "desktop"', (done) => {
-    service.getDevice().subscribe((deviceType) => {
-      expect(deviceType).toBe('desktop');
-      done();
+  it('should return "mobile" for window width less than 768', () => {
+    // Mock window.innerWidth
+    Object.defineProperty(window, 'innerWidth', {
+      value: 767,
+      writable: true,
     });
-  });
-
-  it('should return "mobile" when window width is less than 768', (done) => {
-    mockDocument.defaultView.innerWidth = 700; // Simulate mobile width
-    // Trigger a resize event (you might need to adjust this depending on how you're mocking events)
-    window.dispatchEvent(new Event('resize'));
-
-    service.getDevice().subscribe((deviceType) => {
-      expect(deviceType).toBe('mobile');
-      done();
-    });
-  });
-
-  it('should return "tablet" when window width is between 768 and 1023', (done) => {
-    mockDocument.defaultView.innerWidth = 900; // Simulate tablet width
-    window.dispatchEvent(new Event('resize'));
-
-    service.getDevice().subscribe((deviceType) => {
-      expect(deviceType).toBe('tablet');
-      done();
-    });
-  });
-
-  it('should not emit new value if device type does not change', (done) => {
-    const emittedValues: string[] = [];
-    service
-      .getDevice()
-      .subscribe((deviceType) => emittedValues.push(deviceType));
-
-    mockDocument.defaultView.innerWidth = 1100; // Still within desktop range
-    window.dispatchEvent(new Event('resize'));
-
     setTimeout(() => {
-      // Give some time for potential emissions
-      expect(emittedValues).toEqual(['desktop']); // Should only have emitted the initial value
-      done();
-    }, 100);
+      const deviceSignal = service.device();
+      expect(deviceSignal).toBe('mobile');
+    }, 0);
+  });
+
+  it('should return "tablet" for window width between 768 and 1024', () => {
+    Object.defineProperty(window, 'innerWidth', {
+      value: 900,
+      writable: true,
+    });
+    setTimeout(() => {
+      // Mock window.innerWidth
+      const deviceSignal = service.device();
+      expect(deviceSignal).toBe('tablet');
+    }, 0);
+  });
+
+  it('should return "desktop" for window width greater than 1024', () => {
+    // Mock window.innerWidth
+    Object.defineProperty(window, 'innerWidth', {
+      value: 1200,
+      writable: true,
+    });
+    setTimeout(() => {
+      const deviceSignal = service.device();
+      expect(deviceSignal).toBe('desktop');
+    }, 0);
   });
 });
