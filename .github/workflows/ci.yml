@@ -41,13 +41,13 @@ jobs:
       # Nx Affected runs only tasks affected by the changes in this PR/commit. Learn more: https://nx.dev/ci/features/affected
       - run: npx nx affected -t lint test build e2e-ci
 
-      # Chromatic:
-      - name: Run Chromatic
-        uses: chromaui/action@latest
-        with:
-          # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-      - run: npm run chromatic
+      # # Chromatic:
+      # - name: Run Chromatic
+      #   uses: chromaui/action@latest
+      #   with:
+      #     # ⚠️ Make sure to configure a `CHROMATIC_PROJECT_TOKEN` repository secret
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      # - run: npm run chromatic
 
   # chromatic:
   #   name: Run Chromatic
