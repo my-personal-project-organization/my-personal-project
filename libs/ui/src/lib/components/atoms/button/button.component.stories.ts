@@ -43,6 +43,23 @@ export const Secondary: Story = {
     size: 'medium',
     disabled: false,
   },
+  render: (args) => ({
+    props: {
+      ...args,
+      ngModel: null,
+    },
+    template: `
+        <div style="background-color: black; padding: 30px;">
+            <ui-button
+              [text]="text"
+              [type]="type"
+              [color]="color"
+              [size]="size"
+              [disabled]="disabled"
+            />
+        </div>
+      `,
+  }),
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Button/gi)).toBeTruthy();

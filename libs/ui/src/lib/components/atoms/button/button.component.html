@@ -5,13 +5,13 @@
   class="w-full rounded bg-blue-500 font-bold text-white transition duration-300 hover:bg-blue-700 active:bg-blue-800 active:bg-opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
   [ngClass]="[
     color() === 'primary'
-      ? 'bg-gray-600 hover:bg-gray-700 active:bg-gray-900 dark:bg-gray-400 dark:hover:bg-gray-500 dark:active:bg-gray-600'
+      ? 'bg-gray-600 hover:bg-gray-700 active:bg-gray-900 disabled:hover:bg-gray-600 disabled:active:bg-gray-600 dark:bg-gray-400 dark:hover:bg-gray-500 dark:active:bg-gray-600'
       : '',
     color() === 'secondary'
-      ? 'bg-inherit text-gray-300 hover:bg-gray-500 hover:text-white active:bg-gray-800 dark:bg-inherit dark:text-gray-500 dark:hover:bg-gray-300 dark:hover:text-gray-100 dark:active:bg-gray-200'
+      ? 'bg-inherit text-gray-300 hover:bg-gray-500 hover:text-white active:bg-gray-800 disabled:hover:bg-gray-500 disabled:hover:text-gray-300 dark:bg-inherit dark:text-gray-500 dark:hover:bg-gray-300 dark:hover:text-gray-100 dark:active:bg-gray-200'
       : '',
     color() === 'danger'
-      ? 'bg-red-600 hover:bg-red-800 active:bg-red-900 dark:bg-red-500 dark:hover:bg-red-600 dark:active:bg-red-700'
+      ? 'bg-red-600 hover:bg-red-800 active:bg-red-900 disabled:hover:bg-red-600 disabled:active:bg-red-600 dark:bg-red-500 dark:hover:bg-red-600 dark:active:bg-red-700'
       : '',
     size() === 'small' ? 'px-2 py-1 text-sm' : '',
     size() === 'medium' ? 'px-4 py-2 text-base' : '',
