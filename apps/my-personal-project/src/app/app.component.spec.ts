@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
-import { RouterModule } from '@angular/router';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -17,9 +17,9 @@ describe('AppComponent', () => {
     expect(compiled.querySelector('h1')?.textContent).toContain('greeting');
   });
 
-  it(`should have as title undefined`, () => {
+  it(`should have as title My Personal Project`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual(undefined);
+    expect(app.titleService.getTitle()).toEqual('My Personal Project');
   });
 });
