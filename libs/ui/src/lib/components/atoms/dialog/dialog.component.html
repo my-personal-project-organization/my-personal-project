@@ -1,43 +1,32 @@
-<div
-  *ngIf="isOpen()"
-  class="fixed inset-0 z-50 flex items-center justify-center"
->
-  <div
-    class="w-full max-w-md rounded-lg bg-white p-6 shadow-md dark:bg-gray-800"
-    (click)="$event.stopPropagation()"
-    (keyup.enter)="$event.preventDefault()"
-    aria-hidden="true"
-  >
-    <h2 class="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
-      {{ title() }}
-    </h2>
-    <ng-content></ng-content>
-    <div class="mt-6 flex flex-row-reverse justify-between gap-4">
-      <ui-button
-        (btnClick)="confirm.emit()"
-        [type]="'button'"
-        [text]="confirmButtonText()"
-        color="primary"
-        size="medium"
-        [disabled]="confirmButtonDisabled()"
-      ></ui-button>
-      @if (!hideCancelButton()) {
+@if (isOpen()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      class="w-full max-w-md rounded-lg bg-white p-6 shadow-md dark:bg-gray-800"
+    >
+      <h2 class="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
+        {{ title() }}
+      </h2>
+      <ng-content></ng-content>
+      <div class="mt-6 flex flex-row-reverse justify-between gap-4">
         <ui-button
-          (btnClick)="closed.emit()"
+          (btnClick)="confirm.emit()"
           [type]="'button'"
-          [text]="cancelButtonText()"
-          color="danger"
+          [text]="confirmButtonText()"
+          color="primary"
           size="medium"
-          [disabled]="cancelButtonDisabled()"
+          [disabled]="confirmButtonDisabled()"
         ></ui-button>
-      }
+        @if (!hideCancelButton()) {
+          <ui-button
+            (btnClick)="closed.emit()"
+            [type]="'button'"
+            [text]="cancelButtonText()"
+            color="danger"
+            size="medium"
+            [disabled]="cancelButtonDisabled()"
+          ></ui-button>
+        }
+      </div>
     </div>
   </div>
-</div>
-<div
-  *ngIf="isOpen()"
-  class="fixed inset-0 bg-white/50 dark:bg-black/50"
-  (click)="closed.emit()"
-  (keyup.enter)="closed.emit()"
-  tabindex="3"
-></div>
+}
