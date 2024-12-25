@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -12,5 +12,7 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent {
   titleService = inject(Title);
 
-  title = this.titleService.setTitle($localize`My Personal Project`);
+  title = this.titleService.setTitle(
+    $localize`:@@app.title:My Personal Project`,
+  );
 }
