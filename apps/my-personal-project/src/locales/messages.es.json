@@ -39,6 +39,6 @@
     "landing.skills.jest": "Jest",
     "landing.skills.ngrx": "NgRx",
     "landing.skills.rxjs": "RxJS",
-    "landing.skills.'team-management'": "Gestión de equipos",
+    "landing.skills.'team-management'": "Gestión de equipos"
   }
 }
