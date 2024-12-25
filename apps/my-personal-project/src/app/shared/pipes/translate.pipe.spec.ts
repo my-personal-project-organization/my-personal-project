@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
-import { TranslationService } from '../services/translation.service';
+import { TranslationService } from '../services/translations/translation.service';
 import { TranslatePipe } from './translate.pipe';
 
 describe('TranslatePipe', () => {

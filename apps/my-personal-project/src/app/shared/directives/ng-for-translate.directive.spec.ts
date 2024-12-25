@@ -38,7 +38,7 @@ describe('NgForTranslateDirective', () => {
   });
 
   it('should iterate and translate correctly', () => {
-    component.translationKey = 'landing.jobs.2.keyPoints';
+    component.translationKey = 'landing.jobs.2.key-points';
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(9);

@@ -7,7 +7,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { TranslationService } from '../services/translation.service';
+import { TranslationService } from '../services/translations/translation.service';
 
 @Directive({
   selector: '[ngForTranslate]',
@@ -31,7 +31,6 @@ export class NgForTranslateDirective implements OnChanges {
         this.translationService.getTranslations(ngForTranslateFrom);
 
       if (translationsObject) {
-        let index = 0;
         for (const key in translationsObject) {
           // eslint-disable-next-line no-prototype-builtins
           if (translationsObject.hasOwnProperty(key)) {
@@ -43,9 +42,8 @@ export class NgForTranslateDirective implements OnChanges {
                 : translationsObject[key];
             this.viewContainerRef.createEmbeddedView(this.templateRef, {
               $implicit: item,
-              index, // Add index for easier access
+              index: key, // We pass the key as Index
             });
-            index++;
           }
         }
       }

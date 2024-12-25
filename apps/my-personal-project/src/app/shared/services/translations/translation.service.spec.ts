@@ -19,7 +19,7 @@ describe('TranslationService', () => {
     expect(service.translate('landing.jobs.3.title')).toBe(
       'Senior Front End Angular Developer',
     );
-    expect(service.translate('landing.jobs.2.keyPoints.5')).toBe(
+    expect(service.translate('landing.jobs.2.key-points.5')).toBe(
       'Mentored and developed junior and mid-level developers.',
     );
   });
@@ -27,8 +27,8 @@ describe('TranslationService', () => {
   it('should return the key for non-existent keys', () => {
     expect(service.translate('non.existent.key')).toBe('non.existent.key');
     expect(service.translate('landing.jobs.4')).toBe('landing.jobs.4'); // Even if parent exists
-    expect(service.translate('landing.jobs.2.keyPoints.99')).toBe(
-      'landing.jobs.2.keyPoints.99',
+    expect(service.translate('landing.jobs.2.key-points.99')).toBe(
+      'landing.jobs.2.key-points.99',
     );
   });
 
