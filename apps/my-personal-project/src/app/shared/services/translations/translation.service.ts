@@ -20,11 +20,11 @@ export class TranslationService {
     }
 
     const keys = key.split('.');
-    let current: unknown = this.translations;
+    let current: Record<string, unknown> = this.translations;
 
     for (const k of keys) {
       if (typeof current === 'object' && current !== null && k in current) {
-        current = (current as Record<string, unknown>)[k];
+        current = current[k] as Record<string, unknown>;
       } else {
         return key;
       }
@@ -41,13 +41,19 @@ export class TranslationService {
    * The function `getTranslations` retrieves nested translations based on a given key in TypeScript.
    * The main purpose is to be used by ngForTranslate pipe.
    */
-  getTranslations(key: string): { [key: string]: string | object } | undefined {
+  getTranslations(key: string): Record<string, unknown> | undefined {
+    if (key === null || key === undefined || typeof key !== 'string') {
+      return undefined;
+    }
+    if (key === '') {
+      return this.translations;
+    }
     const keys = key.split('.');
-    let current: unknown = this.translations;
+    let current = this.translations;
 
     for (const k of keys) {
       if (typeof current === 'object' && current !== null && k in current) {
-        current = (current as Record<string, unknown>)[k];
+        current = current[k] as Record<string, unknown>;
       } else {
         return undefined;
       }
@@ -59,7 +65,7 @@ export class TranslationService {
     return undefined;
   }
 
-  translations: { [key: string]: unknown } = {
+  translations: Record<string, unknown> = {
     landing: landingPageTranslations,
   };
 }
