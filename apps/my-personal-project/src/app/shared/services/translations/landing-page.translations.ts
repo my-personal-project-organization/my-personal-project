@@ -57,6 +57,7 @@ export const landingPageTranslations = {
       ngrx: $localize`:@@landing.skills.ngrx:NgRx`,
       rxjs: $localize`:@@landing.skills.rxjs:RxJS`,
       'team-management': $localize`:@@landing.skills.'team-management':Team Management`,
+      communication: $localize`:@@landing.skills.communication:Communication`,
     },
   },
 } as const;
