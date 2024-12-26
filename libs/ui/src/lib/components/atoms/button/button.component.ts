@@ -1,5 +1,5 @@
-import { Component, input, output } from '@angular/core';
 import { CommonModule, NgClass } from '@angular/common';
+import { Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'ui-button',
@@ -11,7 +11,7 @@ export class ButtonComponent {
   // * Inputs and Outputs
   /** Disable the button */
   public disabled = input<boolean>();
-  /** The type of the button */
+  /** The type of the button can be 'button' | 'submit' */
   public type = input.required<'button' | 'submit'>();
   /** The text of the button */
   public text = input.required<string>();
