@@ -6,4 +6,5 @@ test('has title', async ({ page }) => {
   // Expect h1 to contain a substring.
   expect(await page.locator('h1').innerText()).toContain('My experiences');
   expect(await page.getByTestId('landing-skills').count()).toBe(10);
+  expect(await page.getByTestId('landing-skills').count()).toBe(10);
 });
