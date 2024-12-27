@@ -8,9 +8,9 @@
     "landing.jobs.3.description": "GBTEC Group · Tiempo Completo · Dec 2024 - Present · Vigo, Galicia, España · Remoto",
     "landing.jobs.3.key-points.0": "Desarrollo de una aplicación Angular.",
     "landing.jobs.2.title": "Frontend Manager",
-    "landing.jobs.2.description": "BizAway · Tiempo Completo · Jul 2023 - Dec 2024 · Vigo, Galicia, España · Remoto",
     "landing.jobs.2.key-points.0": "Gestioné y proporcioné liderazgo técnico a 4 equipos de desarrollo front-end.",
     "landing.jobs.2.key-points.1": "Desempeñé un papel clave en la ampliación de la organización de ingeniería de la empresa.",
+    "landing.jobs.2.description": "BizAway · Tiempo Completo · Jul 2023 - Dec 2024 · Vigo, Galicia, España · Remoto",
     "landing.jobs.2.key-points.2": "Definí e implementé estándares y mejores prácticas de desarrollo front-end.",
     "landing.jobs.2.key-points.3": "Colaboré con equipos multifuncionales.",
     "landing.jobs.2.key-points.4": "Participé activamente en revisiones de diseño utilizando Figma.",
@@ -39,6 +39,7 @@
     "landing.skills.jest": "Jest",
     "landing.skills.ngrx": "NgRx",
     "landing.skills.rxjs": "RxJS",
-    "landing.skills.'team-management'": "Gestión de equipos"
+    "landing.skills.'team-management'": "Gestión de equipos",
+    "landing.skills.communication": "Comunicación"
   }
 }
