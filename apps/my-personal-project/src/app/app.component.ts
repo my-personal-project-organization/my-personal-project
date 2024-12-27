@@ -11,7 +11,7 @@ import { APP_CONFIG } from '../environments/app-config.token';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  private readonly titleService = inject(Title);
+  public readonly titleService = inject(Title);
   private readonly appConfig = inject(APP_CONFIG);
 
   title = this.titleService.setTitle(
