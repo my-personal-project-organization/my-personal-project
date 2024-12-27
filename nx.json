@@ -52,7 +52,10 @@
       ],
       "options": {
         "passWithNoTests": true,
-        "codeCoverage": true
+        "codeCoverage": true,
+        "coverageReporters": [
+          "lcov"
+        ]
       },
       "configurations": {
         "ci": {
