@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
+import { $localize } from '@angular/localize/init';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { APP_CONFIG } from '../environments/app-config.token';
+import { environment } from '../environments/environment';
 
 @Component({
   standalone: true,
@@ -12,7 +13,6 @@ import { APP_CONFIG } from '../environments/app-config.token';
 })
 export class AppComponent {
   public readonly titleService = inject(Title);
-  private readonly appConfig = inject(APP_CONFIG);
 
   title = this.titleService.setTitle(
     $localize`:@@app.title:My Personal Project`,
@@ -20,6 +20,7 @@ export class AppComponent {
 
   // TODO: Remove on next task
   constructor() {
-    console.log(this.appConfig.apiUrl);
+    const aa = environment.firebaseApiKey;
+    console.log(aa);
   }
 }
