@@ -20,6 +20,8 @@ jobs:
       - name: Install dependencies
         # ⚠️ See your package manager's documentation for the correct command to install dependencies in a CI environment.
         run: npm ci
+        env:
+          NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }} 
       - name: Run Chromatic
         uses: chromaui/action@latest
         with:
