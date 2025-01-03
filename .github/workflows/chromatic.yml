@@ -7,6 +7,9 @@ jobs:
     name: Run Chromatic
     runs-on: ubuntu-latest
     steps:
+      - name: Authenticate with npm
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Checkout code
         uses: actions/checkout@v4
         with:
