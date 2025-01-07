@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  // Inject the Title service to set the title of the app
   titleService = inject(Title);
 
   title = this.titleService.setTitle(
