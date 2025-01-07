@@ -12,7 +12,7 @@ on:
 
 permissions:
   actions: read
-  contents: read
+  contents: write
 
 jobs:
   main:
@@ -42,7 +42,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.G_HUB_TOKEN }}
 
-      # - run: npm ci --legacy-peer-deps
       - uses: nrwl/nx-set-shas@v4
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
