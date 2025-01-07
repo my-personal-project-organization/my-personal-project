@@ -1,14 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { APP_CONFIG } from '../environments/app-config.token';
-import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent, RouterModule.forRoot([])],
-      providers: [{ provide: APP_CONFIG, useValue: environment }],
     }).compileComponents();
   });
 

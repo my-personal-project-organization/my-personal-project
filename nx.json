@@ -19,7 +19,9 @@
       "!{projectRoot}/tsconfig.storybook.json"
     ],
     "sharedGlobals": [
-      "{workspaceRoot}/.github/workflows/ci.yml"
+      "{workspaceRoot}/.github/workflows/ci.yml",
+      "{workspaceRoot}/.github/workflows/chromatic.yml",
+      "{workspaceRoot}/.github/workflows/sonarqube.yml"
     ]
   },
   "nxCloudId": "676d84add2d279433bd5d248",
