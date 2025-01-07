@@ -8,7 +8,7 @@ const envList = ['local', 'prod'];
 
 // ? Follow: https://medium.com/@ragabon/create-multiple-environment-ts-in-angular-using-env-and-automate-using-node-js-933503fca752
 
-export function createEnvironments() {
+function createEnvironments() {
   envList.forEach((en) => {
     const envPath = en !== 'local' ? `.${en}` : '';
     const apiUrl = en === 'local' ? 'local' : 'prod';
@@ -42,3 +42,4 @@ export function createEnvironments() {
 }
 
 createEnvironments();
+module.exports = { createEnvironments };

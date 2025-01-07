@@ -134,7 +134,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "node ./apps/my-personal-project/src/environments/create-environments.js"
+          "node ./apps/my-personal-project/src/environments/create-environments.cjs"
         ]
       }
     }
