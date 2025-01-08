@@ -51,12 +51,19 @@
         "{workspaceRoot}/jest.preset.js"
       ],
       "options": {
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "codeCoverage": true,
+        "coverageReporters": [
+          "lcov"
+        ]
       },
       "configurations": {
         "ci": {
           "ci": true,
-          "codeCoverage": true
+          "codeCoverage": true,
+          "coverageReporters": [
+            "lcov"
+          ]
         }
       }
     },
