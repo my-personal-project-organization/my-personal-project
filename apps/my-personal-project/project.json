@@ -14,6 +14,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
+      "dependsOn": [
+        "create-environment"
+      ],
       "outputs": [
         "{options.outputPath}"
       ],
@@ -54,7 +57,13 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/my-personal-project/src/environments/environment.ts",
+              "with": "apps/my-personal-project/src/environments/environment.prod.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
@@ -76,6 +85,9 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "dependsOn": [
+        "create-environment"
+      ],
       "configurations": {
         "production": {
           "buildTarget": "my-personal-project:build:production"
@@ -116,6 +128,14 @@
         "port": 4200,
         "staticFilePath": "dist/apps/my-personal-project/browser",
         "spa": true
+      }
+    },
+    "create-environment": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "node ./apps/my-personal-project/src/environments/create-environments.cjs"
+        ]
       }
     }
   }
