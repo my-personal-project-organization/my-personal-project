@@ -114,6 +114,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
+      "dependsOn": [
+        "create-environment"
+      ],
       "outputs": [
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
