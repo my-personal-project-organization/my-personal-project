@@ -17,10 +17,15 @@ function createEnvironments() {
     const envFile = `export const environment = {
       apiUrl: '${apiUrl}',
       production: ${production},
-      firebaseApiKey: '${process.env.FIREBASE_API_KEY}',
-      firebasesMessagingSenderId: '${process.env.FIREBASE_MESSAGING_SENDER_ID}',
-      firebaseAppId: '${process.env.FIREBASE_APP_ID}',
-      firebaseMeasurementId: '${process.env.FIREBASE_MEASUREMENT_ID}'
+      firebaseConfig: {
+        apiKey: '${process.env.FIREBASE_API_KEY}',
+        authDomain: 'my-personal-project-7c70d.firebaseapp.com',
+        projectId: 'my-personal-project-7c70d',
+        storageBucket: 'my-personal-project-7c70d.firebasestorage.app',
+        messagingSenderId: '938956948971',
+        appId: '1:938956948971:web:34ade1fc4fb53a773a45ae',
+        measurementId: 'G-422CWNGJS7',
+      }
     };`;
 
     const targetPath = path.join(
