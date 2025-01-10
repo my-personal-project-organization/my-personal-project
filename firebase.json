@@ -1,0 +1,24 @@
+{
+  "hosting": {
+    "public": "dist/apps/my-personal-project/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/es/**",
+        "destination": "/es/index.html"
+      },
+      {
+        "source": "**",
+        "destination": "/en-US/index.html"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

@@ -63,7 +63,7 @@ describe('createEnvironments', () => {
     createEnvironments();
     expect(fs.writeFile).toHaveBeenCalledWith(
       expect.stringContaining('environment.ts'),
-      expect.stringContaining(`firebaseApiKey: 'mocked_api_key'`),
+      expect.stringContaining(`apiKey: 'mocked_api_key'`),
       expect.any(Function),
     );
   });
