@@ -8,7 +8,7 @@ import { Firestore } from '@angular/fire/firestore';
 import { DdbbService } from './ddbb.service'; // Your service file
 
 // Initialize the mock functions before jest.mock
-const collectionMock = jest.fn();
+// const collectionMock = jest.fn();
 const addDocMock = jest.fn();
 const docMock = jest.fn();
 const docDataMock = jest.fn();
@@ -41,7 +41,7 @@ describe('DdbbService', () => {
   }));
 
   // Create a mock Firestore object to be injected
-  const firestoreMock: any = {};
+  const firestoreMock = {};
   // let firestoreMock: {
   //   collection: jest.Mock;
   //   doc: jest.Mock;
