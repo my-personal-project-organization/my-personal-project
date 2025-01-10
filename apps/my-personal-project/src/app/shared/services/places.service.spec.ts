@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-require-imports */
 const { ReadableStream } = require('node:util');
 Object.defineProperties(globalThis, {

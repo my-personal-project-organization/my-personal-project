@@ -1,11 +1,12 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-require-imports */
 const { ReadableStream } = require('node:util');
 Object.defineProperties(globalThis, {
   ReadableStream: { value: ReadableStream },
 });
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { DialogComponent } from '@my-personal-project/ui';
 import { of } from 'rxjs';
-import { DialogComponent } from '../../../../../../libs/ui/src';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { PlacesService } from '../../shared/services/places.service';
