@@ -1,156 +1,141 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { ReadableStream } = require('node:util');
-Object.defineProperties(globalThis, {
-  ReadableStream: { value: ReadableStream },
-});
 import { TestBed } from '@angular/core/testing';
 import { Firestore } from '@angular/fire/firestore';
-import { DdbbService } from './ddbb.service'; // Your service file
+import { DdbbService } from './ddbb.service';
 
-// Initialize the mock functions before jest.mock
-// const collectionMock = jest.fn();
-const addDocMock = jest.fn();
-const docMock = jest.fn();
-const docDataMock = jest.fn();
-const updateDocMock = jest.fn();
-const deleteDocMock = jest.fn();
-const getDocMock = jest.fn();
-const getDocsMock = jest.fn();
-const queryMock = jest.fn();
-const setDocMock = jest.fn();
-const collectionDataMock = jest.fn();
-const serverTimestampMock = jest.fn();
-const whereMock = jest.fn();
+// Mock Firestore
+const mockFirestore = {
+  collection: jest.fn(),
+};
+
+// Mock addDoc
+const mockAddDoc = jest.fn();
 
 describe('DdbbService', () => {
   let service: DdbbService;
-  jest.mock('@angular/fire/firestore', () => ({
-    collection: jest.fn().mockResolvedValue({ id: '123' }),
-    addDoc: addDocMock,
-    doc: docMock,
-    docData: docDataMock,
-    updateDoc: updateDocMock,
-    deleteDoc: deleteDocMock,
-    getDoc: getDocMock,
-    getDocs: getDocsMock,
-    query: queryMock,
-    setDoc: setDocMock,
-    collectionData: collectionDataMock,
-    serverTimestamp: serverTimestampMock,
-    where: whereMock,
-  }));
-
-  // Create a mock Firestore object to be injected
-  const firestoreMock = {};
-  // let firestoreMock: {
-  //   collection: jest.Mock;
-  //   doc: jest.Mock;
-  //   addDoc: jest.Mock;
-  //   getDoc: jest.Mock;
-  //   getDocs: jest.Mock;
-  //   updateDoc: jest.Mock;
-  //   setDoc: jest.Mock;
-  //   deleteDoc: jest.Mock;
-  //   collectionData: jest.Mock;
-  //   docData: jest.Mock;
-  //   query: jest.Mock;
-  //   where: jest.Mock;
-  // };
 
   beforeEach(() => {
-    // firestoreMock = {
-    //   collection: jest.fn().mockReturnThis(), // Update collection mock to return itself
-    //   doc: jest.fn().mockReturnThis(), // Update doc mock to return itself
-    //   addDoc: jest.fn(),
-    //   getDoc: jest.fn(),
-    //   getDocs: jest.fn(),
-    //   updateDoc: jest.fn(),
-    //   setDoc: jest.fn(),
-    //   deleteDoc: jest.fn(),
-    //   collectionData: jest.fn(),
-    //   docData: jest.fn(),
-    //   query: jest.fn(),
-    //   where: jest.fn(),
-    // };
-
     TestBed.configureTestingModule({
-      providers: [DdbbService, { provide: Firestore, useValue: firestoreMock }],
+      providers: [DdbbService, { provide: Firestore, useValue: mockFirestore }],
     });
 
     service = TestBed.inject(DdbbService);
+    jest.clearAllMocks();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  // TODO: Add tests. I cannot make it work with the current setup.
-  // it('should add a document', async () => {
-  //   const data = { name: 'test' };
-  //   // firestoreMock.addDoc.mockResolvedValue({ id: '123' });
+  // describe('add', () => {
+  //   it('should add a document to the specified collection with server timestamp', async () => {
+  //     const collectionName = 'testCollection';
+  //     const data = { name: 'Test Data', value: 123 };
+  //     const expectedData = { ...data, createdAt: 'mockTimestamp' };
+  //     const mockCollectionRef = { _path: { segments: [collectionName] } };
+  //     const mockDocRef = { id: 'newDocId', path: `${collectionName}/newDocId`, _converter: null, type: "document", firestore: mockFirestore};
 
-  //   const result = await service.add('testCollection', data);
-  //   expect(firestoreMock.addDoc).toHaveBeenCalled();
-  //   expect(result.id).toBe('123');
-  // });
+  //     mockFirestore.collection.mockReturnValueOnce(mockCollectionRef);
+  //     mockAddDoc.mockResolvedValueOnce(mockDocRef);
 
-  // it('should get a document', () => {
-  //   const data = { id: '123', name: 'test' };
-  //   firestoreMock.docData.mockReturnValue(of(data));
+  //     // Mock serverTimestamp to return a specific value for testing
+  //     (serverTimestamp as unknown as jest.Mock).mockReturnValue('mockTimestamp');
 
-  //   service.get('testCollection', '123').subscribe((result) => {
-  //     expect(result).toEqual(data);
+  //     const result = await service.add(collectionName, data);
+
+  //     expect(mockFirestore.collection).toHaveBeenCalledWith(mockFirestore, collectionName);
+  //     expect(mockAddDoc).toHaveBeenCalledWith(mockCollectionRef, expectedData);
+  //     expect(result).toEqual(mockDocRef);
   //   });
-  //   expect(firestoreMock.docData).toHaveBeenCalled();
-  // });
 
-  // it('should get all documents', () => {
-  //   const data = [{ id: '123', name: 'test' }];
-  //   firestoreMock.collectionData.mockReturnValue(of(data));
+  //   it('should handle errors during document addition', async () => {
+  //     const collectionName = 'testCollection';
+  //     const data = { name: 'Test Data', value: 123 };
+  //     const mockCollectionRef = { _path: { segments: [collectionName] } };
+  //     const errorMessage = 'Error adding document';
 
-  //   service.getAll('testCollection').subscribe((result) => {
-  //     expect(result).toEqual(data);
+  //     mockFirestore.collection.mockReturnValueOnce(mockCollectionRef);
+  //     mockAddDoc.mockRejectedValueOnce(new Error(errorMessage));
+
+  //     // Mock serverTimestamp to return a specific value for testing
+  //     (serverTimestamp as unknown as jest.Mock).mockReturnValue('mockTimestamp');
+
+  //     await expect(service.add(collectionName, data)).rejects.toThrow(errorMessage);
+
+  //     expect(mockFirestore.collection).toHaveBeenCalledWith(mockFirestore, collectionName);
+  //     expect(mockAddDoc).toHaveBeenCalledWith(mockCollectionRef, { ...data, createdAt: 'mockTimestamp' });
   //   });
-  //   expect(firestoreMock.collectionData).toHaveBeenCalled();
-  // });
 
-  // it('should update a document', async () => {
-  //   const data = { name: 'updated' };
-  //   firestoreMock.updateDoc.mockResolvedValue(undefined);
+  //   it('should add a document with various data types', async () => {
+  //       const collectionName = 'testCollection';
+  //       const data = {
+  //         string: 'Test String',
+  //         number: 123,
+  //         boolean: true,
+  //         array: [1, 2, 3],
+  //         object: { key: 'value' }
+  //       };
+  //       const expectedData = { ...data, createdAt: 'mockTimestamp' };
+  //       const mockCollectionRef = { _path: { segments: [collectionName] } };
+  //       const mockDocRef = { id: 'newDocId', path: `${collectionName}/newDocId`, _converter: null, type: "document", firestore: mockFirestore};
 
-  //   await service.update('testCollection', '123', data);
-  //   expect(firestoreMock.updateDoc).toHaveBeenCalled();
-  // });
+  //       mockFirestore.collection.mockReturnValueOnce(mockCollectionRef);
+  //       mockAddDoc.mockResolvedValueOnce(mockDocRef);
 
-  // it('should set a document', async () => {
-  //   const data = { name: 'set' };
-  //   firestoreMock.setDoc.mockResolvedValue(undefined);
+  //       // Mock serverTimestamp to return a specific value for testing
+  //       (serverTimestamp as unknown as jest.Mock).mockReturnValue('mockTimestamp');
 
-  //   await service.set('testCollection', '123', data);
-  //   expect(firestoreMock.setDoc).toHaveBeenCalled();
-  // });
+  //       const result = await service.add(collectionName, data);
 
-  // it('should delete a document', async () => {
-  //   firestoreMock.deleteDoc.mockResolvedValue(undefined);
-
-  //   await service.delete('testCollection', '123');
-  //   expect(firestoreMock.deleteDoc).toHaveBeenCalled();
-  // });
-
-  // it('should query documents', () => {
-  //   const data = [{ id: '123', name: 'test' }];
-  //   firestoreMock.collectionData.mockReturnValue(of(data));
-
-  //   service
-  //     .query('testCollection', firestoreMock.where('name', '==', 'test'))
-  //     .subscribe((result) => {
-  //       expect(result).toEqual(data);
+  //       expect(mockFirestore.collection).toHaveBeenCalledWith(mockFirestore, collectionName);
+  //       expect(mockAddDoc).toHaveBeenCalledWith(mockCollectionRef, expectedData);
+  //       expect(result).toEqual(mockDocRef);
   //     });
-  //   expect(firestoreMock.collectionData).toHaveBeenCalled();
-  // });
 
-  // it('should create a where query constraint', () => {
-  //   const constraint = service.where('name', '==', 'test');
-  //   expect(constraint).toBeDefined();
+  //     it('should add a document with an empty object', async () => {
+  //       const collectionName = 'testCollection';
+  //       const data = {};
+  //       const expectedData = { createdAt: 'mockTimestamp' };
+  //       const mockCollectionRef = { _path: { segments: [collectionName] } };
+  //       const mockDocRef = { id: 'newDocId', path: `${collectionName}/newDocId`, _converter: null, type: "document", firestore: mockFirestore};
+
+  //       mockFirestore.collection.mockReturnValueOnce(mockCollectionRef);
+  //       mockAddDoc.mockResolvedValueOnce(mockDocRef);
+
+  //       (serverTimestamp as unknown as jest.Mock).mockReturnValue('mockTimestamp');
+
+  //       const result = await service.add(collectionName, data);
+
+  //       expect(mockFirestore.collection).toHaveBeenCalledWith(mockFirestore, collectionName);
+  //       expect(mockAddDoc).toHaveBeenCalledWith(mockCollectionRef, expectedData);
+  //       expect(result).toEqual(mockDocRef);
+  //     });
+
+  //     it('should add a document with nested objects', async () => {
+  //       const collectionName = 'testCollection';
+  //       const data = {
+  //         name: 'Nested Object',
+  //         details: {
+  //           age: 30,
+  //           address: {
+  //             city: 'Test City',
+  //             country: 'Test Country'
+  //           }
+  //         }
+  //       };
+  //       const expectedData = { ...data, createdAt: 'mockTimestamp' };
+  //       const mockCollectionRef = { _path: { segments: [collectionName] } };
+  //       const mockDocRef = { id: 'newDocId', path: `${collectionName}/newDocId`, _converter: null, type: "document", firestore: mockFirestore};
+
+  //       mockFirestore.collection.mockReturnValueOnce(mockCollectionRef);
+  //       mockAddDoc.mockResolvedValueOnce(mockDocRef);
+
+  //       (serverTimestamp as unknown as jest.Mock).mockReturnValue('mockTimestamp');
+
+  //       const result = await service.add(collectionName, data);
+
+  //       expect(mockFirestore.collection).toHaveBeenCalledWith(mockFirestore, collectionName);
+  //       expect(mockAddDoc).toHaveBeenCalledWith(mockCollectionRef, expectedData);
+  //       expect(result).toEqual(mockDocRef);
+  //     });
   // });
 });
