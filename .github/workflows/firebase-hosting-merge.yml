@@ -18,3 +18,7 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MY_PERSONAL_PROJECT_7C70D }}
           channelId: live
           projectId: my-personal-project-7c70d
+          # ? We tried a solution with gemini with does not work. I create a GitHub Page and these 2 secrets are not used.
+          # ? I will try to use them in the future. if we find a solution we need to delete the GitHub Page and the secrets.
+          # appId: ${{ secrets.GH_PAGE_APP_ID }}
+          # privateKey: ${{ secrets.GH_PAGE_PRIVATE_KEY }}

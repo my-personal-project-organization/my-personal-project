@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Component, DebugElement } from '@angular/core';
+import { Component, DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ScrollEndDirective } from './scroll-end.directive'; // Adjust the path as needed
@@ -7,6 +7,8 @@ import { ScrollEndDirective } from './scroll-end.directive'; // Adjust the path 
 // A simple host component to apply the directive to
 @Component({
   template: `<div libScrollEnd (scrollEnd)="onScrollEnd()"></div>`,
+  standalone: true,
+  imports: [ScrollEndDirective],
 })
 class TestHostComponent {
   onScrollEnd() {
@@ -26,11 +28,13 @@ describe('ScrollEndDirective', () => {
   let directiveEl: DebugElement;
   let directiveInstance: ScrollEndDirective;
 
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TestHostComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+  });
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [TestHostComponent], // Only declare the host component
-      imports: [ScrollEndDirective], // Import the standalone directive
-    });
     fixture = TestBed.createComponent(TestHostComponent);
     component = fixture.componentInstance;
     directiveEl = fixture.debugElement.query(By.directive(ScrollEndDirective));
