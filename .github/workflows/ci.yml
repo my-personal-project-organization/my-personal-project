@@ -35,6 +35,19 @@ jobs:
 
       - run: npm ci --legacy-peer-deps
       - uses: nrwl/nx-set-shas@v4
+      # Install Playwright dependencies to fix this warning:
+      # ╔══════════════════════════════════════════════════════╗
+      # ║ Host system is missing dependencies to run browsers. ║
+      # ║ Missing libraries:                                   ║
+      # ║     libgtk-4.so.1                                    ║
+      # ║     libgraphene-1.0.so.0                             ║
+      # ║     libavif.so.13                                    ║
+      # ╚══════════════════════════════════════════════════════╝
+      # Learn more: https://playwright.dev/docs/intro#installation
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Install Playwright Dependencies
+        run: sudo apt install libgtk-4-1 libgraphene-1.0-0 libavif13
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
