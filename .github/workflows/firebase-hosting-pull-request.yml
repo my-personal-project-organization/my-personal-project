@@ -19,3 +19,5 @@ jobs:
           repoToken: ${{ secrets.G_HUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MY_PERSONAL_PROJECT_7C70D }}
           projectId: my-personal-project-7c70d
+          appId: ${{ secrets.GH_PAGE_APP_ID }}
+          privateKey: ${{ secrets.GH_PAGE_PRIVATE_KEY }}
