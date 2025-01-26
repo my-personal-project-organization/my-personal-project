@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ArticleSchema } from '@mpp/scribo/data-access';
 import { DialogComponent } from '@mpp/shared/ui';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -57,5 +58,41 @@ export class LandingPageComponent {
     };
     const response = await this.placesService.addPlace(place);
     console.log('Response:', response);
+  }
+
+  // TODO: REMOVE just testing
+  testZod() {
+    const articleData = {
+      _id: 'some-id',
+      userId: 'user-id',
+      mainTitle: 'My Great Article',
+      content: [
+        {
+          title: 'Section 1',
+          items: [
+            { type: 'description', value: '<p>Some formatted HTML</p>' },
+            {
+              type: 'image',
+              value: 'https://example.com/image.jpg',
+              footer: 'My Image',
+            },
+          ],
+        },
+      ],
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+
+    const validatedArticle = ArticleSchema.parse(articleData); // Throws ZodError if validation fails
+
+    // Or use safeParse:
+    const result = ArticleSchema.safeParse(articleData);
+    if (result.success) {
+      const validatedArticle = result.data;
+      // Do something with the validated article
+    } else {
+      // Handle the error (result.error)
+      console.error(result.error.format());
+    }
   }
 }
