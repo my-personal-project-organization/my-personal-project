@@ -5,7 +5,7 @@ Object.defineProperties(globalThis, {
   ReadableStream: { value: ReadableStream },
 });
 import { TestBed } from '@angular/core/testing';
-import { DdbbService } from '@my-personal-project/core';
+import { DdbbService } from '@mpp/shared/data-access';
 import { Place } from '../types/place';
 import { PlacesService } from './places.service';
 

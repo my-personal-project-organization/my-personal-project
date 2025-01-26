@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { DialogComponent } from '@my-personal-project/ui';
+import { DialogComponent } from '@mpp/shared/ui';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { PlacesService } from '../../shared/services/places.service';

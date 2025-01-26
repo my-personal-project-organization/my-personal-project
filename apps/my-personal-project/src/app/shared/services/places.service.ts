@@ -1,6 +1,6 @@
 // TODO: REMOVE just testing
 import { inject, Injectable } from '@angular/core';
-import { DdbbService } from '@my-personal-project/core';
+import { DdbbService } from '@mpp/shared/data-access';
 import { Place } from '../types/place';
 
 @Injectable({
