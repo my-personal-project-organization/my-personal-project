@@ -9,22 +9,22 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[ngForObject]',
+  selector: '[uiNgForObject]',
   standalone: true,
 })
 export class NgForObjectDirective implements OnChanges {
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly templateRef = inject(TemplateRef<unknown>);
 
-  /** Use: *ngForObject="let item; from: myObject; let index = index"  */
-  public ngForObjectFrom = input.required<{ [key: string]: unknown }>();
+  /** Use: *uiNgForObject="let item; from: myObject; let index = index"  */
+  public uiNgForObjectFrom = input.required<{ [key: string]: unknown }>();
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      changes['ngForObjectFrom'] &&
-      changes['ngForObjectFrom']?.currentValue
+      changes['uiNgForObjectFrom'] &&
+      changes['uiNgForObjectFrom']?.currentValue
     ) {
-      const currentValue = changes['ngForObjectFrom']?.currentValue;
+      const currentValue = changes['uiNgForObjectFrom']?.currentValue;
       const propertyNames = Object.keys(currentValue);
 
       // remove all views

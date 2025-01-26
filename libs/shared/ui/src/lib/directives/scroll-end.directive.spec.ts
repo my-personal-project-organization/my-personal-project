@@ -6,7 +6,7 @@ import { ScrollEndDirective } from './scroll-end.directive'; // Adjust the path 
 
 // A simple host component to apply the directive to
 @Component({
-  template: `<div libScrollEnd (scrollEnd)="onScrollEnd()"></div>`,
+  template: `<div uiScrollEnd (scrollEnd)="onScrollEnd()"></div>`,
   standalone: true,
   imports: [ScrollEndDirective],
 })

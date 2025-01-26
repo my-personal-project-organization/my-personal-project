@@ -7,7 +7,7 @@ import { NgForObjectDirective } from './ng-for-object.directive';
   standalone: true,
   imports: [NgForObjectDirective],
   template: `
-    <ng-container *ngForObject="let item; from: myObject; let index = index">
+    <ng-container *uiNgForObject="let item; from: myObject; let index = index">
       <div id="item-{{ i }}">{{ item }}</div>
     </ng-container>
   `,

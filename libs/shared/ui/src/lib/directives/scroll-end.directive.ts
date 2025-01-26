@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, HostListener, Output } from '@angular/core';
 
-@Directive({ standalone: true, selector: '[libScrollEnd]' })
+@Directive({ standalone: true, selector: '[uiScrollEnd]' })
 export class ScrollEndDirective {
   @Output() public scrollEnd = new EventEmitter<void>();
 
