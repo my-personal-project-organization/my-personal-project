@@ -1,1 +1,2 @@
-export * from './lib/shared/data-access/shared/data-access.component';
+export * from './lib/services';
+export * from './lib/directives';

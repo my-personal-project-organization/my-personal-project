@@ -7,7 +7,8 @@
     "storybook": "nx run ui:storybook",
     "build-storybook": "nx run ui:build-storybook",
     "chromatic": "npx chromatic --project-token=chpt_43bff0fc4bc5b49  --exit-zero-on-changes --only-changed --allow-console-errors",
-    "localize": "nx run my-personal-project:build:production --localize && npx serve dist/apps/my-personal-project/browser"
+    "localize": "nx run my-personal-project:build:production --localize && npx serve dist/apps/my-personal-project/browser",
+    "deploy": "firebase deploy"
   },
   "private": true,
   "dependencies": {
