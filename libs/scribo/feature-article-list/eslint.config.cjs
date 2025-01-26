@@ -26,7 +26,7 @@ module.exports = [
         'error',
         {
           type: 'attribute',
-          prefix: 'featureArticleList',
+          prefix: 'ftrArticleList',
           style: 'camelCase',
         },
       ],
@@ -34,7 +34,7 @@ module.exports = [
         'error',
         {
           type: 'element',
-          prefix: 'feature-article-list',
+          prefix: 'ftr-article-list',
           style: 'kebab-case',
         },
       ],
