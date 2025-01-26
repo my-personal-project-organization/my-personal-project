@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { ArticleSchema } from '@mpp/scribo/data-access';
 import { DialogComponent } from '@mpp/shared/ui';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -7,6 +6,7 @@ import { PlacesService } from '../../shared/services/places.service';
 import { TranslationService } from '../../shared/services/translations/translation.service';
 import { Place } from '../../shared/types/place';
 import { LandingPageService } from './landing-page.service';
+import { NewArticleSchema } from '@mpp/scribo/data-access';
 
 @Component({
   selector: 'app-landing-page',
@@ -83,10 +83,10 @@ export class LandingPageComponent {
       updatedAt: new Date(),
     };
 
-    const validatedArticle = ArticleSchema.parse(articleData); // Throws ZodError if validation fails
+    const validatedArticle = NewArticleSchema.parse(articleData); // Throws ZodError if validation fails
 
     // Or use safeParse:
-    const result = ArticleSchema.safeParse(articleData);
+    const result = NewArticleSchema.safeParse(articleData);
     if (result.success) {
       const validatedArticle = result.data;
       // Do something with the validated article
