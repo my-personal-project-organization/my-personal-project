@@ -5,7 +5,7 @@ Object.defineProperties(globalThis, {
   ReadableStream: { value: ReadableStream },
 });
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DialogComponent } from '@my-personal-project/ui';
+import { DialogComponent } from '@mpp/shared/ui';
 import { of } from 'rxjs';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';

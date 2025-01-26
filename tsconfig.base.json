@@ -16,8 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@mpp/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@my-personal-project/core": ["libs/core/src/index.ts"],
-      "@my-personal-project/ui": ["libs/ui/src/index.ts"]
+      "@my-personal-project/core": ["libs/core/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
