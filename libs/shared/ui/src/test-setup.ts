@@ -4,3 +4,6 @@ setupZoneTestEnv({
   errorOnUnknownElements: true,
   errorOnUnknownProperties: true,
 });
+
+import '@angular/localize/init';
+global.TextEncoder = TextEncoder;
