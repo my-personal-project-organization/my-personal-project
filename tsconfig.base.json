@@ -16,8 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@mpp/shared/data-access": ["libs/shared/data-access/src/index.ts"],
-      "@mpp/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@my-personal-project/core": ["libs/core/src/index.ts"]
+      "@mpp/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

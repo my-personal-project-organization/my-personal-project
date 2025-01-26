@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,8 +7,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LocalStorageService } from '@my-personal-project/core';
+import { LocalStorageService } from '@mpp/shared/data-access';
 
 @Component({
   selector: 'ui-dark-mode-switcher',
