@@ -1,6 +1,8 @@
 {
   "name": "@mpp/scribo/data-access",
   "version": "0.0.1",
-  "peerDependencies": {},
+  "peerDependencies": {
+    "zod": "3.24.1"
+  },
   "sideEffects": false
 }
