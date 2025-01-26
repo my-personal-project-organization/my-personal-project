@@ -2,7 +2,12 @@
 import { TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { DdbbService } from '@mpp/shared/data-access';
 import { of, throwError } from 'rxjs';
-import { Article } from '../models';
+import {
+  Article,
+  NewArticleSchema,
+  SavedArticle,
+  SavedArticleSchema,
+} from '../models';
 import { mockArticle, mockArticles } from './article.mock';
 import { ArticleService } from './article.service';
 
@@ -65,6 +70,24 @@ describe('ArticleService', () => {
       expect(result).toEqual({ success: false });
       expect(mockDdbbService.getAll).toHaveBeenCalledWith('articles');
     }));
+
+    it('should filter out invalid articles', fakeAsync(() => {
+      const invalidArticle = { _id: 'invalid', userId: 'test' }; // Missing required fields
+      const articlesWithInvalid = [...mockArticles, invalidArticle];
+      (mockDdbbService.getAll as jest.Mock).mockReturnValue(
+        of(articlesWithInvalid),
+      );
+
+      let result: { success: boolean; data?: Article[] } | undefined;
+      service.getAll().subscribe((response) => {
+        result = response;
+      });
+
+      tick();
+
+      expect(result).toEqual({ success: true, data: mockArticles }); // Should only contain valid articles
+      expect(mockDdbbService.getAll).toHaveBeenCalledWith('articles');
+    }));
   });
 
   describe('getById', () => {
@@ -118,14 +141,32 @@ describe('ArticleService', () => {
       expect(result).toEqual({ success: false });
       expect(mockDdbbService.get).toHaveBeenCalledWith('articles', 'some-id');
     }));
+
+    it('should return success: false if article fails Zod validation', fakeAsync(() => {
+      const invalidArticle = { _id: 'invalid', userId: 'test' }; // Missing required fields
+      (mockDdbbService.get as jest.Mock).mockReturnValue(of(invalidArticle));
+
+      let result: { success: boolean; data?: Article | undefined } | undefined;
+      service.getById('invalid-id').subscribe((response) => {
+        result = response;
+      });
+
+      tick();
+
+      expect(result).toEqual({ success: false });
+      expect(mockDdbbService.get).toHaveBeenCalledWith(
+        'articles',
+        'invalid-id',
+      );
+    }));
   });
 
   describe('add', () => {
-    it('should add an article and return success: true', fakeAsync(() => {
-      const newArticle: Article = {
+    it('should add a Zod-validated article and return success: true', fakeAsync(() => {
+      const newArticle: Article = NewArticleSchema.parse({
         ...mockArticle,
         _id: 'new-article-id',
-      };
+      });
 
       (mockDdbbService.add as jest.Mock).mockReturnValue(Promise.resolve({}));
 
@@ -141,10 +182,10 @@ describe('ArticleService', () => {
     }));
 
     it('should handle errors from DdbbService and return success: false', fakeAsync(() => {
-      const newArticle: Article = {
+      const newArticle: Article = NewArticleSchema.parse({
         ...mockArticle,
         _id: 'new-article-id',
-      };
+      });
       const errorMessage = 'Error adding article';
       (mockDdbbService.add as jest.Mock).mockReturnValue(
         throwError(() => new Error(errorMessage)),
@@ -163,11 +204,13 @@ describe('ArticleService', () => {
   });
 
   describe('update', () => {
-    it('should update an article and return success: true', fakeAsync(() => {
-      const updatedArticle: Article = {
+    it('should update a Zod-validated article and return success: true', fakeAsync(() => {
+      const updatedArticle: SavedArticle = SavedArticleSchema.parse({
+        // Use SavedArticleSchema
         ...mockArticle,
         mainTitle: 'Updated Title',
-      };
+      });
+
       (mockDdbbService.update as jest.Mock).mockReturnValue(Promise.resolve());
 
       let result: { success: boolean } | undefined;
@@ -180,16 +223,17 @@ describe('ArticleService', () => {
       expect(result).toEqual({ success: true });
       expect(mockDdbbService.update).toHaveBeenCalledWith(
         'articles',
-        mockArticle._id,
+        (mockArticle as SavedArticle)._id,
         updatedArticle,
       );
     }));
 
     it('should handle errors from DdbbService and return success: false', fakeAsync(() => {
-      const updatedArticle: Article = {
+      const updatedArticle: SavedArticle = SavedArticleSchema.parse({
+        // Use SavedArticleSchema
         ...mockArticle,
         mainTitle: 'Updated Title',
-      };
+      });
       const errorMessage = 'Error updating article';
       (mockDdbbService.update as jest.Mock).mockReturnValue(
         throwError(() => new Error(errorMessage)),
@@ -205,7 +249,7 @@ describe('ArticleService', () => {
       expect(result).toEqual({ success: false });
       expect(mockDdbbService.update).toHaveBeenCalledWith(
         'articles',
-        mockArticle._id,
+        (mockArticle as SavedArticle)._id,
         updatedArticle,
       );
     }));
@@ -216,16 +260,18 @@ describe('ArticleService', () => {
       (mockDdbbService.delete as jest.Mock).mockReturnValue(Promise.resolve());
 
       let result: { success: boolean } | undefined;
-      service.delete(mockArticle._id).subscribe((response) => {
-        result = response;
-      });
+      service
+        .delete((mockArticle as SavedArticle)._id)
+        .subscribe((response) => {
+          result = response;
+        });
 
       tick();
 
       expect(result).toEqual({ success: true });
       expect(mockDdbbService.delete).toHaveBeenCalledWith(
         'articles',
-        mockArticle._id,
+        (mockArticle as SavedArticle)._id,
       );
     }));
 

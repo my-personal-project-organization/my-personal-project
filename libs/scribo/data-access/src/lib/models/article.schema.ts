@@ -19,13 +19,23 @@ const ContentSectionSchema = z.object({
   items: z.array(ContentItemSchema),
 });
 
-export const ArticleSchema = z.object({
-  _id: z.string(),
+export const BaseArticleSchema = z.object({
   userId: z.string(),
   mainTitle: z.string(),
   content: z.array(ContentSectionSchema),
-  createdAt: z.date(),
-  updatedAt: z.date(),
 });
 
-export type Article = z.infer<typeof ArticleSchema>;
+// Schema for a new article (before saving)
+export const NewArticleSchema = BaseArticleSchema.extend({}); // Same as BaseArticleSchema
+export type NewArticle = z.infer<typeof NewArticleSchema>;
+
+// Schema for a saved article (with id and timestamps)
+export const SavedArticleSchema = BaseArticleSchema.extend({
+  _id: z.string(),
+  createdAt: z.any(), // Or z.date() if you are always converting on retrieval
+  updatedAt: z.any(), // Or z.date() if you are always converting on retrieval
+});
+export type SavedArticle = z.infer<typeof SavedArticleSchema>;
+
+// Still we use a generic Article type if needed
+export type Article = NewArticle | SavedArticle;
