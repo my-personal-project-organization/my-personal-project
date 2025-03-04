@@ -1,6 +1,6 @@
 // libs/shared/data-access/src/lib/services/article.service.ts
 import { inject, Injectable } from '@angular/core';
-import { DdbbService } from '@mpp/shared/data-access';
+import { FirestoneService } from '@mpp/shared/data-access';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { z } from 'zod';
 import {
@@ -14,10 +14,10 @@ import {
   providedIn: 'root',
 })
 export class ArticleService {
-  private readonly ddbbService = inject(DdbbService);
+  private readonly firestoneService = inject(FirestoneService);
 
   getAll(): Observable<{ success: boolean; data?: SavedArticle[] }> {
-    return this.ddbbService.getAll<Article>('articles').pipe(
+    return this.firestoneService.getAll<Article>('articles').pipe(
       map((articles) => {
         const validatedArticles = articles
           .map((article) => {
@@ -46,7 +46,7 @@ export class ArticleService {
   getById(
     id: string,
   ): Observable<{ success: boolean; data?: SavedArticle | undefined }> {
-    return this.ddbbService.get<Article>('articles', id).pipe(
+    return this.firestoneService.get<Article>('articles', id).pipe(
       map((article) => {
         if (article === undefined) {
           return { success: true, data: undefined }; // Article not found, but not an error
@@ -71,7 +71,7 @@ export class ArticleService {
   }
 
   add(article: NewArticle): Observable<{ success: boolean }> {
-    return from(this.ddbbService.add('articles', article)).pipe(
+    return from(this.firestoneService.add('articles', article)).pipe(
       map(() => ({ success: true })),
       catchError((error) => {
         console.error('Error adding article:', error);
@@ -81,7 +81,9 @@ export class ArticleService {
   }
 
   update(article: SavedArticle): Observable<{ success: boolean }> {
-    return from(this.ddbbService.update('articles', article._id, article)).pipe(
+    return from(
+      this.firestoneService.update('articles', article._id, article),
+    ).pipe(
       map(() => ({ success: true })),
       catchError((error) => {
         console.error('Error updating article:', error);
@@ -91,7 +93,7 @@ export class ArticleService {
   }
 
   delete(id: string): Observable<{ success: boolean }> {
-    return from(this.ddbbService.delete('articles', id)).pipe(
+    return from(this.firestoneService.delete('articles', id)).pipe(
       map(() => ({ success: true })),
       catchError((error) => {
         console.error('Error deleting article:', error);

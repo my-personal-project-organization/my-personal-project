@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Firestore } from '@angular/fire/firestore';
-import { DdbbService } from './ddbb.service';
+import { FirestoneService } from './ddbb.service';
 
 // Mock Firestore
 const mockFirestore = {
@@ -10,15 +10,18 @@ const mockFirestore = {
 // Mock addDoc
 const mockAddDoc = jest.fn();
 
-describe('DdbbService', () => {
-  let service: DdbbService;
+describe('FirestoneService', () => {
+  let service: FirestoneService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DdbbService, { provide: Firestore, useValue: mockFirestore }],
+      providers: [
+        FirestoneService,
+        { provide: Firestore, useValue: mockFirestore },
+      ],
     });
 
-    service = TestBed.inject(DdbbService);
+    service = TestBed.inject(FirestoneService);
     jest.clearAllMocks();
   });
 
