@@ -1,6 +1,7 @@
 import { signalStore, withState } from '@ngrx/signals';
 import { withEntities } from '@ngrx/signals/entities'; // Import EntityState
 import { User, UserSchema } from '../models/user.schema';
+import { withDevtools } from './devtools/with-devtools';
 import { witFirestoreEntityStore } from './firestore-entity-store';
 
 type UserStoreSate = {
@@ -14,6 +15,8 @@ const initialState: UserStoreSate = {
 
 export const UserStore = signalStore(
   { providedIn: 'root' },
+  // ? https://ngrx-toolkit.angulararchitects.io/docs/with-devtools
+  withDevtools('users'),
   withState(initialState),
   withEntities<User>(),
   witFirestoreEntityStore<User>('users', UserSchema), // Correct: Pass User, UserSchema
