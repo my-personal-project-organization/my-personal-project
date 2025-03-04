@@ -5,15 +5,15 @@ Object.defineProperties(globalThis, {
   ReadableStream: { value: ReadableStream },
 });
 import { TestBed } from '@angular/core/testing';
-import { DdbbService } from '@mpp/shared/data-access';
+import { FirestoneService } from '@mpp/shared/data-access';
 import { Place } from '../types/place';
 import { PlacesService } from './places.service';
 
 describe('Service: Places', () => {
-  let ddbbServiceMock: any; // Mock the DdbbService
+  let firestoneServiceMock: any; // Mock the FirestoneService
 
   beforeEach(() => {
-    ddbbServiceMock = {
+    firestoneServiceMock = {
       add: jest.fn().mockResolvedValue(true),
       getAll: jest.fn().mockResolvedValue([]),
     };
@@ -21,7 +21,7 @@ describe('Service: Places', () => {
     TestBed.configureTestingModule({
       providers: [
         PlacesService,
-        { provide: DdbbService, useValue: ddbbServiceMock },
+        { provide: FirestoneService, useValue: firestoneServiceMock },
       ],
     });
   });
@@ -44,12 +44,12 @@ describe('Service: Places', () => {
       },
     };
     await service.addPlace(place);
-    expect(ddbbServiceMock.add).toHaveBeenCalledWith('places', place);
+    expect(firestoneServiceMock.add).toHaveBeenCalledWith('places', place);
   });
 
   it('should get places', () => {
     const service: PlacesService = TestBed.inject(PlacesService);
     service.getPlaces();
-    expect(ddbbServiceMock.getAll).toHaveBeenCalledWith('places');
+    expect(firestoneServiceMock.getAll).toHaveBeenCalledWith('places');
   });
 });

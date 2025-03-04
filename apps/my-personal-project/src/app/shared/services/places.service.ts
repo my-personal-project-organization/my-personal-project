@@ -1,19 +1,19 @@
 // TODO: REMOVE just testing
 import { inject, Injectable } from '@angular/core';
-import { DdbbService } from '@mpp/shared/data-access';
+import { FirestoneService } from '@mpp/shared/data-access';
 import { Place } from '../types/place';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlacesService {
-  private readonly ddbbService = inject(DdbbService);
+  private readonly firestoneService = inject(FirestoneService);
 
   addPlace(place: Place) {
-    return this.ddbbService.add('places', place);
+    return this.firestoneService.add('places', place);
   }
 
   getPlaces() {
-    return this.ddbbService.getAll<Place>('places');
+    return this.firestoneService.getAll<Place>('places');
   }
 }

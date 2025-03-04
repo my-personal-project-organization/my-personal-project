@@ -22,7 +22,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class DdbbService {
+export class FirestoneService {
   private readonly firestore = inject(Firestore);
 
   /**
