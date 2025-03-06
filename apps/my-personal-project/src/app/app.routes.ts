@@ -1,10 +1,15 @@
 import { Route } from '@angular/router';
+import { AuthTestComponent } from './pages/auth/auth.component';
 
 export const appRoutes: Route[] = [
   {
     path: '',
     redirectTo: 'scribo',
     pathMatch: 'full',
+  },
+  {
+    path: 'auth',
+    component: AuthTestComponent,
   },
   {
     path: 'user-management',
@@ -31,7 +36,7 @@ export const appRoutes: Route[] = [
         loadComponent: () => import('@mpp/scribo/feature-article-list').then((m) => m.ArticleListComponent),
       },
       {
-        path: '', // Empty path within 'scribo' to load a default component if needed
+        path: '',
         redirectTo: 'list',
         pathMatch: 'full',
       },
