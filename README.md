@@ -1,82 +1,150 @@
-# MyPersonalProject
+# Mario Personal Project
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+This project is a personal portfolio and article-sharing platform built with Angular, Nx, NgRx Signals, Firestore, and Tailwind CSS. It consists of two main sections:
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+- **CV/History:** A personal portfolio showcasing skills, experience, and projects.
+- **Scribo:** An article-sharing platform where users can create, read, update, and delete articles.
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Features
 
-## Finish your CI setup
+- **User Authentication:** Secure user authentication using Firebase Authentication with GitHub.
+- **Real-time Data:** Utilizes Firestore for real-time data synchronization.
+- **State Management:** NgRx Signals provides efficient and predictable state management.
+- **Data Validation:** Zod is used for robust schema validation, ensuring data integrity.
+- **Responsive UI:** Tailwind CSS provides a responsive and visually appealing user interface.
+- **Modular Architecture:** The project is structured as an Nx monorepo, promoting code reusability and maintainability.
+- **CRUD Operations:** Full Create, Read, Update, and Delete functionality for both CV/Portfolio data and Scribo articles.
+- **User Roles (Potentially):** The foundation is laid for implementing role-based access control (e.g., admin users).
+- **Dark Mode** Tailwind dark mode support.
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/KZ5NWXnTGL)
+## Technologies Used
 
+- [Angular](https://angular.io/) (v19+) - Frontend framework
+- [Nx](https://nx.dev/) - Monorepo build system
+- [NgRx Signals](https://ngrx.io/guide/signals) - State management
+- [Firebase](https://firebase.google.com/) - Backend services (Authentication, Firestore)
+- [AngularFire](https://github.com/angular/angularfire) - Official Angular library for Firebase
+- [Zod](https://zod.dev/) - Schema validation
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [Jest](https://jestjs.io/) - Testing framework
+- [Playwright](https://playwright.dev/) - End-to-end testing (configured, but not fully implemented in the provided code)
+- [ESLint](https://eslint.org/) - Linting
+- [RxJs](https://rxjs.dev/) - Reactive Extensions for JavaScript
 
-## Run tasks
+## Getting Started
 
-To run the dev server for your app, use:
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-```sh
-npx nx serve my-personal-project
-```
+**Prerequisites:**
 
-To create a production bundle:
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) or [pnpm](https://pnpm.io/)
+- [Angular CLI](https://cli.angular.io/) (`npm install -g @angular/cli`)
+- [Nx CLI](https://nx.dev/getting-started/installation) (`npm install -g nx`)
+- A Firebase project with Firestore and Authentication (GitHub provider) enabled.
+- A GitHub account (for OAuth app creation).
 
-```sh
-npx nx build my-personal-project
-```
+**Installation:**
 
-To see all available targets to run for a project, run:
+1.  **Clone the repository:**
 
-```sh
-npx nx show project my-personal-project
-```
-        
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+    ```bash
+    git clone <your-repository-url>
+    cd <your-repository-name>
+    ```
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+2.  **Install dependencies:**
 
-## Add new projects
+    ```bash
+    npm install  # Or yarn install, or pnpm install
+    ```
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+3.  **Configure Firebase:**
 
-Use the plugin's generator to create new projects.
+    - Create a file `src/environments/environment.ts` (and `src/environments/environment.prod.ts` for production).
+    - Add your Firebase configuration to these files:
 
-To generate a new application, use:
+      ```typescript
+      // src/environments/environment.ts
+      export const environment = {
+        production: false,
+        firebase: {
+          apiKey: 'YOUR_API_KEY',
+          authDomain: 'YOUR_AUTH_DOMAIN',
+          projectId: 'YOUR_PROJECT_ID',
+          storageBucket: 'YOUR_STORAGE_BUCKET',
+          messagingSenderId: 'YOUR_MESSAGING_SENDER_ID',
+          appId: 'YOUR_APP_ID',
+          measurementId: 'YOUR_MEASUREMENT_ID', // Optional
+        },
+      };
+      ```
 
-```sh
-npx nx g @nx/angular:app demo
-```
+      Replace the placeholder values with your actual Firebase project configuration from the Firebase console (Project settings -> General -> Your apps -> Web app -> Config).
 
-To generate a new library, use:
+4.  **Run the application:**
 
-```sh
-npx nx g @nx/angular:lib mylib
-```
+    ```bash
+    nx serve cv-app  # To run the CV/History app
+    # OR
+    nx serve scribo-app  # To run the Scribo app
+    ```
 
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
+    The application will be available at `http://localhost:4200` (or a different port if 4200 is in use).
 
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+5.  **Run tests**
+    ```bash
+    nx test shared-data-access
+    ```
+    Or any other lib or app.
 
+## Project Structure
 
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This project is an Nx monorepo with the following structure:
+my-personal-project/
+├── apps/
+│ ├── cv-app/ # Main application for the CV/History section
+│ └── scribo-app/ # Main application for the Scribo article-sharing platform
+└── libs/
+├── shared/
+│ ├── ui/ # Reusable UI components (shared across apps)
+│ ├── utils/ # Reusable utility functions
+│ └── data-access/ # Shared data access logic (Firebase, Auth, UserStore, generic Firestore store)
+│ ├── models/
+│ │ ├── firestore.schema.ts # Base Zod schema for Firestore documents
+│ │ └── user.schema.ts # Zod schema for User data
+│ ├── services/
+│ │ ├── firestone.service.ts# Service for interacting with Firestore
+│ │ └── user.store.ts # NgRx Signal Store for managing user data
+│ └── state/
+│ └── firestore-entity-store.ts # Generic NgRx Signal Store feature for Firestore entities
+├── cv/ # CV-specific libraries
+│ ├── feature-about/
+│ ├── feature-experience/
+│ ├── feature-projects/
+│ ├── feature-skills/
+│ └── data-access/ # CV-specific data access logic (can use shared/data-access)
+└── scribo/ # Scribo-specific libraries
+├── feature-article-list/
+├── feature-article-view/
+├── feature-article-create/
+├── feature-user-profile/
+└── data-access/ # Scribo-specific data access logic (can use shared/data-access)
 
-## Install Nx Console
+## Contributing (Optional)
 
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
+Contributions are welcome! Please follow these guidelines:
 
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+1.  Fork the repository.
+2.  Create a new branch for your feature/fix: `git checkout -b feature/my-new-feature`
+3.  Commit your changes: `git commit -m "Add some feature"`
+4.  Push to the branch: `git push origin feature/my-new-feature`
+5.  Create a pull request.
 
-## Useful links
+Please make sure to update tests as appropriate.
 
-Learn more:
+## License (Optional)
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. (You'd need to create a LICENSE.md file). If you don't want to use MIT, choose a different license.
 
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+---
