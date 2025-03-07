@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { $localize } from '@angular/localize/init';
-import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { AppService } from './app.service';
 
 @Component({
   standalone: true,
@@ -9,11 +8,10 @@ import { RouterModule } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  providers: [AppService],
 })
 export class AppComponent {
-  public readonly titleService = inject(Title);
+  private readonly appService = inject(AppService);
 
-  title = this.titleService.setTitle(
-    $localize`:@@app.title:My Personal Project`,
-  );
+  title = this.appService.setTitle();
 }

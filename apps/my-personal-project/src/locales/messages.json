@@ -1,6 +1,7 @@
 {
   "locale": "en-US",
   "translations": {
+    "app.title": "My Personal Project",
     "7708270344948043036": " {$INTERPOLATION} ",
     "landing.title": "My experiences",
     "landing.jobs.3.title": "Senior Front End Angular Developer",
