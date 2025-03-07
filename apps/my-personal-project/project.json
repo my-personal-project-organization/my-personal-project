@@ -20,7 +20,7 @@
         "outputPath": "dist/apps/my-personal-project",
         "index": "apps/my-personal-project/src/index.html",
         "browser": "apps/my-personal-project/src/main.ts",
-        "polyfills": [],
+        "polyfills": ["@angular/localize/init"],
         "tsConfig": "apps/my-personal-project/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [

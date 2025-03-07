@@ -7,7 +7,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
-  title: 'DropdownComponent',
+  title: 'Shared/UI/DropdownComponent',
   parameters: {
     layout: 'centered',
   },

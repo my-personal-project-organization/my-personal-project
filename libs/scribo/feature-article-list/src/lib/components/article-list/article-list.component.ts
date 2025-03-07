@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { Article, ArticleService } from '@mpp/scribo/data-access';
+import { IconComponent } from '@mpp/shared/ui';
 
 @Component({
   selector: 'ftr-article-list',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.scss'],
   standalone: true,
+  imports: [IconComponent],
 })
 export class ArticleListComponent {
   private readonly articleService = inject(ArticleService);
