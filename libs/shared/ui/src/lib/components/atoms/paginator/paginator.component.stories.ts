@@ -6,7 +6,7 @@ import { expect } from '@storybook/jest';
 
 const meta: Meta<PaginatorComponent> = {
   component: PaginatorComponent,
-  title: 'PaginatorComponent',
+  title: 'Shared/UI/PaginatorComponent',
   parameters: {
     layout: 'padded',
   },
@@ -47,14 +47,10 @@ export const WithCurrentPage: Story = {
     expect(canvas.getByTestId('paginator-info-from')).toHaveTextContent('21');
     expect(canvas.getByTestId('paginator-info-to')).toHaveTextContent('30');
     expect(canvas.getByTestId('paginator-pagination')).toBeTruthy();
-    expect(
-      canvas.getByTestId('paginator-pagination-current-page'),
-    ).toHaveTextContent('3');
+    expect(canvas.getByTestId('paginator-pagination-current-page')).toHaveTextContent('3');
     expect(canvas.getByTestId('paginator-go-first-page-btn')).toBeTruthy();
     expect(canvas.getByTestId('paginator-page-size-dropdown')).toBeTruthy();
-    expect(
-      canvas.getByTestId('paginator-page-size-dropdown'),
-    ).toHaveTextContent('10');
+    expect(canvas.getByTestId('paginator-page-size-dropdown')).toHaveTextContent('10');
   },
 };
 
@@ -74,8 +70,6 @@ export const WithPageSize: Story = {
     expect(canvas.getByTestId('paginator-pagination')).toBeTruthy();
     expect(canvas.getByTestId('paginator-go-first-page-btn')).toBeTruthy();
     expect(canvas.getByTestId('paginator-page-size-dropdown')).toBeTruthy();
-    expect(
-      canvas.getByTestId('paginator-page-size-dropdown'),
-    ).toHaveTextContent('20');
+    expect(canvas.getByTestId('paginator-page-size-dropdown')).toHaveTextContent('20');
   },
 };

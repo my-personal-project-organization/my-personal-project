@@ -7,7 +7,7 @@ import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<DarkModeSwitcherComponent> = {
   component: DarkModeSwitcherComponent,
-  title: 'DarkModeSwitcherComponent',
+  title: 'Shared/UI/DarkModeSwitcherComponent',
   parameters: {
     layout: 'centered',
   },

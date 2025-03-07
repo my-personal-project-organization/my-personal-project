@@ -6,7 +6,7 @@ import { expect } from '@storybook/jest';
 
 const meta: Meta<DialogComponent> = {
   component: DialogComponent,
-  title: 'DialogComponent',
+  title: 'Shared/UI/DialogComponent',
   argTypes: {
     title: { control: 'text' },
     confirmButtonText: { control: 'text' },
