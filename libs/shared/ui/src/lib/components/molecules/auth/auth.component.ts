@@ -1,10 +1,9 @@
-// auth-test.component.ts
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthStore } from '@mpp/shared/data-access'; // Import AuthStore
 
 @Component({
-  selector: 'app-auth-test',
+  selector: 'ui-auth-test',
   imports: [CommonModule],
   template: `
     <div>
