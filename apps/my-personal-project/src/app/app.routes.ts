@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { ScriboFeatureLayoutComponent } from '@mpp/scribo/feature-layout';
+import { AuthGuard } from '@mpp/shared/data-access';
 
 export const appRoutes: Route[] = [
   {
@@ -29,10 +30,15 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'list',
+        canActivate: [AuthGuard],
+        data: {
+          redirectTo: '/scribo/landing',
+        },
         loadComponent: () => import('@mpp/scribo/feature-article-list').then((m) => m.ArticleListComponent),
       },
       {
         path: 'user-profile',
+        // Todo: Add a route guard to protect this route
         loadComponent: () =>
           import('@mpp/scribo/feature-user-profile').then((m) => m.ScriboFeatureUserProfileComponent),
       },
