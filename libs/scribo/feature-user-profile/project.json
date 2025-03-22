@@ -2,7 +2,7 @@
   "name": "scribo/feature-user-profile",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/scribo/feature-user-profile/src",
-  "prefix": "scrb-user-profile",
+  "prefix": "scrb-user",
   "projectType": "library",
   "tags": [],
   "targets": {

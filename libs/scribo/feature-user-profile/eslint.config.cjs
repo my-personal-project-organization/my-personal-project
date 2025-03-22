@@ -12,7 +12,7 @@ module.exports = [
         'error',
         {
           type: 'attribute',
-          prefix: 'scrbUserProfile',
+          prefix: 'scrbUser',
           style: 'camelCase',
         },
       ],
@@ -20,7 +20,7 @@ module.exports = [
         'error',
         {
           type: 'element',
-          prefix: 'scrb-user-profile',
+          prefix: 'scrb-user',
           style: 'kebab-case',
         },
       ],

@@ -26,7 +26,7 @@ module.exports = [
         'error',
         {
           type: 'attribute',
-          prefix: 'dataAccess',
+          prefix: 'scrbDataAccess',
           style: 'camelCase',
         },
       ],
@@ -34,7 +34,7 @@ module.exports = [
         'error',
         {
           type: 'element',
-          prefix: 'data-access',
+          prefix: 'scrb-data-access',
           style: 'kebab-case',
         },
       ],
