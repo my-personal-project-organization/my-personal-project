@@ -2,15 +2,13 @@
   "name": "scribo/feature-article-list",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/scribo/feature-article-list/src",
-  "prefix": "ftr-article-list",
+  "prefix": "scrb-article-list",
   "projectType": "library",
   "tags": [],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
-      "outputs": [
-        "{workspaceRoot}/dist/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
         "project": "libs/scribo/feature-article-list/ng-package.json"
       },
@@ -26,9 +24,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "libs/scribo/feature-article-list/jest.config.ts"
       }

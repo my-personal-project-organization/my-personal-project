@@ -1,16 +1,7 @@
 import { Route } from '@angular/router';
-import { AuthTestComponent } from './pages/auth/auth.component';
+import { ScriboFeatureLayoutComponent } from '@mpp/scribo/feature-layout';
 
 export const appRoutes: Route[] = [
-  {
-    path: '',
-    redirectTo: 'scribo',
-    pathMatch: 'full',
-  },
-  {
-    path: 'auth',
-    component: AuthTestComponent,
-  },
   {
     path: 'user-management',
     loadComponent: () =>
@@ -30,21 +21,49 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'scribo',
+    component: ScriboFeatureLayoutComponent,
     children: [
+      {
+        path: 'landing',
+        loadComponent: () =>
+          import('@mpp/scribo/feature-landing').then((m) => m.ScriboFeatureLandingComponent),
+      },
       {
         path: 'list',
         loadComponent: () => import('@mpp/scribo/feature-article-list').then((m) => m.ArticleListComponent),
       },
       {
+        path: 'user-profile',
+        loadComponent: () =>
+          import('@mpp/scribo/feature-user-profile').then((m) => m.ScriboFeatureUserProfileComponent),
+      },
+      {
         path: '',
-        redirectTo: 'list',
+        redirectTo: 'landing',
         pathMatch: 'full',
       },
     ],
   },
-
   {
-    path: '**',
-    redirectTo: '',
+    path: '',
+    redirectTo: 'scribo/landing',
+    pathMatch: 'full',
   },
+  { path: '**', redirectTo: '' },
 ];
+
+// ! HERE
+// ! HERE
+// ! HERE
+// User Data Page: You're correct to consider whether user data management belongs in this library.  It depends on how extensive the user data features are:
+
+// Small, Self-Contained: If the user data is only a profile summary displayed on the dashboard, it's fine to keep it within @mpp/scribo/feature-dashboard.
+
+// Extensive User Management: If you have features like:
+
+// Editing profile details (name, email, password, avatar)
+// User settings (preferences, notifications)
+// Account management (deletion, subscription)
+// User roles/permissions
+// Then a separate library like @mpp/scribo/feature-user-profile (or @mpp/scribo/feature-account) is a much better choice. This keeps your dashboard library focused and avoids it becoming bloated.
+// The principle of high cohesion, low coupling is key here.

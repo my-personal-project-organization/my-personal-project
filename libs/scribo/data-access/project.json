@@ -2,7 +2,7 @@
   "name": "scribo/data-access",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/scribo/data-access/src",
-  "prefix": "data-access",
+  "prefix": "scrb-data-access",
   "projectType": "library",
   "tags": [],
   "targets": {
