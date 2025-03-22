@@ -1,1 +1,1 @@
-export * from './lib/scribo/feature-landing/scribo/feature-landing.component';
+export * from './lib/components/landing/landing.component';
