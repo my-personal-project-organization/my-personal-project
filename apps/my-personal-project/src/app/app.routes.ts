@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { ScriboLayoutComponent } from './shared/components/scribo-layout/scribo-layout.component';
+import { ScriboFeatureLayoutComponent } from '@mpp/scribo/feature-layout';
 
 export const appRoutes: Route[] = [
   {
@@ -21,7 +21,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'scribo',
-    component: ScriboLayoutComponent,
+    component: ScriboFeatureLayoutComponent,
     children: [
       {
         path: 'landing',
@@ -65,7 +65,5 @@ export const appRoutes: Route[] = [
 // User settings (preferences, notifications)
 // Account management (deletion, subscription)
 // User roles/permissions
-// Then a separate library like @mpp/scribo/feature-user-profile (or @mpp/scribo/feature-account) is a much better choice. This keeps your dashboard library focused and avoids it becoming bloated.  The principle of high cohesion, low coupling is key here.
-
-// ! LAYOUT where to place it?????
-// Layout: Your ScriboLayoutComponent is correctly placed in a shared UI library. This is an excellent example of reusable UI.
+// Then a separate library like @mpp/scribo/feature-user-profile (or @mpp/scribo/feature-account) is a much better choice. This keeps your dashboard library focused and avoids it becoming bloated.
+// The principle of high cohesion, low coupling is key here.
