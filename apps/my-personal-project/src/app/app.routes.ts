@@ -12,7 +12,7 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import(
         './pages/user-management/components/user-management-update/user-management-update.component'
-      ).then((m) => m.UserManagementUpdateComponent), //Update
+      ).then((m) => m.UserManagementUpdateComponent),
   },
   {
     path: 'landing',
@@ -25,8 +25,7 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'landing',
-        loadComponent: () =>
-          import('@mpp/scribo/feature-landing').then((m) => m.ScriboFeatureLandingComponent),
+        loadComponent: () => import('@mpp/scribo/feature-landing').then((m) => m.LandingComponent),
       },
       {
         path: 'list',
