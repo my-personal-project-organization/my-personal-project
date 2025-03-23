@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { DialogComponent } from './dialog.component';
 
-import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { within } from '@storybook/testing-library';
 
 const meta: Meta<DialogComponent> = {
   component: DialogComponent,
-  title: 'Shared/UI/DialogComponent',
+  title: 'Shared/UI/Atoms/Dialog',
   argTypes: {
     title: { control: 'text' },
     confirmButtonText: { control: 'text' },

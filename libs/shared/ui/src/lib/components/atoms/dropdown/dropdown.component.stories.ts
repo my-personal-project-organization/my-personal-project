@@ -1,13 +1,13 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DropdownComponent } from './dropdown.component';
 
-import { within } from '@storybook/testing-library';
-import { expect } from '@storybook/jest';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { expect } from '@storybook/jest';
+import { within } from '@storybook/testing-library';
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,
-  title: 'Shared/UI/DropdownComponent',
+  title: 'Shared/UI/Atoms/Dropdown',
   parameters: {
     layout: 'centered',
   },

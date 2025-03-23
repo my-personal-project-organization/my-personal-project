@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { PaginatorComponent } from './paginator.component';
 
-import { within } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
+import { within } from '@storybook/testing-library';
 
 const meta: Meta<PaginatorComponent> = {
   component: PaginatorComponent,
-  title: 'Shared/UI/PaginatorComponent',
+  title: 'Shared/UI/Atoms/Paginator',
   parameters: {
     layout: 'padded',
   },

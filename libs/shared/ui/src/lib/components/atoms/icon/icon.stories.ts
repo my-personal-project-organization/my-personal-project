@@ -6,7 +6,7 @@ import { iconsJson } from './icons';
 
 const meta: Meta<IconComponent> = {
   component: IconComponent,
-  title: 'Shared/UI/IconComponent',
+  title: 'Shared/UI/Atoms/Icon',
   parameters: {
     layout: 'centered',
   },
