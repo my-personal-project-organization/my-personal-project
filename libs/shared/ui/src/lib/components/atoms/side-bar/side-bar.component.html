@@ -1,0 +1,9 @@
+<aside
+  class="fixed left-0 top-0 h-full w-64 bg-gray-100 shadow-md transition-transform duration-300 dark:bg-gray-800"
+  [class.translate-x-0]="isOpen()"
+  [class.-translate-x-full]="!isOpen()"
+>
+  <div class="p-4">
+    <ng-container *ngTemplateOutlet="sidebarContent()"></ng-container>
+  </div>
+</aside>
