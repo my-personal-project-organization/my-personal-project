@@ -1,0 +1,32 @@
+<nav
+  class="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800"
+>
+  <div class="container mx-auto flex items-center justify-between px-4 py-3">
+    <a
+      routerLink="/scribo/dashboard"
+      class="text-xl font-bold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
+    >
+      Scribo
+    </a>
+
+    <div class="flex items-center space-x-4">
+      <ng-content></ng-content>
+
+      <ui-button
+        [attr.aria-label]="isOpen() ? 'Close sidebar menu' : 'Open sidebar menu'"
+        type="button"
+        color="primary"
+        size="medium"
+        (btnClick)="toggle()"
+      >
+        @if (isOpen()) {
+          <ui-icon name="close" size="1.25rem"></ui-icon>
+        } @else {
+          <ui-icon name="menu" size="1.25rem"></ui-icon>
+        }
+      </ui-button>
+    </div>
+  </div>
+</nav>
+
+<ui-side-bar [isOpen]="isOpen()" [sidebarContent]="sidebarContent()"></ui-side-bar>
