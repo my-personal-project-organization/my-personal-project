@@ -16,7 +16,7 @@ export class ButtonComponent {
   /** The type of the button */
   public type = input.required<'button' | 'submit'>();
   /** The text of the button */
-  public text = input.required<string>();
+  public text = input<string>('');
   /** The size of the button */
   public size = input<'small' | 'medium' | 'large'>('medium');
   /** The color of the button */
