@@ -29,6 +29,7 @@ export type IconName =
   | 'phone'
   | 'location'
   | 'link'
+  | 'linkedin'
   | 'calendar'
   | 'clock'
   | 'image';
