@@ -1,11 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 
 import { expect } from '@storybook/jest';
 import { within } from '@storybook/testing-library';
+import { IconComponent } from '../icon';
 
 const meta: Meta<ButtonComponent> = {
   component: ButtonComponent,
+  decorators: [
+    moduleMetadata({
+      imports: [IconComponent],
+    }),
+  ],
   title: 'Shared/UI/Atoms/Button',
   parameters: {
     layout: 'centered',
@@ -133,5 +139,37 @@ export const Disabled: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     expect(canvas.getByText(/Button/gi)).toBeTruthy();
+  },
+};
+
+export const WithIcon: Story = {
+  render: (args) => ({
+    props: {
+      text: args.text,
+      type: args.type,
+      color: args.color,
+      size: args.size,
+      disabled: args.disabled,
+    },
+    template: `
+    <ui-button [text]="text" [type]="type" [color]="color" [size]="size" [disabled]="disabled">
+      <ui-icon name="calendar"></ui-icon>
+    </ui-button>
+  `,
+  }),
+  args: {
+    text: 'Click Me',
+    type: 'button',
+    color: 'primary',
+    size: 'medium',
+    disabled: false,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button');
+    expect(button).toBeTruthy();
+    expect(canvas.getByText(/Click Me/gi)).toBeTruthy();
+    const svg = canvas.getByTestId('calendar');
+    expect(svg).toBeInTheDocument();
   },
 };
