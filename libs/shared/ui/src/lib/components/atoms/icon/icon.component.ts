@@ -51,8 +51,6 @@ export class IconComponent {
         this.renderer.setStyle(svgElement, 'width', size);
         this.renderer.setStyle(svgElement, 'height', size);
       }
-      this.renderer.addClass(svgElement, 'text-gray-600');
-      this.renderer.addClass(svgElement, 'dark:text-gray-300');
       this.renderer.appendChild(this.el.nativeElement, svgElement);
     } else {
       console.warn(`Icon "${name}" not found in registry.`);
