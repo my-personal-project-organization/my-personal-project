@@ -1,23 +1,7 @@
-import { Component, TemplateRef } from '@angular/core';
 import { Meta, StoryObj } from '@storybook/angular';
 import { expect } from '@storybook/jest';
 import { within } from '@storybook/testing-library';
-import { ButtonComponent } from '../../atoms';
 import { SideBarComponent } from './side-bar.component';
-
-@Component({
-  selector: 'ui-sidebar-content',
-  template: `
-    <div>
-      <h3>Sidebar Content</h3>
-      <p>This is some content for the sidebar.</p>
-      <ui-button text="Click Me"></ui-button>
-    </div>
-  `,
-  standalone: true,
-  imports: [ButtonComponent],
-})
-class SidebarContentComponent {}
 
 const meta: Meta<SideBarComponent> = {
   title: 'Shared/UI/Atoms/SideBar',
