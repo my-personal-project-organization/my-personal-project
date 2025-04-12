@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { ScriboFeatureLayoutComponent } from '@mpp/scribo/feature-layout';
+import { AuthGuard } from '@mpp/shared/data-access';
 
 export const appRoutes: Route[] = [
   {
@@ -12,7 +13,7 @@ export const appRoutes: Route[] = [
     loadComponent: () =>
       import(
         './pages/user-management/components/user-management-update/user-management-update.component'
-      ).then((m) => m.UserManagementUpdateComponent), //Update
+      ).then((m) => m.UserManagementUpdateComponent),
   },
   {
     path: 'landing',
@@ -25,15 +26,19 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'landing',
-        loadComponent: () =>
-          import('@mpp/scribo/feature-landing').then((m) => m.ScriboFeatureLandingComponent),
+        loadComponent: () => import('@mpp/scribo/feature-landing').then((m) => m.LandingComponent),
       },
       {
         path: 'list',
+        canActivate: [AuthGuard],
+        data: {
+          redirectTo: '/scribo/landing',
+        },
         loadComponent: () => import('@mpp/scribo/feature-article-list').then((m) => m.ArticleListComponent),
       },
       {
         path: 'user-profile',
+        // Todo: Add a route guard to protect this route
         loadComponent: () =>
           import('@mpp/scribo/feature-user-profile').then((m) => m.ScriboFeatureUserProfileComponent),
       },

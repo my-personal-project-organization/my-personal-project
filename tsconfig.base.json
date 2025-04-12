@@ -20,8 +20,8 @@
       "@mpp/scribo/data-access": ["libs/scribo/data-access/src/index.ts"],
       "@mpp/scribo/feature-article-list": ["libs/scribo/feature-article-list/src/index.ts"],
       "@mpp/scribo/feature-landing": ["libs/scribo/feature-landing/src/index.ts"],
-      "@mpp/scribo/feature-user-profile": ["libs/scribo/feature-user-profile/src/index.ts"],
       "@mpp/scribo/feature-layout": ["libs/scribo/feature-layout/src/index.ts"],
+      "@mpp/scribo/feature-user-profile": ["libs/scribo/feature-user-profile/src/index.ts"],
       "@mpp/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@mpp/shared/ui": ["libs/shared/ui/src/index.ts"],
       "@mpp/shared/utils": ["libs/shared/utils/src/index.ts"]
