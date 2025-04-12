@@ -8,7 +8,7 @@ import { within } from '@storybook/testing-library';
 import { FooterComponent } from './footer.component';
 
 const meta: Meta<FooterComponent> = {
-  title: 'Scribo/Layout/Footer',
+  title: 'Scribo/FeatureLayout/Footer',
   component: FooterComponent,
   decorators: [
     moduleMetadata({
