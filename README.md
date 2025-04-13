@@ -101,6 +101,8 @@ These instructions will get you a copy of the project up and running on your loc
 ## Project Structure
 
 This project is an Nx monorepo with the following structure:
+
+```bash
 my-personal-project/
 ├── apps/
 │ ├── cv-app/ # Main application for the CV/History section
@@ -130,8 +132,9 @@ my-personal-project/
 ├── feature-article-create/
 ├── feature-user-profile/
 └── data-access/ # Scribo-specific data access logic (can use shared/data-access)
+```
 
-## Contributing (Optional)
+## Contributing
 
 Contributions are welcome! Please follow these guidelines:
 
@@ -143,8 +146,8 @@ Contributions are welcome! Please follow these guidelines:
 
 Please make sure to update tests as appropriate.
 
-## License (Optional)
+## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details. (You'd need to create a LICENSE.md file). If you don't want to use MIT, choose a different license.
+This project is licensed under the MIT License.
 
 ---
