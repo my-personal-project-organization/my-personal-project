@@ -49,8 +49,8 @@ These instructions will get you a copy of the project up and running on your loc
 1.  **Clone the repository:**
 
     ```bash
-    git clone <your-repository-url>
-    cd <your-repository-name>
+    git clone https://github.com/my-personal-project-organization/my-personal-project.git
+    cd my-personal-project
     ```
 
 2.  **Install dependencies:**
