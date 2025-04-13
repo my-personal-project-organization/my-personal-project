@@ -56,12 +56,12 @@ These instructions will get you a copy of the project up and running on your loc
 2.  **Install dependencies:**
 
     ```bash
-    npm install  # Or yarn install, or pnpm install
+    npm install
     ```
 
 3.  **Configure Firebase:**
 
-    - Create a file `src/environments/environment.ts` (and `src/environments/environment.prod.ts` for production).
+    - If you run the project automatically it will create a file `src/environments/environment.ts` (and `src/environments/environment.prod.ts` for production).
     - Add your Firebase configuration to these files:
 
       ```typescript
@@ -93,10 +93,14 @@ These instructions will get you a copy of the project up and running on your loc
     The application will be available at `http://localhost:4200` (or a different port if 4200 is in use).
 
 5.  **Run tests**
+
     ```bash
     nx test shared-data-access
     ```
-    Or any other lib or app.
+
+    To simplify running tasks, it is recommended to use the Nx Console, a powerful UI for managing Nx workspaces. Nx Console is available as a Visual Studio Code extension, allowing you to easily run, debug, and explore tasks without needing to memorize CLI commands. You can install it from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console).
+
+    Once installed, you can access Nx Console directly from the VS Code sidebar, where you can select and execute tasks such as building, serving, testing, or linting specific apps or libraries in your workspace.
 
 ## Project Structure
 
