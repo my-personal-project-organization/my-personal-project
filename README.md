@@ -109,33 +109,33 @@ This project is an Nx monorepo with the following structure:
 ```bash
 my-personal-project/
 ├── apps/
-│ ├── cv-app/ # Main application for the CV/History section
-│ └── scribo-app/ # Main application for the Scribo article-sharing platform
+│   ├── cv-app/ # Main application for the CV/History section
+│   └── scribo-app/ # Main application for the Scribo article-sharing platform
 └── libs/
-├── shared/
-│ ├── ui/ # Reusable UI components (shared across apps)
-│ ├── utils/ # Reusable utility functions
-│ └── data-access/ # Shared data access logic (Firebase, Auth, UserStore, generic Firestore store)
-│ ├── models/
-│ │ ├── firestore.schema.ts # Base Zod schema for Firestore documents
-│ │ └── user.schema.ts # Zod schema for User data
-│ ├── services/
-│ │ ├── firestone.service.ts# Service for interacting with Firestore
-│ │ └── user.store.ts # NgRx Signal Store for managing user data
-│ └── state/
-│ └── firestore-entity-store.ts # Generic NgRx Signal Store feature for Firestore entities
-├── cv/ # CV-specific libraries
-│ ├── feature-about/
-│ ├── feature-experience/
-│ ├── feature-projects/
-│ ├── feature-skills/
-│ └── data-access/ # CV-specific data access logic (can use shared/data-access)
-└── scribo/ # Scribo-specific libraries
-├── feature-article-list/
-├── feature-article-view/
-├── feature-article-create/
-├── feature-user-profile/
-└── data-access/ # Scribo-specific data access logic (can use shared/data-access)
+    ├── shared/
+    │   ├── ui/ # Reusable UI components (shared across apps)
+    │   ├── utils/ # Reusable utility functions
+    │   └── data-access/ # Shared data access logic (Firebase, Auth, UserStore, generic Firestore store)
+    │       ├── models/
+    │       │   ├── firestore.schema.ts # Base Zod schema for Firestore documents
+    │       │   └── user.schema.ts # Zod schema for User data
+    │       ├── services/
+    │       │   ├── firestone.service.ts# Service for interacting with Firestore
+    │       │   └── user.store.ts # NgRx Signal Store for managing user data
+    │       └── state/
+    │           └── firestore-entity-store.ts # Generic NgRx Signal Store feature for Firestore entities
+    ├── cv/ # CV-specific libraries
+    │   ├── feature-about/
+    │   ├── feature-experience/
+    │   ├── feature-projects/
+    │   ├── feature-skills/
+    │   └── data-access/ # CV-specific data access logic (can use shared/data-access)
+    └── scribo/ # Scribo-specific libraries
+        ├── feature-article-list/
+        ├── feature-article-view/
+        ├── feature-article-create/
+        ├── feature-user-profile/
+        └── data-access/ # Scribo-specific data access logic (can use shared/data-access)
 ```
 
 ## Contributing
