@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { NewArticleSchema } from '@mpp/scribo/data-access';
 import { DialogComponent } from '@mpp/shared/ui';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
@@ -6,12 +8,12 @@ import { PlacesService } from '../../shared/services/places.service';
 import { TranslationService } from '../../shared/services/translations/translation.service';
 import { Place } from '../../shared/types/place';
 import { LandingPageService } from './landing-page.service';
-import { NewArticleSchema } from '@mpp/scribo/data-access';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-landing-page',
   standalone: true,
-  imports: [DialogComponent, TranslatePipe, NgForTranslateDirective],
+  imports: [DialogComponent, TranslatePipe, NgForTranslateDirective, FooterComponent],
   providers: [LandingPageService],
   templateUrl: './landing-page.component.html',
   styleUrl: './landing-page.component.scss',
@@ -20,6 +22,7 @@ import { NewArticleSchema } from '@mpp/scribo/data-access';
 export class LandingPageComponent {
   private readonly translationService = inject(TranslationService);
   private readonly placesService = inject(PlacesService);
+  private readonly router = inject(Router);
 
   dialogOpen = false;
   dialogTitle: string | undefined;
@@ -35,6 +38,10 @@ export class LandingPageComponent {
   closeDialog() {
     this.dialogOpen = false;
     this.listPlaces();
+  }
+
+  onCLickScriboProject() {
+    this.router.navigate(['/scribo']);
   }
 
   // TODO: REMOVE just testing
