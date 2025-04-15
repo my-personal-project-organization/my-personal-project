@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthStore } from '@mpp/shared/data-access';
 import { ButtonComponent } from '@mpp/shared/ui';
@@ -16,15 +16,8 @@ export class LandingComponent {
   private readonly router = inject(Router);
   features = features;
 
-  constructor() {
-    effect(() => {
-      if (this.authStore.isAuthenticated()) {
-        this.router.navigate(['/scribo/list']);
-      }
-    });
-  }
-
-  onStartBtnClick(): void {
-    this.authStore.signInWithGithub();
+  async onStartBtnClick() {
+    await this.authStore.signInWithGithub();
+    this.router.navigate(['/scribo/list']);
   }
 }
