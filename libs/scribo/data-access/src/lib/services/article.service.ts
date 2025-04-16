@@ -3,12 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { FirestoneService } from '@mpp/shared/data-access';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { z } from 'zod';
-import {
-  Article,
-  NewArticle,
-  SavedArticle,
-  SavedArticleSchema,
-} from '../models/article.schema';
+import { Article, ArticleSchema, NewArticle } from '../models/article.schema';
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +11,13 @@ import {
 export class ArticleService {
   private readonly firestoneService = inject(FirestoneService);
 
-  getAll(): Observable<{ success: boolean; data?: SavedArticle[] }> {
+  getAll(): Observable<{ success: boolean; data?: Article[] }> {
     return this.firestoneService.getAll<Article>('articles').pipe(
       map((articles) => {
         const validatedArticles = articles
           .map((article) => {
             try {
-              return SavedArticleSchema.parse(article);
+              return ArticleSchema.parse(article);
             } catch (error) {
               if (error instanceof z.ZodError) {
                 console.error('Zod validation error:', error.errors);
@@ -32,7 +27,7 @@ export class ArticleService {
               return null;
             }
           })
-          .filter((article): article is SavedArticle => article !== null);
+          .filter((article): article is Article => article !== null);
 
         return { success: true, data: validatedArticles };
       }),
@@ -43,16 +38,14 @@ export class ArticleService {
     );
   }
 
-  getById(
-    id: string,
-  ): Observable<{ success: boolean; data?: SavedArticle | undefined }> {
+  getById(id: string): Observable<{ success: boolean; data?: Article | undefined }> {
     return this.firestoneService.get<Article>('articles', id).pipe(
       map((article) => {
         if (article === undefined) {
           return { success: true, data: undefined }; // Article not found, but not an error
         }
         try {
-          const validatedArticle = SavedArticleSchema.parse(article);
+          const validatedArticle = ArticleSchema.parse(article);
           return { success: true, data: validatedArticle };
         } catch (error) {
           if (error instanceof z.ZodError) {
@@ -80,10 +73,8 @@ export class ArticleService {
     );
   }
 
-  update(article: SavedArticle): Observable<{ success: boolean }> {
-    return from(
-      this.firestoneService.update('articles', article._id, article),
-    ).pipe(
+  update(article: Article): Observable<{ success: boolean }> {
+    return from(this.firestoneService.update('articles', article.id, article)).pipe(
       map(() => ({ success: true })),
       catchError((error) => {
         console.error('Error updating article:', error);
