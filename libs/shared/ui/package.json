@@ -6,7 +6,10 @@
     "@angular/core": "^19.0.0",
     "@angular/forms": "19.0.7",
     "@nx/angular": "20.3.3",
-    "@mpp/shared/data-access": "0.0.1"
+    "@mpp/shared/data-access": "0.0.1",
+    "@angular/router": "19.0.7",
+    "@storybook/jest": "^0.2.3",
+    "@storybook/testing-library": "^0.2.2"
   },
   "sideEffects": false
 }
