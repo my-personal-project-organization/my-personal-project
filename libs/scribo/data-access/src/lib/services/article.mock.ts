@@ -1,7 +1,7 @@
 import { Article } from '../models';
 
 export const mockArticle: Article = {
-  _id: 'article-id-123',
+  id: 'article-id-123',
   userId: 'user-id-456',
   mainTitle: 'My Awesome Article',
   content: [
@@ -42,7 +42,7 @@ export const mockArticle: Article = {
 export const mockArticles: Article[] = [
   mockArticle,
   {
-    _id: 'article-id-456',
+    id: 'article-id-456',
     userId: 'user-id-789',
     mainTitle: 'Another Great Article',
     content: [

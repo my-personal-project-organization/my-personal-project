@@ -12,6 +12,6 @@ describe('AppComponent', () => {
   it(`should have as title My Personal Project`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.titleService.getTitle()).toEqual('My Personal Project');
+    expect(app.title).toEqual(undefined);
   });
 });

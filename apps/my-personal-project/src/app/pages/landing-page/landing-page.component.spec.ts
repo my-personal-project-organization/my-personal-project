@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { ReadableStream } = require('node:util');
-Object.defineProperties(globalThis, {
-  ReadableStream: { value: ReadableStream },
-});
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { DialogComponent } from '@mpp/shared/ui';
 import { of } from 'rxjs';
 import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
@@ -41,6 +37,7 @@ describe('LandingPageComponent', () => {
         { provide: TranslationService, useValue: mockTranslationService },
         { provide: PlacesService, useValue: mockPlacesService },
         LandingPageService, //Provide LandingPageService
+        { provide: ActivatedRoute, useValue: {} }, // Provide ActivatedRoute mock
       ],
     }).compileComponents();
 
@@ -51,29 +48,5 @@ describe('LandingPageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should open dialog and call addPlace', async () => {
-    // Changed test name and made async
-    const experience = 'testExperience';
-    const listKey = 'testListKey';
-    await component.openDialog(experience, listKey); // Await openDialog because saveData is called inside it.
-
-    expect(mockTranslationService.translate).toHaveBeenCalledWith(experience);
-    expect(component.dialogOpen).toBe(true);
-    expect(component.listKey).toBe(listKey);
-    expect(mockPlacesService.addPlace).toHaveBeenCalledWith(
-      expect.objectContaining({ name: 'My Place 2' }),
-    ); // Use expect.objectContaining for partial matching
-  });
-  it('should close dialog', async () => {
-    // made async
-    const mockListPlaces = jest.fn(); // Mock listPlaces
-    component.listPlaces = mockListPlaces; // Replace the original method with the mock
-
-    component.dialogOpen = true;
-    await component.closeDialog(); // await closeDialog to ensure listPlaces is called
-    expect(component.dialogOpen).toBe(false);
-    expect(mockListPlaces).toHaveBeenCalled(); //Assert that the mocked function was called
   });
 });

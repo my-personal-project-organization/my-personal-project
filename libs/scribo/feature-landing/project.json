@@ -15,6 +15,57 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint"
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "styles": ["libs/scribo/feature-landing/.storybook/styles.scss"],
+        "port": 4400,
+        "configDir": "libs/scribo/feature-landing/.storybook",
+        "browserTarget": "scribo/feature-landing:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "styles": ["libs/scribo/feature-landing/.storybook/styles.scss"],
+        "outputDir": "dist/storybook/scribo/feature-landing",
+        "configDir": "libs/scribo/feature-landing/.storybook",
+        "browserTarget": "scribo/feature-landing:build-storybook",
+        "compodoc": false
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "test-storybook": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "test-storybook -c libs/scribo/feature-landing/.storybook --url=http://localhost:4400"
+      }
+    },
+    "static-storybook": {
+      "executor": "@nx/web:file-server",
+      "dependsOn": ["build-storybook"],
+      "options": {
+        "buildTarget": "scribo/feature-landing:build-storybook",
+        "staticFilePath": "dist/storybook/scribo/feature-landing",
+        "spa": true
+      },
+      "configurations": {
+        "ci": {
+          "buildTarget": "scribo/feature-landing:build-storybook:ci"
+        }
+      }
     }
   }
 }

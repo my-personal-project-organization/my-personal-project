@@ -3,21 +3,21 @@
     <a
       routerLink="/scribo/landing"
       routerLinkActive="active"
-      class="text-gray-700 hover:underline dark:text-gray-300"
+      class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
       >Home</a
     >
     @if (isAuthenticated()) {
       <a
         routerLink="/scribo/list"
         routerLinkActive="active"
-        class="text-gray-700 hover:underline dark:text-gray-300"
+        class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
         data-testid="nav-articles-link"
         >Articles</a
       >
       <a
         routerLink="/scribo/user-profile"
         routerLinkActive="active"
-        class="text-gray-700 hover:underline dark:text-gray-300"
+        class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
         data-testid="nav-profile-link"
         >Profile</a
       >
@@ -48,7 +48,7 @@
         <ui-button
           type="button"
           text="Logout"
-          color="primary"
+          color="danger"
           size="small"
           class="mt-4"
           data-testid="sidebar-logout-button"
@@ -64,9 +64,6 @@
           data-testid="sidebar-login-button"
         ></ui-button>
       }
-      <div class="mt-8 rounded bg-gray-200 p-4 dark:bg-gray-700">
-        <p class="text-sm text-gray-500 dark:text-gray-400">Additional Sidebar Info</p>
-      </div>
     </div>
   </ng-template>
 

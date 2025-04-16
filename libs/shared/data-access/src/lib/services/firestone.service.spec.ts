@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Firestore } from '@angular/fire/firestore';
-import { FirestoneService } from './ddbb.service';
-
+import { FirestoneService } from './firestone.service';
 // Mock Firestore
 const mockFirestore = {
   collection: jest.fn(),
@@ -15,10 +14,7 @@ describe('FirestoneService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        FirestoneService,
-        { provide: Firestore, useValue: mockFirestore },
-      ],
+      providers: [FirestoneService, { provide: Firestore, useValue: mockFirestore }],
     });
 
     service = TestBed.inject(FirestoneService);

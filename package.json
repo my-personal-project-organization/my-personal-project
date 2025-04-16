@@ -9,7 +9,8 @@
     "chromatic": "npx chromatic --project-token=chpt_43bff0fc4bc5b49  --exit-zero-on-changes --only-changed --allow-console-errors",
     "localize": "nx run my-personal-project:build:production --localize && npx serve dist/apps/my-personal-project/browser",
     "deploy": "npx nx run my-personal-project:build --configuration=production && firebase deploy",
-    "analyze-bundle": "npx nx run my-personal-project:build:analyze-bundle && source-map-explorer dist/apps/my-personal-project/**/*.js --html analyze-bundle.html"
+    "analyze-bundle": "npx nx run my-personal-project:build:analyze-bundle && source-map-explorer dist/apps/my-personal-project/**/*.js --html analyze-bundle.html",
+    "run-before-pr": "npx nx affected -t lint test build e2e"
   },
   "private": true,
   "dependencies": {
