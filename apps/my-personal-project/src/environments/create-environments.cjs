@@ -28,19 +28,13 @@ function createEnvironments() {
       }
     };`;
 
-    const targetPath = path.join(
-      __dirname,
-      `../environments/environment${envPath}.ts`,
-    );
+    const targetPath = path.join(__dirname, `../environments/environment${envPath}.ts`);
     fs.writeFile(targetPath, envFile, (err) => {
       if (err) {
         console.error(err);
         throw err;
       } else {
-        console.log(
-          successColor,
-          `${checkSign} Successfully generated ${en} environment file`,
-        );
+        console.log(successColor, `${checkSign} Successfully generated ${en} environment file`);
       }
     });
   });
