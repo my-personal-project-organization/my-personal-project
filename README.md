@@ -15,7 +15,10 @@ This project is a personal portfolio and article-sharing platform built with Ang
 - **Modular Architecture:** The project is structured as an Nx monorepo, promoting code reusability and maintainability.
 - **CRUD Operations:** Full Create, Read, Update, and Delete functionality for both CV/Portfolio data and Scribo articles.
 - **User Roles (Potentially):** The foundation is laid for implementing role-based access control (e.g., admin users).
-- **Dark Mode** Tailwind dark mode support.
+- **Dark Mode:** Tailwind dark mode support.
+- **Component Documentation:** Storybook is used for documenting components, including interaction tests.
+- **Visual Regression Testing:** Chromatic is integrated for visual regression testing.
+- **End-to-End Testing:** Playwright is used for comprehensive end-to-end testing.
 
 ## Technologies Used
 
@@ -28,6 +31,7 @@ This project is a personal portfolio and article-sharing platform built with Ang
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
 - [Jest](https://jestjs.io/) - Testing framework
 - [Playwright](https://playwright.dev/) - End-to-end testing (configured, but not fully implemented in the provided code)
+- [Storybook](https://storybook.js.org/) - Component documentation and interaction testing
 - [ESLint](https://eslint.org/) - Linting
 - [RxJs](https://rxjs.dev/) - Reactive Extensions for JavaScript
 
@@ -102,9 +106,60 @@ These instructions will get you a copy of the project up and running on your loc
 
     Once installed, you can access Nx Console directly from the VS Code sidebar, where you can select and execute tasks such as building, serving, testing, or linting specific apps or libraries in your workspace.
 
+6.  **Understand the Pipelines**
+
+    The project uses GitHub Actions for CI/CD pipelines. These pipelines automate tasks such as linting, testing, building, and deploying the application. Below is an overview of the key pipelines:
+
+    - **Linting:** Ensures code quality and consistency using ESLint.
+    - **Unit Testing:** Runs unit tests using Jest to verify the functionality of individual components and services.
+    - **End-to-End Testing:** Executes Playwright tests to validate the application's behavior in a browser environment.
+    - **Build and Deploy:** Builds the application using Angular AOT and deploys it to the configured hosting environment.
+    - **Chromatic Visual Regression Testing:** Chromatic is integrated to ensure visual consistency across UI components. It captures snapshots of your Storybook stories and compares them against the baseline to detect unintended visual changes. The pipeline is triggered on every push.
+
+    You can find the pipeline configurations in the `.github/workflows/` directory. To trigger these pipelines, push your changes to the repository or create a pull request.
+
 ## Project Structure
 
-This project is an Nx monorepo with the following structure:
+This project is organized as an Nx monorepo, containing multiple applications and libraries. Below is an overview of the structure:
+
+### Applications (`apps/`)
+
+- **cv-app/**: Main application for the CV/History section.
+- **scribo-app/**: Main application for the Scribo article-sharing platform.
+
+### Libraries (`libs/`)
+
+#### Shared Libraries (`shared/`)
+
+- **ui/**: Reusable UI components shared across applications.
+- **utils/**: Reusable utility functions.
+- **data-access/**: Shared data access logic, including:
+  - **models/**: Zod schemas for Firestore documents and user data.
+    - `firestore.schema.ts`: Base Zod schema for Firestore documents.
+    - `user.schema.ts`: Zod schema for User data.
+  - **services/**: Services for interacting with Firestore and managing user data.
+    - `firestore.service.ts`: Service for interacting with Firestore.
+    - `user.store.ts`: NgRx Signal Store for managing user data.
+  - **state/**: State management utilities.
+    - `firestore-entity-store.ts`: Generic NgRx Signal Store feature for Firestore entities.
+
+#### CV-Specific Libraries (`cv/`)
+
+- **feature-about/**: Feature module for the "About" section of the CV.
+- **feature-experience/**: Feature module for the "Experience" section of the CV.
+- **feature-projects/**: Feature module for the "Projects" section of the CV.
+- **feature-skills/**: Feature module for the "Skills" section of the CV.
+- **data-access/**: CV-specific data access logic, leveraging shared data-access libraries.
+
+#### Scribo-Specific Libraries (`scribo/`)
+
+- **feature-article-list/**: Feature module for listing articles.
+- **feature-article-view/**: Feature module for viewing individual articles.
+- **feature-article-create/**: Feature module for creating new articles.
+- **feature-user-profile/**: Feature module for managing user profiles.
+- **data-access/**: Scribo-specific data access logic, leveraging shared data-access libraries.
+
+This structure ensures modularity, reusability, and scalability, making it easier to maintain and extend the project.
 
 ```bash
 my-personal-project/
