@@ -46,7 +46,7 @@ Thumbs.db
 .angular
 
 # Environment properties, never commit
-.env
+.env*
 environment*.ts
 
 # Firebase

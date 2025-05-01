@@ -67,9 +67,6 @@
     "test": {
       "cache": true
     },
-    "create-environment": {
-      "cache": true
-    },
     "@nx/angular:ng-packagr-lite": {
       "cache": true,
       "dependsOn": ["^build"],
