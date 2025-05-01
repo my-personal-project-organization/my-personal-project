@@ -12,6 +12,17 @@
     }
   },
   "targets": {
+    "create-environment": {
+      "cache": true,
+      "executor": "nx:run-commands",
+      "outputs": [
+        "{projectRoot}/src/environments/environment.ts",
+        "{projectRoot}/src/environments/environment.prod.ts"
+      ],
+      "options": {
+        "command": "node ./apps/my-personal-project/src/environments/create-environments.cjs"
+      }
+    },
     "build": {
       "executor": "@angular-devkit/build-angular:application",
       "dependsOn": ["create-environment"],
@@ -32,7 +43,13 @@
         "styles": ["apps/my-personal-project/src/styles.scss"],
         "scripts": [],
         "localize": true,
-        "i18nMissingTranslation": "error"
+        "i18nMissingTranslation": "error",
+        "fileReplacements": [
+          {
+            "replace": "apps/my-personal-project/src/environments/environment.ts",
+            "with": "apps/my-personal-project/src/environments/environment.prod.ts"
+          }
+        ]
       },
       "configurations": {
         "production": {
@@ -117,12 +134,6 @@
         "port": 4200,
         "staticFilePath": "dist/apps/my-personal-project/browser",
         "spa": true
-      }
-    },
-    "create-environment": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": ["node ./apps/my-personal-project/src/environments/create-environments.cjs"]
       }
     }
   }
