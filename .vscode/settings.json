@@ -1,0 +1,20 @@
+{
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {
+      "file": "promps/commit-message-convention.md"
+    }
+  ],
+  "github.copilot.chat.codeGeneration.instructions": [
+    {
+      "file": "promps/angular-19-best-practices.md"
+    },
+    {
+      "file": "promps/angular-performance.md"
+    }
+  ],
+  "github.copilot.chat.testGeneration.instructions": [
+    {
+      "file": "promps/testing-methodologies.md"
+    }
+  ]
+}
