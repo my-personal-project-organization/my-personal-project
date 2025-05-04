@@ -1,24 +1,22 @@
+import { NgClass } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  OnInit,
   OnDestroy,
+  OnInit,
+  computed,
   input,
   output,
-  ChangeDetectionStrategy,
-  inject,
-  ChangeDetectorRef,
-  computed,
 } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { IconComponent } from '../icon/icon.component'; // Import IconComponent
 
-// Define allowed toast types using 'as const'
 export const ToastTypes = ['info', 'success', 'warning', 'error'] as const;
 export type ToastType = (typeof ToastTypes)[number];
 
 @Component({
   selector: 'ui-toast',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, IconComponent], // Add IconComponent here
   templateUrl: './toast.component.html',
   styleUrls: ['./toast.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,6 +64,20 @@ export class ToastComponent implements OnInit, OnDestroy {
       error: 'text-red-900 dark:text-red-100',
     };
     return `${baseClasses} ${typeClasses[this.type()]}`;
+  });
+
+  // Define computed signal for button classes
+  protected buttonClasses = computed(() => {
+    const base = 'absolute right-2 top-2 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-offset-2';
+    const typeClasses = {
+      info: 'text-blue-500 hover:bg-blue-200 focus:ring-blue-400 dark:text-blue-300 dark:hover:bg-blue-800',
+      success:
+        'text-green-500 hover:bg-green-200 focus:ring-green-400 dark:text-green-300 dark:hover:bg-green-800',
+      warning:
+        'text-yellow-500 hover:bg-yellow-200 focus:ring-yellow-400 dark:text-yellow-300 dark:hover:bg-yellow-800',
+      error: 'text-red-500 hover:bg-red-200 focus:ring-red-400 dark:text-red-300 dark:hover:bg-red-800',
+    };
+    return `${base} ${typeClasses[this.type()]}`;
   });
 
   ngOnInit(): void {
