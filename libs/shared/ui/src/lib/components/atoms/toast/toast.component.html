@@ -1,0 +1,38 @@
+<div [ngClass]="toastClasses()" role="alert">
+  <!-- Close Button -->
+  <button
+    (click)="close()"
+    type="button"
+    class="absolute right-2 top-2 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-offset-2"
+    [ngClass]="{
+      'text-blue-500 hover:bg-blue-200 focus:ring-blue-400 dark:text-blue-300 dark:hover:bg-blue-800':
+        type() === 'info',
+      'text-green-500 hover:bg-green-200 focus:ring-green-400 dark:text-green-300 dark:hover:bg-green-800':
+        type() === 'success',
+      'text-yellow-500 hover:bg-yellow-200 focus:ring-yellow-400 dark:text-yellow-300 dark:hover:bg-yellow-800':
+        type() === 'warning',
+      'text-red-500 hover:bg-red-200 focus:ring-red-400 dark:text-red-300 dark:hover:bg-red-800':
+        type() === 'error',
+    }"
+    aria-label="Close"
+  >
+    <svg
+      class="h-5 w-5"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Content -->
+  <div>
+    @if (title(); as toastTitle) {
+      <strong [ngClass]="titleClasses()">{{ toastTitle }}</strong>
+    }
+    <p class="text-sm">{{ message() }}</p>
+  </div>
+</div>
