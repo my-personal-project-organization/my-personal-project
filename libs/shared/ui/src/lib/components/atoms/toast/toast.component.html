@@ -1,0 +1,20 @@
+<div [ngClass]="toastClasses()" role="alert">
+  <!-- Close Button -->
+  <button
+    (click)="close()"
+    type="button"
+    class="absolute right-2 top-2 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-offset-2"
+    [ngClass]="buttonClasses()"
+    aria-label="Close"
+  >
+    <ui-icon name="close" size="1.25rem" class="h-5 w-5"></ui-icon>
+  </button>
+
+  <!-- Content -->
+  <div>
+    @if (title(); as toastTitle) {
+      <strong [ngClass]="titleClasses()">{{ toastTitle }}</strong>
+    }
+    <p class="text-sm">{{ message() }}</p>
+  </div>
+</div>
