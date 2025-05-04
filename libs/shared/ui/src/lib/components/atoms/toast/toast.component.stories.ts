@@ -171,7 +171,10 @@ class DynamicToastDemoComponent {
     this.toastService.info('This is an info message.', 'Info Title');
   }
   showSuccess() {
-    this.toastService.success('Operation completed successfully!', 'Success Title');
+    this.toastService.success(
+      'Operation completed successfully! This story demonstrates creating toasts dynamically using the `ToastService`. Click the buttons to trigger different toast types. The `ToastContainerComponent` (inside the demo component) is responsible for rendering the toasts.',
+      'Success Title',
+    );
   }
   showWarning() {
     this.toastService.warning('Please check your input.', 'Warning Title', 10);
