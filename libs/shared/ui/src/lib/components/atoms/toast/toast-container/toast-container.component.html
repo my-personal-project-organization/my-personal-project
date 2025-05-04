@@ -1,5 +1,6 @@
 @for (toast of toastService.toasts(); track trackById($index, toast)) {
   <ui-toast
+    [@toastAnimation]
     [id]="toast.id"
     [message]="toast.message"
     [title]="toast.title"
