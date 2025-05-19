@@ -16,5 +16,6 @@
     {
       "file": ".github/promps/testing-methodologies.md"
     }
-  ]
+  ],
+  "nxConsole.generateAiAgentRules": true
 }
