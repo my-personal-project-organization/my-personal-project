@@ -60,6 +60,13 @@
     "sc.landing.cta.title": "Ready to Start Sharing?",
     "sc.landing.cta.subtitle": "Join our community of writers and readers today!",
     "sc.landing.cta.button": "Get Started Now",
+    "sc.layout.footer.title": " - Your platform to share your stories.",
+    "sc.layout.footer.createdBy": "Created by Mario Velasco.",
+    "sc.layout.footer.myProfile": "My Profile",
+    "sc.layout.footer.aria.github": "Visit my GitHub profile",
+    "sc.layout.footer.aria.linkedin": "Visit my LinkedIn profile",
+    "sc.layout.footer.aria.email": "Send me an email",
+    "sc.layout.footer.copyright": "All rights reserved.",
     "7708270344948043036": " {$INTERPOLATION} "
   }
 }

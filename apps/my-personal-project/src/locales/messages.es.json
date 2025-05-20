@@ -60,6 +60,13 @@
     "sc.landing.cta.title": "¿Listo para empezar a compartir?",
     "sc.landing.cta.subtitle": "¡Únete hoy a nuestra comunidad de escritores y lectores!",
     "sc.landing.cta.button": "Comienza ahora",
+    "sc.layout.footer.title": " - Tu plataforma para compartir tus historias.",
+    "sc.layout.footer.createdBy": "Creado por Mario Velasco.",
+    "sc.layout.footer.myProfile": "Mi perfil",
+    "sc.layout.footer.aria.github": "Visita mi perfil de GitHub",
+    "sc.layout.footer.aria.linkedin": "Visita mi perfil de LinkedIn",
+    "sc.layout.footer.aria.email": "Envíame un correo electrónico",
+    "sc.layout.footer.copyright": "Todos los derechos reservados.",
     "7708270344948043036": " {$INTERPOLATION} "
   }
 }
