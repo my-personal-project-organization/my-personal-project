@@ -1,1 +1,1 @@
-export * from './lib/cv/feature-about/cv/feature-about.component';
+export * from './lib/components/landing/landing.component';
