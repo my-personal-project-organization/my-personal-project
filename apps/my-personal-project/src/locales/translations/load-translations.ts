@@ -1,12 +1,18 @@
 import { inject } from '@angular/core';
 import { TranslationService } from '@mpp/shared/data-access';
-import { landingPageTranslations } from './landing-page.translations';
+import { cvLandingPageTranslations } from './cv-landing-page.translations';
+import { scriboLandingPageTranslations } from './scribo-landing-page.translations';
 
 export function loadAppTranslations() {
   return () => {
     const translationService = inject(TranslationService);
     return translationService.loadTranslations({
-      landing: landingPageTranslations,
+      cv: {
+        landing: cvLandingPageTranslations,
+      },
+      sc: {
+        landing: scriboLandingPageTranslations,
+      },
     });
   };
 }
