@@ -7,12 +7,12 @@ import { NgForTranslateDirective } from '../../shared/directives/ng-for-translat
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { PlacesService } from '../../shared/services/places.service';
 import { TranslationService } from '../../shared/services/translations/translation.service';
-import { LandingPageComponent } from './landing-page.component';
-import { LandingPageService } from './landing-page.service';
+import { LandingComponent } from './landing.component';
+import { LandingService } from './landing.service';
 
-describe('LandingPageComponent', () => {
-  let component: LandingPageComponent;
-  let fixture: ComponentFixture<LandingPageComponent>;
+describe('LandingComponent', () => {
+  let component: LandingComponent;
+  let fixture: ComponentFixture<LandingComponent>;
   let mockTranslationService: any;
   let mockPlacesService: any;
 
@@ -28,7 +28,7 @@ describe('LandingPageComponent', () => {
     };
     await TestBed.configureTestingModule({
       imports: [
-        LandingPageComponent,
+        LandingComponent,
         DialogComponent, // Add necessary imports
         TranslatePipe,
         NgForTranslateDirective,
@@ -36,12 +36,12 @@ describe('LandingPageComponent', () => {
       providers: [
         { provide: TranslationService, useValue: mockTranslationService },
         { provide: PlacesService, useValue: mockPlacesService },
-        LandingPageService, //Provide LandingPageService
+        LandingService, //Provide LandingService
         { provide: ActivatedRoute, useValue: {} }, // Provide ActivatedRoute mock
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LandingPageComponent);
+    fixture = TestBed.createComponent(LandingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

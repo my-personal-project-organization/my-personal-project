@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthStore } from '@mpp/shared/data-access';
+import { AuthStore, TranslatePipe } from '@mpp/shared/data-access';
 import { ButtonComponent } from '@mpp/shared/ui';
 import { features } from './landing.features';
 
@@ -8,7 +8,7 @@ import { features } from './landing.features';
   selector: 'scrb-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LandingComponent {

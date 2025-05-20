@@ -1,0 +1,68 @@
+<ui-nav-bar [sidebarContent]="sidebarTemplate">
+  <a
+    routerLink="/scribo/landing"
+    routerLinkActive="active"
+    class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
+    >{{ 'sc.layout.nav.home' | translate }}</a
+  >
+  @if (isAuthenticated()) {
+    <a
+      routerLink="/scribo/list"
+      routerLinkActive="active"
+      class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
+      data-testid="nav-articles-link"
+      >{{ 'sc.layout.nav.articles' | translate }}</a
+    >
+    <a
+      routerLink="/scribo/user-profile"
+      routerLinkActive="active"
+      class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
+      data-testid="nav-profile-link"
+      >{{ 'sc.layout.nav.profile' | translate }}</a
+    >
+  }
+</ui-nav-bar>
+
+<ng-template #sidebarTemplate>
+  <div class="px-6 py-4">
+    <scrb-layout-language-switcher></scrb-layout-language-switcher>
+    <a
+      routerLink="/scribo/landing"
+      class="block py-2 text-gray-700 hover:underline dark:text-gray-300"
+      data-testid="sidebar-home-link"
+      >{{ 'sc.layout.nav.home' | translate }}</a
+    >
+    @if (isAuthenticated()) {
+      <a
+        routerLink="/scribo/list"
+        class="block py-2 text-gray-700 hover:underline dark:text-gray-300"
+        data-testid="sidebar-articles-link"
+        >{{ 'sc.layout.nav.articles' | translate }}</a
+      >
+      <a
+        routerLink="/scribo/user-profile"
+        class="block py-2 text-gray-700 hover:underline dark:text-gray-300"
+        data-testid="sidebar-profile-link"
+        >{{ 'sc.layout.nav.profile' | translate }}</a
+      >
+      <ui-button
+        type="button"
+        [text]="'sc.layout.nav.logout' | translate"
+        color="danger"
+        size="small"
+        class="mt-4"
+        data-testid="sidebar-logout-button"
+        (btnClick)="logout()"
+      ></ui-button>
+    } @else {
+      <ui-button
+        type="button"
+        [text]="'sc.layout.nav.login' | translate"
+        color="primary"
+        class="mt-4"
+        (btnClick)="login()"
+        data-testid="sidebar-login-button"
+      ></ui-button>
+    }
+  </div>
+</ng-template>

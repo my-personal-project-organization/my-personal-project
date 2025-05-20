@@ -17,9 +17,13 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'landing',
-    loadComponent: () =>
-      import('./pages/landing-page/landing-page.component').then((m) => m.LandingPageComponent),
+    loadComponent: () => import('@mpp/cv/feature-about').then((m) => m.LandingComponent),
   },
+  // {
+  //   path: 'landing',
+  //   loadComponent: () =>
+  //     import('./pages/landing-page/landing-page.component').then((m) => m.LandingPageComponent),
+  // },
   {
     path: 'scribo',
     component: ScriboFeatureLayoutComponent,

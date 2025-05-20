@@ -1,15 +1,15 @@
 <div class="min-h-screen bg-white dark:bg-gray-800">
   <div class="mx-auto max-w-3xl p-4">
     <h1 class="mb-4 text-3xl font-bold text-gray-900 dark:text-white">
-      {{ 'landing.title' | translate }}
+      {{ 'cv.landing.title' | translate }}
     </h1>
     <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <div
-        *ngForTranslate="let item; from: 'landing.jobs'; let key = index"
+        *ngForTranslate="let item; from: 'cv.landing.jobs'; let key = index"
         tabindex="0"
         class="transform cursor-pointer rounded-lg bg-gray-100 p-6 shadow-lg transition duration-300 hover:-translate-y-2 hover:bg-gray-200 hover:shadow-xl dark:bg-gray-700 dark:hover:bg-gray-600"
-        (click)="openDialog(item.title, 'landing.jobs.' + key + '.key-points')"
-        (keyup.enter)="openDialog(item.title, 'landing.jobs.' + key + '.key-points')"
+        (click)="openDialog(item.title, 'cv.landing.jobs.' + key + '.key-points')"
+        (keyup.enter)="openDialog(item.title, 'cv.landing.jobs.' + key + '.key-points')"
       >
         <h2 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">
           {{ item.title | translate }}
@@ -36,11 +36,11 @@
     }
     <section class="my-6">
       <h2 i18n class="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
-        {{ 'landing.skills.title' | translate }}
+        {{ 'cv.landing.skills.title' | translate }}
       </h2>
       <div class="flex flex-wrap gap-3">
         <span
-          *ngForTranslate="let skill; from: 'landing.skills.types'"
+          *ngForTranslate="let skill; from: 'cv.landing.skills.types'"
           class="rounded-full bg-blue-100 px-4 py-2 text-sm font-semibold text-blue-800 transition duration-300 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-200 dark:hover:bg-blue-800"
           data-testid="landing-skills"
         >
@@ -49,7 +49,9 @@
       </div>
     </section>
     <div class="mt-6">
-      <h2 class="mb-4 text-2xl font-bold text-gray-900 dark:text-white">My Projects</h2>
+      <h2 class="mb-4 text-2xl font-bold text-gray-900 dark:text-white">
+        {{ 'cv.landing.projects.title' | translate }}
+      </h2>
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div
           tabindex="0"
@@ -59,11 +61,11 @@
         >
           <h3 class="text-xl font-medium text-gray-900 dark:text-white">Scribo</h3>
           <p class="text-gray-700 dark:text-gray-400">
-            Explore Scribo and share your stories with the world.
+            {{ 'cv.landing.projects.scribo' | translate }}
           </p>
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-landing-footer></app-landing-footer>
+<feature-about-footer></feature-about-footer>

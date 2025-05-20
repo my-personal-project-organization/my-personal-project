@@ -18,17 +18,13 @@ export class NgForTranslateDirective implements OnChanges {
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly templateRef = inject(TemplateRef<unknown>);
 
-  /** Use: *ngForTranslate="let item; from: 'landing.jobs'; let index = index" */
+  /** Use: *ngForTranslate="let item; from: 'cv.landing.jobs'; let index = index" */
   public ngForTranslateFrom = input.required<string>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      changes['ngForTranslateFrom'] &&
-      changes['ngForTranslateFrom']?.currentValue
-    ) {
+    if (changes['ngForTranslateFrom'] && changes['ngForTranslateFrom']?.currentValue) {
       const ngForTranslateFrom = changes['ngForTranslateFrom']?.currentValue;
-      const translationsObject =
-        this.translationService.getTranslations(ngForTranslateFrom);
+      const translationsObject = this.translationService.getTranslations(ngForTranslateFrom);
 
       if (translationsObject) {
         for (const key in translationsObject) {
@@ -36,9 +32,7 @@ export class NgForTranslateDirective implements OnChanges {
           if (translationsObject.hasOwnProperty(key)) {
             const item =
               typeof translationsObject[key] === 'string'
-                ? this.translationService.translate(
-                    `${ngForTranslateFrom}.${key}`,
-                  )
+                ? this.translationService.translate(`${ngForTranslateFrom}.${key}`)
                 : translationsObject[key];
             this.viewContainerRef.createEmbeddedView(this.templateRef, {
               $implicit: item,
