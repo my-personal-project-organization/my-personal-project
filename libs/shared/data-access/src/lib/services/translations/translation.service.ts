@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { landingPageTranslations } from './landing-page.translations';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TranslationService {
+  private translations: Record<string, unknown> = {};
   /**
    * The function `translate` takes a key as input, retrieves the corresponding value from a nested
    * object structure, and returns the translated string or the original key if not found.
@@ -65,7 +65,16 @@ export class TranslationService {
     return undefined;
   }
 
-  translations: Record<string, unknown> = {
-    landing: landingPageTranslations,
-  };
+  loadTranslations(translations: Record<string, unknown>): void {
+    if (Object.keys(this.translations).length !== 0) {
+      throw new Error('Translations object is already loaded');
+    }
+    if (translations === null || translations === undefined || typeof translations !== 'object') {
+      throw new Error('Translations must be an object');
+    }
+    if (Object.keys(translations).length === 0) {
+      throw new Error('Translations object is empty');
+    }
+    this.translations = translations;
+  }
 }
