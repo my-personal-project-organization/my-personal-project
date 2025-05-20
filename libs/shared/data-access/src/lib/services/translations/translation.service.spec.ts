@@ -15,21 +15,17 @@ describe('TranslationService', () => {
   });
 
   it('should translate existing keys', () => {
-    expect(service.translate('landing.title')).toBe('My experiences');
-    expect(service.translate('landing.jobs.3.title')).toBe(
-      'Senior Front End Angular Developer',
-    );
-    expect(service.translate('landing.jobs.2.key-points.5')).toBe(
+    expect(service.translate('cv.landing.title')).toBe('My experiences');
+    expect(service.translate('cv.landing.jobs.3.title')).toBe('Senior Front End Angular Developer');
+    expect(service.translate('cv.landing.jobs.2.key-points.5')).toBe(
       'Mentored and developed junior and mid-level developers.',
     );
   });
 
   it('should return the key for non-existent keys', () => {
     expect(service.translate('non.existent.key')).toBe('non.existent.key');
-    expect(service.translate('landing.jobs.4')).toBe('landing.jobs.4'); // Even if parent exists
-    expect(service.translate('landing.jobs.2.key-points.99')).toBe(
-      'landing.jobs.2.key-points.99',
-    );
+    expect(service.translate('cv.landing.jobs.4')).toBe('cv.landing.jobs.4'); // Even if parent exists
+    expect(service.translate('cv.landing.jobs.2.key-points.99')).toBe('cv.landing.jobs.2.key-points.99');
   });
 
   it('should return the key for invalid keys (e.g., number, objects)', () => {
@@ -37,9 +33,7 @@ describe('TranslationService', () => {
     expect(service.translate({} as any)).toBe('translate key is not string');
     expect(service.translate([] as any)).toBe('translate key is not string');
     expect(service.translate(null as any)).toBe('translate key is not string'); // Check how null/undefined are handled
-    expect(service.translate(undefined as any)).toBe(
-      'translate key is not string',
-    );
+    expect(service.translate(undefined as any)).toBe('translate key is not string');
   });
 
   it('should handle empty key string', () => {
@@ -48,7 +42,7 @@ describe('TranslationService', () => {
 
   describe('getTranslations', () => {
     it('should retrieve nested translations for a valid key', () => {
-      const translations = service.getTranslations('landing.jobs.2');
+      const translations = service.getTranslations('cv.landing.jobs.2');
       expect(translations).toBeDefined();
       const title = translations ? translations['title'] : undefined;
       expect(title).toBe('Frontend Manager'); // Accessing using optional chaining (?.)

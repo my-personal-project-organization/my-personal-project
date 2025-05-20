@@ -1,6 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-export const landingPageTranslations = {
+export const cvLandingPageTranslations = {
   title: $localize`:@@landing.title:My experiences`,
   jobs: {
     '3': {

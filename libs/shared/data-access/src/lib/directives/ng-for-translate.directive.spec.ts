@@ -6,9 +6,7 @@ import { NgForTranslateDirective } from './ng-for-translate.directive';
   standalone: true,
   imports: [NgForTranslateDirective],
   template: `
-    <ng-container
-      *ngForTranslate="let item; let i = index; from: translationKey"
-    >
+    <ng-container *ngForTranslate="let item; let i = index; from: translationKey">
       <div id="translation-{{ i }}">{{ item }}</div>
     </ng-container>
   `,
@@ -38,7 +36,7 @@ describe('NgForTranslateDirective', () => {
   });
 
   it('should iterate and translate correctly', () => {
-    component.translationKey = 'landing.jobs.2.key-points';
+    component.translationKey = 'cv.landing.jobs.2.key-points';
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(9);
@@ -58,7 +56,7 @@ describe('NgForTranslateDirective', () => {
   });
 
   it('should handle nested objects', () => {
-    component.translationKey = 'landing.jobs.2';
+    component.translationKey = 'cv.landing.jobs.2';
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(3);
