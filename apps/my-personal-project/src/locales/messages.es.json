@@ -67,6 +67,11 @@
     "sc.layout.footer.aria.linkedin": "Visita mi perfil de LinkedIn",
     "sc.layout.footer.aria.email": "Envíame un correo electrónico",
     "sc.layout.footer.copyright": "Todos los derechos reservados.",
+    "sc.layout.nav.home": "Inicio",
+    "sc.layout.nav.articles": "Artículos",
+    "sc.layout.nav.profile": "Perfil",
+    "sc.layout.nav.logout": "Cerrar sesión",
+    "sc.layout.nav.login": "Iniciar sesión",
     "7708270344948043036": " {$INTERPOLATION} "
   }
 }

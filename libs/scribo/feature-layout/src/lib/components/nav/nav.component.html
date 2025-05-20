@@ -3,7 +3,7 @@
     routerLink="/scribo/landing"
     routerLinkActive="active"
     class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
-    >Home</a
+    >{{ 'sc.layout.nav.home' | translate }}</a
   >
   @if (isAuthenticated()) {
     <a
@@ -11,14 +11,14 @@
       routerLinkActive="active"
       class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
       data-testid="nav-articles-link"
-      >Articles</a
+      >{{ 'sc.layout.nav.articles' | translate }}</a
     >
     <a
       routerLink="/scribo/user-profile"
       routerLinkActive="active"
       class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
       data-testid="nav-profile-link"
-      >Profile</a
+      >{{ 'sc.layout.nav.profile' | translate }}</a
     >
   }
 </ui-nav-bar>
@@ -29,24 +29,24 @@
       routerLink="/scribo/landing"
       class="block py-2 text-gray-700 hover:underline dark:text-gray-300"
       data-testid="sidebar-home-link"
-      >Home</a
+      >{{ 'sc.layout.nav.home' | translate }}</a
     >
     @if (isAuthenticated()) {
       <a
         routerLink="/scribo/list"
         class="block py-2 text-gray-700 hover:underline dark:text-gray-300"
         data-testid="sidebar-articles-link"
-        >Articles</a
+        >{{ 'sc.layout.nav.articles' | translate }}</a
       >
       <a
         routerLink="/scribo/user-profile"
         class="block py-2 text-gray-700 hover:underline dark:text-gray-300"
         data-testid="sidebar-profile-link"
-        >Profile</a
+        >{{ 'sc.layout.nav.profile' | translate }}</a
       >
       <ui-button
         type="button"
-        text="Logout"
+        [text]="'sc.layout.nav.logout' | translate"
         color="danger"
         size="small"
         class="mt-4"
@@ -56,7 +56,7 @@
     } @else {
       <ui-button
         type="button"
-        text="Login"
+        [text]="'sc.layout.nav.login' | translate"
         color="primary"
         class="mt-4"
         (btnClick)="login()"

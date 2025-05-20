@@ -1,10 +1,10 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
-import { AuthStore } from '@mpp/shared/data-access';
+import { AuthStore, TranslatePipe } from '@mpp/shared/data-access';
 import { ButtonComponent, NavBarComponent } from '@mpp/shared/ui';
 
 @Component({
   selector: 'scrb-layout-nav',
-  imports: [NavBarComponent, ButtonComponent],
+  imports: [NavBarComponent, ButtonComponent, TranslatePipe],
   templateUrl: './nav.component.html',
 })
 export class NavComponent {

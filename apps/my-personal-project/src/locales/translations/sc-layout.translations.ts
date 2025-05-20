@@ -1,3 +1,4 @@
+// ...existing code...
 export const scriboLayoutTranslations = {
   footer: {
     title: $localize`:@@sc.layout.footer.title: - Your platform to share your stories.`,
@@ -9,5 +10,12 @@ export const scriboLayoutTranslations = {
       email: $localize`:@@sc.layout.footer.aria.email:Send me an email`,
     },
     copyright: $localize`:@@sc.layout.footer.copyright:All rights reserved.`,
+  },
+  nav: {
+    home: $localize`:@@sc.layout.nav.home:Home`,
+    articles: $localize`:@@sc.layout.nav.articles:Articles`,
+    profile: $localize`:@@sc.layout.nav.profile:Profile`,
+    logout: $localize`:@@sc.layout.nav.logout:Logout`,
+    login: $localize`:@@sc.layout.nav.login:Login`,
   },
 };
