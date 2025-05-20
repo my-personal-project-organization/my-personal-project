@@ -60,4 +60,8 @@ export const landingPageTranslations = {
       communication: $localize`:@@landing.skills.communication:Communication`,
     },
   },
+  projects: {
+    title: $localize`:@@landing.projects.title:Projects`,
+    scribo: $localize`:@@landing.projects.scribo:Explore Scribo and share your stories with the world.`,
+  },
 } as const;

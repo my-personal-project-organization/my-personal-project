@@ -40,6 +40,8 @@
     "landing.skills.ngrx": "NgRx",
     "landing.skills.rxjs": "RxJS",
     "landing.skills.'team-management'": "Gestión de equipos",
-    "landing.skills.communication": "Comunicación"
+    "landing.skills.communication": "Comunicación",
+    "landing.projects.title": "Proyectos",
+    "landing.projects.scribo": "Explora Scribo y comparte tus historias con el mundo."
   }
 }
