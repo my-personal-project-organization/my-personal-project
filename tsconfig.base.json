@@ -10,24 +10,54 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": [
+      "es2020",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@mpp/cv/data-access": ["libs/cv/data-access/src/index.ts"],
-      "@mpp/cv/feature-about": ["libs/cv/feature-about/src/index.ts"],
-      "@mpp/scribo/data-access": ["libs/scribo/data-access/src/index.ts"],
-      "@mpp/scribo/feature-article-list": ["libs/scribo/feature-article-list/src/index.ts"],
-      "@mpp/scribo/feature-landing": ["libs/scribo/feature-landing/src/index.ts"],
-      "@mpp/scribo/feature-layout": ["libs/scribo/feature-layout/src/index.ts"],
-      "@mpp/scribo/feature-user-profile": ["libs/scribo/feature-user-profile/src/index.ts"],
-      "@mpp/shared/data-access": ["libs/shared/data-access/src/index.ts"],
-      "@mpp/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@mpp/shared/util-error": ["libs/shared/util-error/src/index.ts"],
-      "@mpp/shared/utils": ["libs/shared/utils/src/index.ts"],
-      "@mpp/shared/util-translation": ["libs/shared/util-translation/src/index.ts"]
+      "@mpp/cv/data-access": [
+        "libs/cv/data-access/src/index.ts"
+      ],
+      "@mpp/cv/feature-about": [
+        "libs/cv/feature-about/src/index.ts"
+      ],
+      "@mpp/scribo/data-access": [
+        "libs/scribo/data-access/src/index.ts"
+      ],
+      "@mpp/scribo/feature-article-list": [
+        "libs/scribo/feature-article-list/src/index.ts"
+      ],
+      "@mpp/scribo/feature-landing": [
+        "libs/scribo/feature-landing/src/index.ts"
+      ],
+      "@mpp/scribo/feature-layout": [
+        "libs/scribo/feature-layout/src/index.ts"
+      ],
+      "@mpp/scribo/feature-user-profile": [
+        "libs/scribo/feature-user-profile/src/index.ts"
+      ],
+      "@mpp/shared/data-access": [
+        "libs/shared/data-access/src/index.ts"
+      ],
+      "@mpp/shared/ui": [
+        "libs/shared/ui/src/index.ts"
+      ],
+      "@mpp/shared/util-error": [
+        "libs/shared/util-error/src/index.ts"
+      ],
+      "@mpp/shared/util-translation": [
+        "libs/shared/util-translation/src/index.ts"
+      ],
+      "@mpp/shared/utils": [
+        "libs/shared/utils/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

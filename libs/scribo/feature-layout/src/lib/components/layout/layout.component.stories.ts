@@ -1,12 +1,10 @@
 import { provideHttpClient } from '@angular/common/http';
-import { waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockAuthService, provideMockFirebaseConfig } from '@mpp/shared/data-access';
 import { clickOnBtnDataTestId } from '@mpp/shared/ui';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
-import { expect } from '@storybook/jest';
-import { within } from '@storybook/testing-library';
+import { expect, within } from '@storybook/test';
 import { ScriboFeatureLayoutComponent } from './layout.component';
 
 // TODO: Uncomment the following lines to enable routing in the story. NOT WORKING

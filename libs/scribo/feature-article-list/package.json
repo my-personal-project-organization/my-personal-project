@@ -1,9 +1,0 @@
-{
-  "name": "@mpp/scribo/feature-article-list",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/core": "^19.0.0",
-    "@mpp/scribo/data-access": "0.0.1"
-  },
-  "sideEffects": false
-}

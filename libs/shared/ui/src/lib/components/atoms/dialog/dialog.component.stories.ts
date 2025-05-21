@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { DialogComponent } from './dialog.component';
 
-import { expect } from '@storybook/jest';
-import { within } from '@storybook/testing-library';
+import { expect, within } from '@storybook/test';
 
 const meta: Meta<DialogComponent> = {
   component: DialogComponent,

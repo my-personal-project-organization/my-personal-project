@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { expect } from '@storybook/jest';
-import { within } from '@storybook/testing-library';
+import { expect, within } from '@storybook/test';
 import { IconComponent } from './icon.component';
 import { iconsJson } from './icons';
 

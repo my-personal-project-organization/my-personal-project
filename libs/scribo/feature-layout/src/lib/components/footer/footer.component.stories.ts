@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing'; // <-- Import
 import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
-import { expect } from '@storybook/jest';
-import { within } from '@storybook/testing-library';
+import { expect, within } from '@storybook/test';
 import { FooterComponent } from './footer.component';
 
 const meta: Meta<FooterComponent> = {

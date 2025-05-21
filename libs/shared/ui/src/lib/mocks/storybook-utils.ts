@@ -1,5 +1,4 @@
-import { expect } from '@storybook/jest';
-import { within } from '@storybook/testing-library';
+import { expect, within } from '@storybook/test';
 
 /**
  * Utility function to find an element by data-testid and click it.
