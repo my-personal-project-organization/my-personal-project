@@ -98,6 +98,23 @@
       "subject": "Merge pull request #62 from my-personal-project-organization/56-display-error-messages-on-notification-message"
     },
     "targetVersion": "latest",
-    "confirmedPackageUpdates": true
+    "confirmedPackageUpdates": true,
+    "runningMigrations": [
+      "remove-legacy-cache"
+    ],
+    "completedMigrations": {
+      "remove-legacy-cache": {
+        "type": "successful",
+        "name": "remove-legacy-cache",
+        "changedFiles": [
+          {
+            "path": "nx.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "772dc2d0f10d67a4d827775980e1113aa1ad2b53",
+        "nextSteps": []
+      }
+    }
   }
 }
