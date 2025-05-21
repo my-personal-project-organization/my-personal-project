@@ -1,4 +1,3 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   ErrorHandler,
@@ -8,8 +7,9 @@ import {
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { GlobalErrorHandlerService, serverErrorInterceptor } from '@mpp/shared/util-error';
+import { GlobalErrorHandlerService } from '@mpp/shared/util-error';
 import { environment } from '../environments/environment';
 import { loadAppTranslations } from '../locales/translations/load-translations';
 import { appRoutes } from './app.routes';
@@ -31,5 +31,6 @@ export const appConfig: ApplicationConfig = {
     },
     // ? We don't need this interceptor for now
     // provideHttpClient(withInterceptors([serverErrorInterceptor])),
+    provideAnimations(),
   ],
 };
