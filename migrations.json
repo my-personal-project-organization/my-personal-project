@@ -185,12 +185,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "0688a978a3b922d57546b7a58d512ddc456d7281",
+        "ref": "7f41add4826770700b3c5bfb64f377b3272c8daf",
+        "nextSteps": []
+      },
+      "set-continuous-option": {
+        "type": "successful",
+        "name": "set-continuous-option",
+        "changedFiles": [
+          {
+            "path": "apps/my-personal-project/project.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "4bb7414fed2def05f287adfa910c805bfe49088f",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "update-angular-cli-version-19-2-0"
+      "set-continuous-option"
     ]
   }
 }
