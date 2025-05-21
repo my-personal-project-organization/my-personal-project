@@ -24,7 +24,8 @@
       "@mpp/scribo/feature-user-profile": ["libs/scribo/feature-user-profile/src/index.ts"],
       "@mpp/shared/data-access": ["libs/shared/data-access/src/index.ts"],
       "@mpp/shared/ui": ["libs/shared/ui/src/index.ts"],
-      "@mpp/shared/utils": ["libs/shared/utils/src/index.ts"]
+      "@mpp/shared/utils": ["libs/shared/utils/src/index.ts"],
+      "@mpp/shared/util-error": ["libs/shared/util-error/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
