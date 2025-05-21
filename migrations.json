@@ -161,12 +161,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "ee5000cb48eba647e0b41428a81fe596129ee189",
+        "ref": "3870bd7bc31b0f3889ee3207030079c0120d0821",
+        "nextSteps": []
+      },
+      "update-angular-cli-version-19-1-0": {
+        "type": "successful",
+        "name": "update-angular-cli-version-19-1-0",
+        "changedFiles": [
+          {
+            "path": "package.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "c39ce561b0966b1b0c6a311a1c813a998abea7ae",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "remove-tsconfig-option-from-jest-executor"
+      "update-angular-cli-version-19-1-0"
     ]
   }
 }
