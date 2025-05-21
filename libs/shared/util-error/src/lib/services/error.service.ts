@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { errorTranslations } from './error-translations';
+import { errorTranslations } from '../translations/error-translations';
 
 @Injectable({
   providedIn: 'root',
