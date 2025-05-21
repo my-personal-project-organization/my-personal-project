@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@mpp/shared/ui';
 import { LandingService } from './landing.service';
-import { NgForTranslateDirective, TranslatePipe, TranslationService } from '@mpp/shared/data-access';
+import { NgForTranslateDirective, TranslatePipe, TranslationService } from '@mpp/shared/util-translation';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({

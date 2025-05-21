@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { TranslationService } from '@mpp/shared/data-access';
+import { TranslationService } from '@mpp/shared/util-translation';
 import { cvLandingPageTranslations } from './cv-landing-page.translations';
 import { scriboLandingPageTranslations } from './sc-landing-page.translations';
 import { scriboLayoutTranslations } from './sc-layout.translations';

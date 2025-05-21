@@ -2,11 +2,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { DialogComponent } from '@mpp/shared/ui';
-import { of } from 'rxjs';
-import { NgForTranslateDirective } from '../../shared/directives/ng-for-translate.directive';
-import { TranslatePipe } from '../../shared/pipes/translate.pipe';
-import { PlacesService } from '../../shared/services/places.service';
-import { TranslationService } from '../../shared/services/translations/translation.service';
+import { NgForTranslateDirective, TranslatePipe, TranslationService } from '@mpp/shared/util-translation';
 import { LandingComponent } from './landing.component';
 import { LandingService } from './landing.service';
 
@@ -14,7 +10,6 @@ describe('LandingComponent', () => {
   let component: LandingComponent;
   let fixture: ComponentFixture<LandingComponent>;
   let mockTranslationService: any;
-  let mockPlacesService: any;
 
   beforeEach(async () => {
     mockTranslationService = {
@@ -22,10 +17,6 @@ describe('LandingComponent', () => {
       getTranslations: jest.fn(),
     };
 
-    mockPlacesService = {
-      getPlaces: jest.fn().mockReturnValue(of([])), // Mock getPlaces to return an observable
-      addPlace: jest.fn().mockResolvedValue(true), // Mock addPlace to return a promise
-    };
     await TestBed.configureTestingModule({
       imports: [
         LandingComponent,
@@ -35,7 +26,6 @@ describe('LandingComponent', () => {
       ],
       providers: [
         { provide: TranslationService, useValue: mockTranslationService },
-        { provide: PlacesService, useValue: mockPlacesService },
         LandingService, //Provide LandingService
         { provide: ActivatedRoute, useValue: {} }, // Provide ActivatedRoute mock
       ],
