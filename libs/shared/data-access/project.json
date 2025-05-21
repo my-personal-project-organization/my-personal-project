@@ -10,8 +10,7 @@
       "executor": "@nx/angular:ng-packagr-lite",
       "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
       "options": {
-        "project": "libs/shared/data-access/ng-package.json",
-        "polyfills": ["@angular/localize/init"]
+        "project": "libs/shared/data-access/ng-package.json"
       },
       "configurations": {
         "production": {
