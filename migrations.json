@@ -173,12 +173,24 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "c39ce561b0966b1b0c6a311a1c813a998abea7ae",
+        "ref": "48af7ddf35bf49b805f0c507669127290797191d",
+        "nextSteps": []
+      },
+      "update-angular-cli-version-19-2-0": {
+        "type": "successful",
+        "name": "update-angular-cli-version-19-2-0",
+        "changedFiles": [
+          {
+            "path": "package.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "0688a978a3b922d57546b7a58d512ddc456d7281",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "update-angular-cli-version-19-1-0"
+      "update-angular-cli-version-19-2-0"
     ]
   }
 }
