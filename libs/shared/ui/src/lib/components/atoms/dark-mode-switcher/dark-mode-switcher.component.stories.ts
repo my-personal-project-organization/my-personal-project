@@ -1,8 +1,7 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { DarkModeSwitcherComponent } from './dark-mode-switcher.component';
 
-import { expect } from '@storybook/jest';
-import { within } from '@storybook/testing-library';
+import { expect, within } from '@storybook/test';
 import { ButtonComponent } from '../button/button.component';
 
 const meta: Meta<DarkModeSwitcherComponent> = {
