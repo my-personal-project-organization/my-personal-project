@@ -142,12 +142,31 @@
             "type": "UPDATE"
           }
         ],
-        "ref": "c2516fd89a1ac1625f505358f794ddcd52a3d09a",
+        "ref": "663ff1c494e1496eb7bdc086fd99696e583a36ec",
+        "nextSteps": []
+      },
+      "replace-getJestProjects-with-getJestProjectsAsync-v21": {
+        "type": "successful",
+        "name": "replace-getJestProjects-with-getJestProjectsAsync-v21",
+        "changedFiles": [],
+        "ref": "663ff1c494e1496eb7bdc086fd99696e583a36ec",
+        "nextSteps": []
+      },
+      "remove-tsconfig-option-from-jest-executor": {
+        "type": "successful",
+        "name": "remove-tsconfig-option-from-jest-executor",
+        "changedFiles": [
+          {
+            "path": "tsconfig.base.json",
+            "type": "UPDATE"
+          }
+        ],
+        "ref": "ee5000cb48eba647e0b41428a81fe596129ee189",
         "nextSteps": []
       }
     },
     "runningMigrations": [
-      "21-1-0-add-ignore-entries-for-nx-rule-files"
+      "remove-tsconfig-option-from-jest-executor"
     ]
   }
 }
