@@ -1,5 +1,6 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
-import { AuthStore, TranslatePipe } from '@mpp/shared/data-access';
+import { AuthStore } from '@mpp/shared/data-access';
+import { TranslatePipe } from '@mpp/shared/util-translation';
 import { ButtonComponent, NavBarComponent } from '@mpp/shared/ui';
 import { LanguageSwitcherComponent } from '../language-switcher/language-switcher.component';
 

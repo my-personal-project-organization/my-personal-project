@@ -1,1 +1,0 @@
-export * from './ng-for-translate.directive';

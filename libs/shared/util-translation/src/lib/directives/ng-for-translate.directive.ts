@@ -7,7 +7,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { TranslationService } from '../services/translations/translation.service';
+import { TranslationService } from '../services/translation.service';
 
 @Directive({
   selector: '[ngForTranslate]',

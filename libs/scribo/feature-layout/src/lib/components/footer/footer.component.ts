@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IconComponent } from '@mpp/shared/ui';
-import { TranslatePipe } from '@mpp/shared/data-access';
+import { TranslatePipe } from '@mpp/shared/util-translation';
 
 @Component({
   selector: 'scrb-layout-footer',

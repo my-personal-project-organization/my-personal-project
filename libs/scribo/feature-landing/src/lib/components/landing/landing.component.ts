@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthStore, TranslatePipe } from '@mpp/shared/data-access';
+import { AuthStore } from '@mpp/shared/data-access';
+import { TranslatePipe } from '@mpp/shared/util-translation';
 import { ButtonComponent } from '@mpp/shared/ui';
 import { features } from './landing.features';
 

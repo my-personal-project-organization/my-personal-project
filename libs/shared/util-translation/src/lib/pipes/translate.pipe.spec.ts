@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { TestBed } from '@angular/core/testing';
-import { TranslationService } from '../services/translations/translation.service';
 import { TranslatePipe } from './translate.pipe';
+import { TranslationService } from '../services/translation.service';
 
 describe('TranslatePipe', () => {
   let pipe: TranslatePipe;
@@ -22,9 +22,7 @@ describe('TranslatePipe', () => {
   it('should translate a key', () => {
     const key = 'hello';
     const translatedValue = 'Hola';
-    const translateSpy = jest
-      .spyOn(translationService, 'translate')
-      .mockReturnValue(translatedValue);
+    const translateSpy = jest.spyOn(translationService, 'translate').mockReturnValue(translatedValue);
 
     const result = pipe.transform(key);
 
@@ -34,9 +32,7 @@ describe('TranslatePipe', () => {
 
   it('should handle missing translations', () => {
     const key = 'missing.key';
-    const translateSpy = jest
-      .spyOn(translationService, 'translate')
-      .mockReturnValue(key);
+    const translateSpy = jest.spyOn(translationService, 'translate').mockReturnValue(key);
 
     const result = pipe.transform(key);
 
