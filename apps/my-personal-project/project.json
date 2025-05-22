@@ -14,19 +14,13 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",
-      "dependsOn": [
-        "create-environment"
-      ],
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "dependsOn": ["create-environment"],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/my-personal-project",
         "index": "apps/my-personal-project/src/index.html",
         "browser": "apps/my-personal-project/src/main.ts",
-        "polyfills": [
-          "@angular/localize/init"
-        ],
+        "polyfills": ["@angular/localize/init"],
         "tsConfig": "apps/my-personal-project/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
@@ -35,9 +29,7 @@
             "input": "apps/my-personal-project/public"
           }
         ],
-        "styles": [
-          "apps/my-personal-project/src/styles.scss"
-        ],
+        "styles": ["apps/my-personal-project/src/styles.scss"],
         "scripts": [],
         "localize": true,
         "i18nMissingTranslation": "error"
@@ -70,14 +62,10 @@
           "sourceMap": true
         },
         "en": {
-          "localize": [
-            "en"
-          ]
+          "localize": ["en"]
         },
         "es": {
-          "localize": [
-            "es"
-          ]
+          "localize": ["es"]
         },
         "analyze-bundle": {
           "sourceMap": true,
@@ -89,9 +77,7 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
-      "dependsOn": [
-        "create-environment"
-      ],
+      "dependsOn": ["create-environment"],
       "configurations": {
         "production": {
           "buildTarget": "my-personal-project:build:production"
@@ -119,12 +105,8 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "dependsOn": [
-        "create-environment"
-      ],
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "dependsOn": ["create-environment"],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/my-personal-project/jest.config.ts"
       }
@@ -141,9 +123,7 @@
     "create-environment": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "node ./apps/my-personal-project/src/environments/create-environments.cjs"
-        ]
+        "commands": ["node ./apps/my-personal-project/src/environments/create-environments.cjs"]
       }
     }
   }
