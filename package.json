@@ -10,7 +10,9 @@
     "localize": "nx run my-personal-project:build:production --localize && npx serve dist/apps/my-personal-project/browser",
     "deploy": "npx nx run my-personal-project:build --configuration=production && firebase deploy",
     "analyze-bundle": "npx nx run my-personal-project:build:analyze-bundle && source-map-explorer dist/apps/my-personal-project/**/*.js --html analyze-bundle.html",
-    "run-before-pr": "npx nx affected -t lint test build e2e"
+    "run-before-pr": "npx nx affected -t lint test build e2e",
+    "test-storybook:ci-not-working": "https://github.com/storybookjs/test-runner?tab=readme-ov-file#getting-started",
+    "test-storybook:local": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"nx run shared/ui:storybook\" \"wait-on tcp:4400 && npx nx run shared/ui:test-storybook\""
   },
   "private": true,
   "dependencies": {
@@ -52,6 +54,7 @@
     "@nx/workspace": "21.1.0",
     "@playwright/test": "^1.36.0",
     "@schematics/angular": "19.2.9",
+    "@storybook/addon-coverage": "1.0.5",
     "@storybook/addon-essentials": "8.6.14",
     "@storybook/addon-interactions": "8.6.14",
     "@storybook/angular": "8.6.14",
@@ -69,9 +72,11 @@
     "angular-eslint": "19.4.0",
     "autoprefixer": "^10.4.0",
     "chromatic": "^11.16.1",
+    "concurrently": "9.1.2",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "10.1.5",
     "eslint-plugin-playwright": "^1.6.2",
+    "http-server": "14.1.1",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jest-preset-angular": "14.4.2",
@@ -90,6 +95,7 @@
     "ts-node": "10.9.1",
     "tslib": "^2.3.0",
     "typescript": "5.7.3",
-    "typescript-eslint": "^8.13.0"
+    "typescript-eslint": "^8.13.0",
+    "wait-on": "8.0.3"
   }
 }
