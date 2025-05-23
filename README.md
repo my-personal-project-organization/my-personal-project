@@ -1,6 +1,11 @@
 # Mario Personal Project
 
-This project is a personal portfolio and article-sharing platform built with Angular, Nx, NgRx Signals, Firestore, and Tailwind CSS. It consists of two main sections:
+This project is a personal portfolio and article-sharing platform built with Angular, Nx, NgRx Signals, Firestore, and Tailwind CSS.
+
+You can check the project in the next URL:
+**https://my-personal-project-7c70d.web.app**
+
+It consists of two main sections:
 
 - **CV/History:** A personal portfolio showcasing skills, experience, and projects.
 - **Scribo:** An article-sharing platform where users can create, read, update, and delete articles.
