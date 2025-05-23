@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogComponent } from '@mpp/shared/ui';
+import { DialogComponent, IconComponent } from '@mpp/shared/ui';
 import { LandingService } from './landing.service';
 import { NgForTranslateDirective, TranslatePipe, TranslationService } from '@mpp/shared/util-translation';
 import { FooterComponent } from '../footer/footer.component';
@@ -8,7 +8,7 @@ import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'feature-about-landing',
   standalone: true,
-  imports: [DialogComponent, TranslatePipe, NgForTranslateDirective, FooterComponent],
+  imports: [DialogComponent, TranslatePipe, NgForTranslateDirective, FooterComponent, IconComponent],
   providers: [LandingService],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',
@@ -34,5 +34,9 @@ export class LandingComponent {
 
   onCLickScriboProject() {
     this.router.navigate(['/scribo']);
+  }
+
+  onClickDjGasparProject(): void {
+    window.open('https://dj-gaspar.vercel.app/', '_blank');
   }
 }

@@ -63,5 +63,6 @@ export const cvLandingPageTranslations = {
   projects: {
     title: $localize`:@@cv.landing.projects.title:Projects`,
     scribo: $localize`:@@cv.landing.projects.scribo:Explore Scribo and share your stories with the world.`,
+    'dj-gaspar': $localize`:@@cv.landing.projects.dj-gaspar:Music mixing and entertainment platform with DJ sessions`,
   },
 } as const;
