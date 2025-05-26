@@ -32,7 +32,9 @@ export type IconName =
   | 'linkedin'
   | 'calendar'
   | 'clock'
-  | 'image';
+  | 'image'
+  | 'sun'
+  | 'moon';
 export type IconSize = number | `${number}rem`;
 
 export interface IconDefinition {

@@ -1,18 +1,12 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  HostBinding,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, HostBinding, inject, signal } from '@angular/core';
 import { LocalStorageService } from '@mpp/shared/data-access';
+import { IconComponent } from '../icon';
 
 @Component({
   selector: 'ui-dark-mode-switcher',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
   templateUrl: './dark-mode-switcher.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -21,16 +15,14 @@ export class DarkModeSwitcherComponent {
   localStoreService = inject(LocalStorageService);
 
   @HostBinding('class.dark') get mode() {
-    return this.darkMode();
+    return this.isDarkMode();
   }
 
-  darkMode = signal<boolean>(
-    this.localStoreService.getData<boolean>('darkMode') ?? false,
-  );
+  isDarkMode = signal<boolean>(this.localStoreService.getData<boolean>('darkMode') ?? false);
 
   constructor() {
     effect(() => {
-      this.localStoreService.saveData<boolean>('darkMode', this.darkMode());
+      this.saveDarkModeOnLocalStorage(this.isDarkMode());
     });
   }
 
@@ -43,16 +35,27 @@ export class DarkModeSwitcherComponent {
    * It also updates the `darkMode` signal to reflect the new state.
    */
   onToggleDarkMode() {
-    console.log('Dark mode toggled!');
     const htmlEl = document.getElementsByTagName('html')[0];
     if (htmlEl) {
-      if (this.darkMode()) {
+      if (this.isDarkMode()) {
         htmlEl.classList.remove('dark');
-        this.darkMode.set(false);
+        this.isDarkMode.set(false);
       } else {
         htmlEl.classList.add('dark');
-        this.darkMode.set(true);
+        this.isDarkMode.set(true);
       }
+    }
+  }
+
+  // ************* Private functions ********************
+  saveDarkModeOnLocalStorage(isDarkMode: boolean) {
+    const htmlElClasses = document.getElementsByTagName('html')[0]?.classList;
+    const isWindowDarkMode = htmlElClasses.value === 'dark';
+
+    if (isDarkMode && isWindowDarkMode !== isDarkMode) {
+      htmlElClasses.add('dark');
+    } else {
+      this.localStoreService.saveData<boolean>('darkMode', isDarkMode);
     }
   }
 }
