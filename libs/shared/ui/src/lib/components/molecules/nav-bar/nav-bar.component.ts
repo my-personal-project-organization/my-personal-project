@@ -1,13 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, signal, TemplateRef } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ButtonComponent, IconComponent } from '../../atoms';
 import { SideBarComponent } from '../../atoms/side-bar/side-bar.component';
 
 @Component({
   selector: 'ui-nav-bar',
   templateUrl: './nav-bar.component.html',
-  imports: [CommonModule, RouterLink, ButtonComponent, IconComponent, SideBarComponent],
+  imports: [CommonModule, ButtonComponent, IconComponent, SideBarComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavBarComponent {
