@@ -1,26 +1,37 @@
 <ui-nav-bar [sidebarContent]="sidebarTemplate">
-  <a
-    routerLink="/scribo/landing"
-    routerLinkActive="active"
-    class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
-    >{{ 'sc.layout.nav.home' | translate }}</a
-  >
-  @if (isAuthenticated()) {
+  <div class="flex w-full items-center justify-between">
     <a
-      routerLink="/scribo/list"
-      routerLinkActive="active"
-      class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
-      data-testid="nav-articles-link"
-      >{{ 'sc.layout.nav.articles' | translate }}</a
+      routerLink="/scribo/landing"
+      class="text-xl font-bold text-gray-900 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-400"
+      data-testid="nav-bar-logo"
     >
-    <a
-      routerLink="/scribo/user-profile"
-      routerLinkActive="active"
-      class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
-      data-testid="nav-profile-link"
-      >{{ 'sc.layout.nav.profile' | translate }}</a
-    >
-  }
+      Scribo
+    </a>
+    <div class="flex gap-4">
+      <a
+        routerLink="/scribo/landing"
+        routerLinkActive="active"
+        class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
+        >{{ 'sc.layout.nav.home' | translate }}</a
+      >
+      @if (isAuthenticated()) {
+        <a
+          routerLink="/scribo/list"
+          routerLinkActive="active"
+          class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
+          data-testid="nav-articles-link"
+          >{{ 'sc.layout.nav.articles' | translate }}</a
+        >
+        <a
+          routerLink="/scribo/user-profile"
+          routerLinkActive="active"
+          class="cursor-pointer text-gray-700 hover:underline dark:text-gray-300"
+          data-testid="nav-profile-link"
+          >{{ 'sc.layout.nav.profile' | translate }}</a
+        >
+      }
+    </div>
+  </div>
 </ui-nav-bar>
 
 <ng-template #sidebarTemplate>
