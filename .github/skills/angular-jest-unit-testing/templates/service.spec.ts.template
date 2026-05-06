@@ -1,0 +1,378 @@
+import { TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { MyService } from './my.service';
+import { MyDependency } from './my-dependency.service';
+
+/**
+ * Test suite for MyService
+ * 
+ * Replace:
+ * - MyService: Your service class
+ * - my.service: Your service path
+ * - MyDependency: Any services your service depends on
+ * - my-dependency.service: Dependency path
+ * 
+ * HTTP Testing:
+ * - httpMock.expectOne(url) - Expect exactly one request to url
+ * - httpMock.match(urlOrPredicate) - Expect one or more requests
+ * - req.flush(data) - Send response data
+ * - req.flush(null, { status: 404 }) - Send error response
+ * - httpMock.verify() - Ensure no outstanding requests (in afterEach)
+ */
+describe('MyService', () => {
+  let service: MyService;
+  let httpMock: HttpTestingController;
+  let myDependency: jest.Mocked<MyDependency>;
+
+  beforeEach(() => {
+    // Step 1: Create mocks for dependencies
+    const mockMyDependency = {
+      process: jest.fn(),
+      calculate: jest.fn().mockReturnValue(42),
+    };
+
+    // Step 2: Configure TestBed
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        MyService,
+        { provide: MyDependency, useValue: mockMyDependency },
+      ],
+    });
+
+    // Step 3: Inject service and HTTP mock
+    service = TestBed.inject(MyService);
+    httpMock = TestBed.inject(HttpTestingController);
+    myDependency = TestBed.inject(MyDependency) as jest.Mocked<MyDependency>;
+  });
+
+  // Clean up: Verify no outstanding HTTP requests
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  // Test 1: Service creation
+  describe('Service Creation', () => {
+    it('should be created', () => {
+      expect(service).toBeTruthy();
+    });
+
+    it('should initialize with correct default state', () => {
+      expect(service.state$).toBeDefined();
+    });
+  });
+
+  // Test 2: Observable methods
+  describe('Observable Methods', () => {
+    it('should return observable from GET request', (done) => {
+      const mockData = { id: 1, name: 'Test' };
+
+      service.getData$().subscribe((data) => {
+        expect(data).toEqual(mockData);
+        done();
+      });
+
+      const req = httpMock.expectOne('/api/data');
+      expect(req.request.method).toBe('GET');
+      req.flush(mockData);
+    });
+
+    it('should emit values on subscription', (done) => {
+      const values: any[] = [];
+
+      service.data$().subscribe((value) => {
+        values.push(value);
+      });
+
+      const req = httpMock.expectOne('/api/data');
+      req.flush([1, 2, 3]);
+
+      setTimeout(() => {
+        expect(values.length).toBeGreaterThan(0);
+        done();
+      }, 0);
+    });
+
+    it('should handle multiple subscriptions', () => {
+      const listener1 = jest.fn();
+      const listener2 = jest.fn();
+
+      service.getData$().subscribe(listener1);
+      service.getData$().subscribe(listener2);
+
+      const requests = httpMock.match('/api/data');
+      expect(requests.length).toBe(2);
+
+      requests.forEach((req) => req.flush({ id: 1 }));
+
+      expect(listener1).toHaveBeenCalledWith({ id: 1 });
+      expect(listener2).toHaveBeenCalledWith({ id: 1 });
+    });
+  });
+
+  // Test 3: GET requests
+  describe('GET Requests', () => {
+    it('should fetch data correctly', () => {
+      service.fetchUsers().subscribe();
+
+      const req = httpMock.expectOne('/api/users');
+      expect(req.request.method).toBe('GET');
+      req.flush([]);
+    });
+
+    it('should handle query parameters', () => {
+      service.searchUsers('admin').subscribe();
+
+      const req = httpMock.expectOne('/api/users?role=admin');
+      expect(req.request.method).toBe('GET');
+      req.flush([]);
+    });
+
+    it('should construct URL with path parameters', () => {
+      service.getUserById(123).subscribe();
+
+      const req = httpMock.expectOne('/api/users/123');
+      expect(req.request.method).toBe('GET');
+      req.flush({ id: 123 });
+    });
+  });
+
+  // Test 4: POST requests
+  describe('POST Requests', () => {
+    it('should send POST request with data', () => {
+      const newUser = { name: 'John', email: 'john@example.com' };
+
+      service.createUser(newUser).subscribe();
+
+      const req = httpMock.expectOne('/api/users');
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body).toEqual(newUser);
+      req.flush({ id: 1, ...newUser });
+    });
+
+    it('should include correct headers', () => {
+      service.createUser({}).subscribe();
+
+      const req = httpMock.expectOne('/api/users');
+      expect(req.request.headers.has('Content-Type')).toBe(true);
+      req.flush({});
+    });
+  });
+
+  // Test 5: PUT/PATCH requests
+  describe('PUT/PATCH Requests', () => {
+    it('should send PUT request for updates', () => {
+      const updated = { id: 1, name: 'Jane' };
+
+      service.updateUser(1, updated).subscribe();
+
+      const req = httpMock.expectOne('/api/users/1');
+      expect(req.request.method).toBe('PUT');
+      expect(req.request.body).toEqual(updated);
+      req.flush(updated);
+    });
+
+    it('should send PATCH request for partial updates', () => {
+      const patch = { name: 'Jane' };
+
+      service.patchUser(1, patch).subscribe();
+
+      const req = httpMock.expectOne('/api/users/1');
+      expect(req.request.method).toBe('PATCH');
+      req.flush({});
+    });
+  });
+
+  // Test 6: DELETE requests
+  describe('DELETE Requests', () => {
+    it('should send DELETE request', () => {
+      service.deleteUser(1).subscribe();
+
+      const req = httpMock.expectOne('/api/users/1');
+      expect(req.request.method).toBe('DELETE');
+      req.flush({});
+    });
+  });
+
+  // Test 7: Error handling
+  describe('Error Handling', () => {
+    it('should handle 404 error', (done) => {
+      service.getUserById(999).subscribe(
+        () => fail('should have errored'),
+        (error) => {
+          expect(error.status).toBe(404);
+          done();
+        }
+      );
+
+      const req = httpMock.expectOne('/api/users/999');
+      req.flush('Not found', { status: 404, statusText: 'Not Found' });
+    });
+
+    it('should handle 500 error', (done) => {
+      service.someRequest().subscribe(
+        () => fail('should have errored'),
+        (error) => {
+          expect(error.status).toBe(500);
+          done();
+        }
+      );
+
+      const req = httpMock.expectOne(/.*$/);
+      req.flush(null, { status: 500, statusText: 'Internal Server Error' });
+    });
+
+    it('should handle network error', (done) => {
+      service.someRequest().subscribe(
+        () => fail('should have errored'),
+        (error) => {
+          expect(error.status).toBe(0);
+          done();
+        }
+      );
+
+      const req = httpMock.expectOne(/.*$/);
+      req.error(new ProgressEvent('error'));
+    });
+  });
+
+  // Test 8: Observable operators
+  describe('Observable Operators', () => {
+    it('should map data correctly', (done) => {
+      service
+        .getUsers$()
+        .pipe(map((users) => users.map((u) => u.name)))
+        .subscribe((names) => {
+          expect(names).toEqual(['John', 'Jane']);
+          done();
+        });
+
+      const req = httpMock.expectOne('/api/users');
+      req.flush([
+        { id: 1, name: 'John' },
+        { id: 2, name: 'Jane' },
+      ]);
+    });
+
+    it('should filter data correctly', (done) => {
+      service
+        .getUsers$()
+        .pipe(filter((users) => users.length > 0))
+        .subscribe((users) => {
+          expect(users.length).toBeGreaterThan(0);
+          done();
+        });
+
+      const req = httpMock.expectOne('/api/users');
+      req.flush([{ id: 1, name: 'John' }]);
+    });
+  });
+
+  // Test 9: State management
+  describe('State Management', () => {
+    it('should initialize with default state', () => {
+      expect(service.currentState$).toBeDefined();
+    });
+
+    it('should update state when method called', (done) => {
+      service.updateState({ loading: true });
+
+      service.state$.subscribe((state) => {
+        expect(state.loading).toBe(true);
+        done();
+      });
+    });
+
+    it('should emit new values on state change', (done) => {
+      const values: any[] = [];
+
+      service.state$.subscribe((state) => {
+        values.push(state);
+      });
+
+      service.updateState({ id: 1 });
+      service.updateState({ id: 2 });
+
+      setTimeout(() => {
+        expect(values.length).toBeGreaterThan(1);
+        done();
+      }, 0);
+    });
+  });
+
+  // Test 10: Service methods
+  describe('Service Methods', () => {
+    it('should process data correctly', () => {
+      const input = { value: 10 };
+      const result = service.processData(input);
+
+      expect(result).toEqual({ value: 20 });
+    });
+
+    it('should call dependency method', () => {
+      service.executeOperation();
+
+      expect(myDependency.process).toHaveBeenCalled();
+    });
+
+    it('should combine multiple dependencies', () => {
+      service.complexOperation();
+
+      expect(myDependency.process).toHaveBeenCalled();
+      expect(myDependency.calculate).toHaveBeenCalled();
+    });
+  });
+
+  // Test 11: Caching
+  describe('Caching', () => {
+    it('should cache results on first call', () => {
+      service.getCachedData().subscribe();
+      service.getCachedData().subscribe();
+
+      const requests = httpMock.match(/.*$/);
+      expect(requests.length).toBe(1); // Only one request
+
+      requests[0].flush({ id: 1 });
+    });
+
+    it('should invalidate cache', () => {
+      service.getCachedData().subscribe();
+      service.invalidateCache();
+      service.getCachedData().subscribe();
+
+      const requests = httpMock.match(/.*$/);
+      expect(requests.length).toBe(2); // Two requests
+
+      requests.forEach((req) => req.flush({ id: 1 }));
+    });
+  });
+
+  // Test 12: Retry logic
+  describe('Retry Logic', () => {
+    it('should retry on failure', () => {
+      let attemptCount = 0;
+
+      service.retryableCall$().subscribe(
+        () => {},
+        () => {
+          expect(attemptCount).toBeGreaterThan(0);
+        }
+      );
+
+      const requests = httpMock.match(/.*$/);
+      attempts = requests.length;
+    });
+  });
+
+  // Test 13: Integration with dependencies
+  describe('Integration', () => {
+    it('should work with dependencies', () => {
+      myDependency.calculate.mockReturnValue(100);
+
+      const result = service.calculateWithDependency();
+
+      expect(result).toBe(100);
+      expect(myDependency.calculate).toHaveBeenCalled();
+    });
+  });
+});

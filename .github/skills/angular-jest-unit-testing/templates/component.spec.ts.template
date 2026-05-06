@@ -1,0 +1,232 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
+import { MyComponent } from './my.component';
+import { MyService } from './my.service';
+
+/**
+ * Test suite for MyComponent
+ * 
+ * Replace:
+ * - MyComponent: Your component class
+ * - my.component: Your component path
+ * - MyService: Any service your component depends on
+ * - my.service: Service path
+ */
+describe('MyComponent', () => {
+  let component: MyComponent;
+  let fixture: ComponentFixture<MyComponent>;
+  let myService: jest.Mocked<MyService>;
+
+  beforeEach(async () => {
+    // Step 1: Create mocks for all services
+    const mockMyService = {
+      // Mock all methods your component uses
+      method1: jest.fn(),
+      method2: jest.fn().mockReturnValue(of([])),
+      observable$: new BehaviorSubject([]),
+    };
+
+    // Step 2: Configure TestBed
+    await TestBed.configureTestingModule({
+      imports: [
+        MyComponent, // Standalone component
+        NoopAnimationsModule, // For animations
+        TranslateModule.forRoot(), // For i18n
+      ],
+      providers: [
+        // Provide mocked services
+        { provide: MyService, useValue: mockMyService },
+      ],
+    }).compileComponents();
+
+    // Step 3: Create component fixture
+    fixture = TestBed.createComponent(MyComponent);
+    component = fixture.componentInstance;
+
+    // Step 4: Get reference to mocked service
+    myService = TestBed.inject(MyService) as jest.Mocked<MyService>;
+
+    // Step 5: Initial change detection
+    fixture.detectChanges();
+  });
+
+  // Test 1: Component creation
+  describe('Component Creation', () => {
+    it('should create', () => {
+      expect(component).toBeTruthy();
+    });
+  });
+
+  // Test 2: Input bindings
+  describe('Input Bindings', () => {
+    it('should accept and render title input', () => {
+      component.title = 'Test Title';
+      fixture.detectChanges();
+
+      expect(component.title).toBe('Test Title');
+      // Add assertion for template rendering
+      // expect(fixture.nativeElement.querySelector('h1')?.textContent).toContain('Test Title');
+    });
+
+    it('should use default value when input not provided', () => {
+      // Verify default value from component
+      expect(component.severity).toBe('info');
+    });
+  });
+
+  // Test 3: Output events
+  describe('Output Events', () => {
+    it('should emit event when action triggered', () => {
+      const emitSpy = jest.spyOn(component.myEvent, 'emit');
+
+      component.triggerEvent('test-data');
+
+      expect(emitSpy).toHaveBeenCalledWith('test-data');
+    });
+  });
+
+  // Test 4: Component methods
+  describe('Component Methods', () => {
+    it('should execute method correctly', () => {
+      const result = component.myMethod('input');
+
+      expect(result).toBeDefined();
+      // Add specific assertions based on method behavior
+    });
+
+    it('should call service when method invoked', () => {
+      component.loadData();
+
+      expect(myService.method1).toHaveBeenCalled();
+    });
+  });
+
+  // Test 5: Template interactions
+  describe('Template Interactions', () => {
+    it('should find and click button', () => {
+      const spy = jest.spyOn(component, 'onSubmit');
+      const button = fixture.nativeElement.querySelector('button');
+
+      expect(button).toBeTruthy();
+      button.click();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should conditionally render based on state', () => {
+      component.isVisible = true;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.content')).toBeTruthy();
+
+      component.isVisible = false;
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.content')).toBeFalsy();
+    });
+
+    it('should render list items with ngFor', () => {
+      component.items = [
+        { id: 1, name: 'Item 1' },
+        { id: 2, name: 'Item 2' },
+      ];
+      fixture.detectChanges();
+
+      const items = fixture.nativeElement.querySelectorAll('.item');
+
+      expect(items.length).toBe(2);
+    });
+  });
+
+  // Test 6: Change detection
+  describe('Change Detection', () => {
+    it('should update view when input changes', () => {
+      component.message = 'Initial';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.textContent).toContain('Initial');
+
+      component.message = 'Updated';
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.textContent).toContain('Updated');
+    });
+  });
+
+  // Test 7: Async operations
+  describe('Async Operations', () => {
+    it('should handle observable subscription', (done) => {
+      myService.method2.mockReturnValue(of([{ id: 1 }]));
+
+      component.loadData();
+
+      setTimeout(() => {
+        expect(component.data).toEqual([{ id: 1 }]);
+        done();
+      }, 0);
+    });
+
+    it('should handle async operation with fakeAsync', fakeAsync(() => {
+      component.delayedOperation();
+
+      expect(component.isLoading).toBe(true);
+
+      tick(1000);
+
+      expect(component.isLoading).toBe(false);
+    }));
+  });
+
+  // Test 8: Error handling
+  describe('Error Handling', () => {
+    it('should handle error from service', (done) => {
+      myService.method2.mockReturnValue(
+        throwError(() => new Error('Failed'))
+      );
+
+      component.loadData();
+
+      setTimeout(() => {
+        expect(component.error).toBeDefined();
+        done();
+      }, 0);
+    });
+  });
+
+  // Test 9: Edge cases
+  describe('Edge Cases', () => {
+    it('should handle empty data', () => {
+      component.items = [];
+      fixture.detectChanges();
+
+      expect(fixture.nativeElement.querySelector('.empty-state')).toBeTruthy();
+    });
+
+    it('should handle null/undefined values gracefully', () => {
+      component.title = null;
+      fixture.detectChanges();
+
+      expect(() => {
+        fixture.detectChanges();
+      }).not.toThrow();
+    });
+  });
+
+  // Test 10: Lifecycle integration
+  describe('Lifecycle Integration', () => {
+    it('should properly initialize on ngOnInit', () => {
+      const spy = jest.spyOn(component, 'ngOnInit');
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should cleanup on ngOnDestroy', () => {
+      const spy = jest.spyOn(component, 'ngOnDestroy');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+});

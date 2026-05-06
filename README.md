@@ -94,9 +94,7 @@ These instructions will get you a copy of the project up and running on your loc
 4.  **Run the application:**
 
     ```bash
-    nx serve cv-app  # To run the CV/History app
-    # OR
-    nx serve scribo-app  # To run the Scribo app
+    npm start
     ```
 
     The application will be available at `http://localhost:4200` (or a different port if 4200 is in use).
@@ -104,7 +102,10 @@ These instructions will get you a copy of the project up and running on your loc
 5.  **Run tests**
 
     ```bash
-    nx test shared-data-access
+    npm run run-before-pr     # Full pre-PR validation (lint, test, build, e2e on affected)
+    npx nx run cv/feature-about:test   # Run CV feature tests
+    npx nx run scribo/data-access:test # Run Scribo state management tests
+    npx nx run my-personal-project-e2e:e2e  # Run E2E tests
     ```
 
     To simplify running tasks, it is recommended to use the Nx Console, a powerful UI for managing Nx workspaces. Nx Console is available as a Visual Studio Code extension, allowing you to easily run, debug, and explore tasks without needing to memorize CLI commands. You can install it from the [Visual Studio Code Marketplace](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console).
@@ -129,73 +130,81 @@ This project is organized as an Nx monorepo, containing multiple applications an
 
 ### Applications (`apps/`)
 
-- **cv-app/**: Main application for the CV/History section.
-- **scribo-app/**: Main application for the Scribo article-sharing platform.
+- **my-personal-project/**: Main Angular application combining CV/Portfolio and Scribo article platform.
+- **my-personal-project-e2e/**: End-to-end tests using Playwright.
 
 ### Libraries (`libs/`)
 
 #### Shared Libraries (`shared/`)
 
-- **ui/**: Reusable UI components shared across applications.
-- **utils/**: Reusable utility functions.
-- **data-access/**: Shared data access logic, including:
-  - **models/**: Zod schemas for Firestore documents and user data.
-    - `firestore.schema.ts`: Base Zod schema for Firestore documents.
-    - `user.schema.ts`: Zod schema for User data.
-  - **services/**: Services for interacting with Firestore and managing user data.
-    - `firestore.service.ts`: Service for interacting with Firestore.
-    - `user.store.ts`: NgRx Signal Store for managing user data.
-  - **state/**: State management utilities.
-    - `firestore-entity-store.ts`: Generic NgRx Signal Store feature for Firestore entities.
+- **ui/**: Reusable UI components (Storybook-documented, standalone Angular 19 components).
+  - ToastContainer, dialogs, and other shared components
+  - Tailwind CSS styling with dark mode support
+  - Icon library
+- **data-access/**: Shared data access layer
+  - `AuthGuard` and route protection guards
+  - Global services (Firebase integration, API clients)
+  - Shared models and types
+  - Global state management
+- **util-error/**: Global error handling
+  - `GlobalErrorHandler` service provider
+  - Error UI utilities
+- **util-translation/**: i18n utilities
+  - `loadAppTranslations()` function for loading locale translations
+  - Support for `en-US` (default) and `es` (Spanish)
+- **utils/**: General utility functions
+  - Helper functions, validators, formatters
 
 #### CV-Specific Libraries (`cv/`)
 
-- **feature-about/**: Feature module for the "About" section of the CV.
-- **feature-experience/**: Feature module for the "Experience" section of the CV.
-- **feature-projects/**: Feature module for the "Projects" section of the CV.
-- **feature-skills/**: Feature module for the "Skills" section of the CV.
-- **data-access/**: CV-specific data access logic, leveraging shared data-access libraries.
+- **feature-about/**: About/CV landing page component with resume and portfolio display.
+- **data-access/**: CV-specific state management and services.
+  - Portfolio data models
+  - CV-related services
+  - Integration with shared/data-access
 
 #### Scribo-Specific Libraries (`scribo/`)
 
-- **feature-article-list/**: Feature module for listing articles.
-- **feature-article-view/**: Feature module for viewing individual articles.
-- **feature-article-create/**: Feature module for creating new articles.
-- **feature-user-profile/**: Feature module for managing user profiles.
-- **data-access/**: Scribo-specific data access logic, leveraging shared data-access libraries.
+- **feature-landing/**: Public-facing article discovery and filtering page (no auth required).
+- **feature-article-list/**: Authenticated article list with CRUD operations (protected by AuthGuard).
+- **feature-user-profile/**: User profile dashboard and settings.
+- **feature-layout/**: Layout wrapper and navigation for Scribo feature routes.
+- **data-access/**: Scribo-specific state management and services.
+  - NgRx Signals store for article state
+  - Firestore service integration
+  - Article models and schemas (Zod validation)
 
 This structure ensures modularity, reusability, and scalability, making it easier to maintain and extend the project.
 
 ```bash
 my-personal-project/
 ├── apps/
-│   ├── cv-app/ # Main application for the CV/History section
-│   └── scribo-app/ # Main application for the Scribo article-sharing platform
+│   ├── my-personal-project/        # Main web application (Angular 19 standalone)
+│   │   └── src/
+│   │       ├── app/                # Feature modules (cv, scribo, auth)
+│   │       ├── environments/       # Environment configurations
+│   │       ├── locales/            # i18n translation files (en-US, es)
+│   │       ├── main.ts             # Bootstrap
+│   │       └── styles.scss         # Global styles
+│   └── my-personal-project-e2e/    # Playwright E2E tests
+│       └── src/
+│           └── example.spec.ts
 └── libs/
-    ├── shared/
-    │   ├── ui/ # Reusable UI components (shared across apps)
-    │   ├── utils/ # Reusable utility functions
-    │   └── data-access/ # Shared data access logic (Firebase, Auth, UserStore, generic Firestore store)
-    │       ├── models/
-    │       │   ├── firestore.schema.ts # Base Zod schema for Firestore documents
-    │       │   └── user.schema.ts # Zod schema for User data
-    │       ├── services/
-    │       │   ├── firestone.service.ts# Service for interacting with Firestore
-    │       │   └── user.store.ts # NgRx Signal Store for managing user data
-    │       └── state/
-    │           └── firestore-entity-store.ts # Generic NgRx Signal Store feature for Firestore entities
-    ├── cv/ # CV-specific libraries
-    │   ├── feature-about/
-    │   ├── feature-experience/
-    │   ├── feature-projects/
-    │   ├── feature-skills/
-    │   └── data-access/ # CV-specific data access logic (can use shared/data-access)
-    └── scribo/ # Scribo-specific libraries
-        ├── feature-article-list/
-        ├── feature-article-view/
-        ├── feature-article-create/
-        ├── feature-user-profile/
-        └── data-access/ # Scribo-specific data access logic (can use shared/data-access)
+    ├── cv/                         # Portfolio/CV domain
+    │   ├── feature-about/          # About/CV landing page
+    │   └── data-access/            # CV state & services
+    ├── scribo/                     # Article-sharing platform domain
+    │   ├── feature-landing/        # Public article discovery
+    │   ├── feature-article-list/   # Authenticated article CRUD (AuthGuard)
+    │   ├── feature-user-profile/   # User profile management
+    │   ├── feature-layout/         # Layout wrapper for scribo routes
+    │   └── data-access/            # Article services & NgRx Signals store
+    └── shared/                     # Cross-domain utilities
+        ├── data-access/            # Global state, guards, services, Firebase integration
+        ├── ui/                     # Component library with Storybook
+        ├── util-error/             # Global error handling
+        ├── util-translation/       # i18n utilities
+        └── utils/                  # Helper functions, validators, formatters
 ```
 
 ## Contributing

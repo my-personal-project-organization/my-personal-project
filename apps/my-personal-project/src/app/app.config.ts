@@ -19,8 +19,8 @@ export const appConfig: ApplicationConfig = {
     // ? https://dev.to/danywalls/angular-19-and-zoneless-1of9 https://angularengineering.com/2024/05/27/angular-18-how-to-remove-zone-js/
     provideExperimentalZonelessChangeDetection(),
     // ? https://www.linkedin.com/posts/koustubhmishra_angular-angular-zone-activity-7249282431067840512-YJoY
-    // provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(appRoutes, withComponentInputBinding()),
+    // provideZoneChangeDetection({ eventCoalescing: true }),
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),

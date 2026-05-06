@@ -1,0 +1,342 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { MyDirective } from './my.directive';
+
+/**
+ * Test suite for MyDirective
+ * 
+ * Replace:
+ * - MyDirective: Your directive class
+ * - my.directive: Your directive path
+ * - setHighlight: Your directive input name
+ * 
+ * Directive testing uses a host component approach:
+ * 1. Create a test host component with the directive
+ * 2. Create fixture from host component
+ * 3. Query for directive element using By.directive()
+ * 4. Verify directive behavior through properties and DOM changes
+ */
+
+// Step 1: Create a host component for testing
+@Component({
+  template: `<div [myDirective]="color" (click)="handleClick()">Host element</div>`,
+  standalone: true,
+  imports: [MyDirective],
+})
+class TestHostComponent {
+  color: string = 'red';
+  clickCount: number = 0;
+
+  handleClick() {
+    this.clickCount++;
+  }
+}
+
+describe('MyDirective', () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+  let hostComponent: TestHostComponent;
+  let directiveElement: DebugElement;
+
+  beforeEach(async () => {
+    // Step 1: Configure TestBed with host component
+    await TestBed.configureTestingModule({
+      imports: [TestHostComponent, MyDirective],
+    }).compileComponents();
+
+    // Step 2: Create host component fixture
+    fixture = TestBed.createComponent(TestHostComponent);
+    hostComponent = fixture.componentInstance;
+
+    // Step 3: Query for directive element
+    directiveElement = fixture.debugElement.query(By.directive(MyDirective));
+
+    // Step 4: Initial change detection
+    fixture.detectChanges();
+  });
+
+  // Test 1: Directive application
+  describe('Directive Application', () => {
+    it('should apply directive to element', () => {
+      expect(directiveElement).toBeTruthy();
+    });
+
+    it('should read directive input', () => {
+      hostComponent.color = 'blue';
+      fixture.detectChanges();
+
+      expect(directiveElement.nativeElement.style.color).toBe('blue');
+    });
+
+    it('should update when input changes', () => {
+      hostComponent.color = 'red';
+      fixture.detectChanges();
+
+      expect(directiveElement.nativeElement.style.color).toBe('red');
+
+      hostComponent.color = 'green';
+      fixture.detectChanges();
+
+      expect(directiveElement.nativeElement.style.color).toBe('green');
+    });
+  });
+
+  // Test 2: DOM manipulation
+  describe('DOM Manipulation', () => {
+    it('should add class to element', () => {
+      expect(directiveElement.nativeElement.classList.contains('directive-class')).toBe(true);
+    });
+
+    it('should modify element styles', () => {
+      expect(directiveElement.nativeElement.style.backgroundColor).toBeDefined();
+    });
+
+    it('should change attributes', () => {
+      expect(directiveElement.nativeElement.getAttribute('data-directive')).toBeDefined();
+    });
+  });
+
+  // Test 3: Event handling
+  describe('Event Handling', () => {
+    it('should listen for element events', () => {
+      directiveElement.nativeElement.click();
+
+      expect(hostComponent.clickCount).toBe(1);
+    });
+
+    it('should prevent default behavior if configured', () => {
+      const event = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+      });
+      const preventSpy = jest.spyOn(event, 'preventDefault');
+
+      directiveElement.nativeElement.dispatchEvent(event);
+
+      // Check if preventDefault was called
+      expect(preventSpy).toHaveBeenCalled();
+    });
+
+    it('should handle hover events', () => {
+      const mouseoverEvent = new MouseEvent('mouseover', { bubbles: true });
+      const mouseoutEvent = new MouseEvent('mouseout', { bubbles: true });
+
+      directiveElement.nativeElement.dispatchEvent(mouseoverEvent);
+      fixture.detectChanges();
+
+      expect(directiveElement.nativeElement.classList.contains('hovered')).toBe(true);
+
+      directiveElement.nativeElement.dispatchEvent(mouseoutEvent);
+      fixture.detectChanges();
+
+      expect(directiveElement.nativeElement.classList.contains('hovered')).toBe(false);
+    });
+  });
+
+  // Test 4: Structural changes
+  describe('Structural Changes', () => {
+    it('should add elements to DOM', () => {
+      const elementsBefore = directiveElement.nativeElement.querySelectorAll('span').length;
+
+      // Trigger directive to add elements (if applicable)
+      hostComponent.color = 'blue';
+      fixture.detectChanges();
+
+      const elementsAfter = directiveElement.nativeElement.querySelectorAll('span').length;
+
+      expect(elementsAfter).toBeGreaterThanOrEqual(elementsBefore);
+    });
+  });
+
+  // Test 5: Directive lifecycle
+  describe('Directive Lifecycle', () => {
+    it('should execute logic on instantiation', () => {
+      // Directive instance is created and detected
+      expect(directiveElement).toBeTruthy();
+    });
+
+    it('should cleanup on destroy', () => {
+      const directive = directiveElement.injector.get(MyDirective);
+      const cleanupSpy = jest.spyOn(directive, 'ngOnDestroy');
+
+      fixture.destroy();
+
+      expect(cleanupSpy).toHaveBeenCalled();
+    });
+  });
+
+  // Test 6: Accessibility
+  describe('Accessibility', () => {
+    it('should maintain proper ARIA attributes', () => {
+      const ariaLabel = directiveElement.nativeElement.getAttribute('aria-label');
+
+      expect(ariaLabel).toBeDefined();
+    });
+
+    it('should not interfere with keyboard navigation', () => {
+      const tabIndex = directiveElement.nativeElement.getAttribute('tabindex');
+
+      // Verify tabindex is appropriate (-1, 0, or not present)
+      expect(
+        tabIndex === null || parseInt(tabIndex) >= -1
+      ).toBe(true);
+    });
+  });
+
+  // Test 7: Edge cases
+  describe('Edge Cases', () => {
+    it('should handle null input gracefully', () => {
+      hostComponent.color = null;
+      fixture.detectChanges();
+
+      expect(() => {
+        fixture.detectChanges();
+      }).not.toThrow();
+    });
+
+    it('should handle undefined input gracefully', () => {
+      hostComponent.color = undefined;
+      fixture.detectChanges();
+
+      expect(() => {
+        fixture.detectChanges();
+      }).not.toThrow();
+    });
+
+    it('should work with multiple instances', () => {
+      const template = `
+        <div [myDirective]="'red'">Red</div>
+        <div [myDirective]="'blue'">Blue</div>
+        <div [myDirective]="'green'">Green</div>
+      `;
+
+      @Component({ template, standalone: true, imports: [MyDirective] })
+      class MultiHostComponent {}
+
+      const multiFixture = TestBed.createComponent(MultiHostComponent);
+      multiFixture.detectChanges();
+
+      const directives = multiFixture.debugElement.queryAll(By.directive(MyDirective));
+
+      expect(directives.length).toBe(3);
+    });
+  });
+
+  // Test 8: Interaction with Angular features
+  describe('Angular Integration', () => {
+    it('should work with ngIf', () => {
+      @Component({
+        template: `<div *ngIf="show" [myDirective]="'test'">Content</div>`,
+        standalone: true,
+        imports: [MyDirective, NgIf],
+      })
+      class ConditionalHostComponent {
+        show = true;
+      }
+
+      const conditionalFixture = TestBed.createComponent(ConditionalHostComponent);
+      conditionalFixture.detectChanges();
+
+      let directiveElement = conditionalFixture.debugElement.query(By.directive(MyDirective));
+      expect(directiveElement).toBeTruthy();
+
+      conditionalFixture.componentInstance.show = false;
+      conditionalFixture.detectChanges();
+
+      directiveElement = conditionalFixture.debugElement.query(By.directive(MyDirective));
+      expect(directiveElement).toBeFalsy();
+    });
+
+    it('should work with ngFor', () => {
+      @Component({
+        template: `
+          <div *ngFor="let item of items" [myDirective]="item.color">
+            {{ item.name }}
+          </div>
+        `,
+        standalone: true,
+        imports: [MyDirective, NgFor],
+      })
+      class ListHostComponent {
+        items = [
+          { name: 'Item 1', color: 'red' },
+          { name: 'Item 2', color: 'blue' },
+        ];
+      }
+
+      const listFixture = TestBed.createComponent(ListHostComponent);
+      listFixture.detectChanges();
+
+      const directives = listFixture.debugElement.queryAll(By.directive(MyDirective));
+
+      expect(directives.length).toBe(2);
+    });
+  });
+});
+
+/**
+ * Test suite for utility functions
+ * 
+ * This template covers testing pure functions, helpers, and utilities
+ */
+import { myUtilityFunction, anotherUtility } from './my-utilities';
+
+describe('Utility Functions', () => {
+  describe('myUtilityFunction', () => {
+    it('should return correct value', () => {
+      const result = myUtilityFunction('input');
+
+      expect(result).toBe('expected');
+    });
+
+    it('should handle edge cases', () => {
+      expect(myUtilityFunction('')).toBe('empty');
+      expect(myUtilityFunction(null)).toBeNull();
+      expect(myUtilityFunction(undefined)).toBeUndefined();
+    });
+
+    it('should work with various input types', () => {
+      expect(myUtilityFunction(1)).toBeDefined();
+      expect(myUtilityFunction({ key: 'value' })).toBeDefined();
+      expect(myUtilityFunction([1, 2, 3])).toBeDefined();
+    });
+  });
+
+  describe('anotherUtility', () => {
+    it('should transform data correctly', () => {
+      const input = [1, 2, 3];
+      const result = anotherUtility(input);
+
+      expect(result).toEqual([2, 4, 6]);
+    });
+
+    it('should handle empty input', () => {
+      const result = anotherUtility([]);
+
+      expect(result).toEqual([]);
+    });
+
+    it('should not mutate original input', () => {
+      const input = [1, 2, 3];
+      const original = [...input];
+
+      anotherUtility(input);
+
+      expect(input).toEqual(original);
+    });
+  });
+
+  describe('Complex Utilities', () => {
+    it('should handle async utilities', async () => {
+      const result = await myAsyncUtility('test');
+
+      expect(result).toBeDefined();
+    });
+
+    it('should handle errors in utilities', () => {
+      expect(() => {
+        errorProneUtility(null);
+      }).toThrow(TypeError);
+    });
+  });
+});
