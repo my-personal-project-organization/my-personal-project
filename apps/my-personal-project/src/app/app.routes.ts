@@ -16,7 +16,7 @@ export const appRoutes: Route[] = [
       ).then((m) => m.UserManagementUpdateComponent),
   },
   {
-    path: 'landing',
+    path: 'cv',
     loadComponent: () => import('@mpp/cv/feature-about').then((m) => m.LandingComponent),
   },
   // {
@@ -55,7 +55,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    redirectTo: 'scribo/landing',
+    redirectTo: 'cv',
     pathMatch: 'full',
   },
   { path: '**', redirectTo: '' },
