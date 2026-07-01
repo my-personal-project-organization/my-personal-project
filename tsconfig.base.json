@@ -45,9 +45,6 @@
       "@mpp/shared/ui": [
         "libs/shared/ui/src/index.ts"
       ],
-      "@mpp/shared/util-error": [
-        "libs/shared/util-error/src/index.ts"
-      ],
       "@mpp/shared/util-translation": [
         "libs/shared/util-translation/src/index.ts"
       ],

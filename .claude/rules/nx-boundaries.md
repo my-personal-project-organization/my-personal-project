@@ -27,9 +27,8 @@ Organized by domain with internal folder structure:
 - `data-access` — Blog store, article service, user service, HTTP
 
 **`libs/shared/`** — Cross-domain code
-- `ui` — Shared UI components (atoms: button, icon; molecules: nav-bar, language-switcher)
+- `ui` — UI components, error handling, and infrastructure (atoms: button, icon; molecules: nav-bar, language-switcher; services: GlobalErrorHandlerService, ToastService, ErrorService; interceptors: serverErrorInterceptor)
 - `data-access` — Global auth store, guards, user service, Firestore integration
-- `util-error` — Error handling services and utilities
 - `util-translation` — i18n utilities and locale management
 - `utils` — General-purpose helpers (formatting, validation, etc.)
 

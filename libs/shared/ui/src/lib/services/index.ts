@@ -1,1 +1,1 @@
-export * from './global-error-handler.service';
+// Error handling services moved to lib/error/services/

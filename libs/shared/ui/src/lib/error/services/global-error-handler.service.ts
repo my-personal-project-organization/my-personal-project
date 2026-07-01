@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, inject, Injectable, Injector } from '@angular/core';
 
-import { ErrorService, LoggingService } from '@mpp/shared/util-error';
-import { ToastService } from '../components/atoms/toast/toast.service';
+import { ErrorService } from './error.service';
+import { LoggingService } from './logging.service';
+import { ToastService } from '../../components/atoms/toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
