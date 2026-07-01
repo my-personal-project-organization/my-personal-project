@@ -1,9 +1,8 @@
 import {
   Directive,
+  effect,
   inject,
   input,
-  OnChanges,
-  SimpleChanges,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
@@ -13,7 +12,7 @@ import { TranslationService } from '../services/translation.service';
   selector: '[ngForTranslate]',
   standalone: true,
 })
-export class NgForTranslateDirective implements OnChanges {
+export class NgForTranslateDirective {
   private readonly translationService = inject(TranslationService);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly templateRef = inject(TemplateRef<unknown>);
@@ -21,11 +20,12 @@ export class NgForTranslateDirective implements OnChanges {
   /** Use: *ngForTranslate="let item; from: 'cv.landing.jobs'; let index = index" */
   public ngForTranslateFrom = input.required<string>();
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['ngForTranslateFrom'] && changes['ngForTranslateFrom']?.currentValue) {
-      const ngForTranslateFrom = changes['ngForTranslateFrom']?.currentValue;
+  constructor() {
+    effect(() => {
+      const ngForTranslateFrom = this.ngForTranslateFrom();
       const translationsObject = this.translationService.getTranslations(ngForTranslateFrom);
 
+      this.viewContainerRef.clear();
       if (translationsObject) {
         for (const key in translationsObject) {
           // eslint-disable-next-line no-prototype-builtins
@@ -41,6 +41,6 @@ export class NgForTranslateDirective implements OnChanges {
           }
         }
       }
-    }
+    });
   }
 }

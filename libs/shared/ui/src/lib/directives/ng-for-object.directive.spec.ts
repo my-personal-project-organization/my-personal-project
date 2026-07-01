@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA, ChangeDetectionStrategy, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgForObjectDirective } from './ng-for-object.directive';
 
@@ -7,13 +7,14 @@ import { NgForObjectDirective } from './ng-for-object.directive';
   standalone: true,
   imports: [NgForObjectDirective],
   template: `
-    <ng-container *uiNgForObject="let item; from: myObject; let index = index">
+    <ng-container *uiNgForObject="let item; from: myObject(); let index = index">
       <div id="item-{{ i }}">{{ item }}</div>
     </ng-container>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class TestHostComponent {
-  myObject: { [key: string]: unknown } = {};
+  myObject = signal<{ [key: string]: unknown }>({});
 }
 
 describe('NgForObjectDirective', () => {
@@ -37,7 +38,7 @@ describe('NgForObjectDirective', () => {
   });
 
   it('should iterate over a simple object', () => {
-    component.myObject = { a: 1, b: 2, c: 3 };
+    component.myObject.set({ a: 1, b: 2, c: 3 });
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(3);
@@ -47,39 +48,39 @@ describe('NgForObjectDirective', () => {
   });
 
   it('should handle an empty object', () => {
-    component.myObject = {};
+    component.myObject.set({});
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(0);
   });
 
   it('should handle a null object', () => {
-    component.myObject = null as any; //type assertion to handle null
+    component.myObject.set(null as any);
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(0);
   });
 
   it('should handle an undefined object', () => {
-    component.myObject = undefined as any; //type assertion to handle undefined
+    component.myObject.set(undefined as any);
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(0);
   });
 
   it('should handle an object with mixed data types', () => {
-    component.myObject = { a: 1, b: 'hello', c: true, d: { e: 1 } };
+    component.myObject.set({ a: 1, b: 'hello', c: true, d: { e: 1 } });
     fixture.detectChanges();
     const divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(4);
   });
 
   it('should update the view when the input changes', () => {
-    component.myObject = { a: 1, b: 2 };
+    component.myObject.set({ a: 1, b: 2 });
     fixture.detectChanges();
     let divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(2);
-    component.myObject = { a: 1, b: 2, c: 3 };
+    component.myObject.set({ a: 1, b: 2, c: 3 });
     fixture.detectChanges();
     divs = fixture.nativeElement.querySelectorAll('div');
     expect(divs.length).toBe(3);

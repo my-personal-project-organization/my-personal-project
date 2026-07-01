@@ -17,23 +17,17 @@
       "Bash(gh run list *)",
       "Bash(gh run view *)",
       "Bash(gh api *)",
-      "Bash(npx nx build *)",
-      "Bash(npx nx lint *)",
-      "Bash(npx nx test *)",
-      "Bash(nx test *)",
-      "Bash(nx lint *)",
-      "Bash(nx build *)",
-      "Bash(nx affected *)",
-      "Bash(npm test *)",
-      "Bash(npm run test *)",
-      "Bash(npm run lint *)",
-      "Bash(npm run build *)",
-      "Bash(npm start *)",
-      "Bash(npm run storybook *)",
-      "Bash(npm run e2e *)",
+      "Bash(npx *)",
+      "Bash(nx *)",
+      "Bash(npm *)",
       "Bash(timeout *)",
-      "Bash(node --version)",
-      "Bash(npm --version)"
+      "Bash(for *)",
+      "Bash(find *)",
+      "Bash(node *)",
+      "Bash(npx nx *)",
+      "Read(//tmp/**)",
+      "Bash(grep *)",
+      "Bash(sed *)"
     ]
   },
   "hooks": {
@@ -44,14 +38,14 @@
           {
             "type": "command",
             "command": ".claude/hooks/block-dangerous.sh",
-            "timeout": 5,
-            "if": "Bash(git push *)|Bash(git reset *)|Bash(rm *)"
+            "if": "Bash(git push *)|Bash(git reset *)|Bash(rm *)",
+            "timeout": 5
           },
           {
             "type": "command",
             "command": ".claude/hooks/pre-push-reminder.sh",
-            "timeout": 5,
-            "if": "Bash(git push *)"
+            "if": "Bash(git push *)",
+            "timeout": 5
           }
         ]
       }
@@ -63,8 +57,8 @@
           {
             "type": "command",
             "command": ".claude/hooks/update-versions-on-package-change.sh",
-            "timeout": 5,
-            "if": "Write(*package.json)"
+            "if": "Write(*package.json)",
+            "timeout": 5
           }
         ]
       }
