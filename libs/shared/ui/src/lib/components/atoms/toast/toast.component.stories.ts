@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import type { ArgTypes, Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
-import { expect, screen, userEvent, waitFor, within } from '@storybook/test';
+import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ToastComponent, ToastTypes } from './toast.component';
 
 import { ButtonComponent } from '../button/button.component';

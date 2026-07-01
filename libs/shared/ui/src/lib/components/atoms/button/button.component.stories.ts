@@ -1,7 +1,7 @@
 import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
 import { ButtonComponent } from './button.component';
 
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import { IconComponent } from '../icon';
 
 const meta: Meta<ButtonComponent> = {

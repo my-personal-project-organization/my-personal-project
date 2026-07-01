@@ -1,8 +1,7 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
-import { DropdownComponent } from './dropdown.component';
-
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { expect, within } from '@storybook/test';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { expect, within } from 'storybook/test';
+import { DropdownComponent } from './dropdown.component';
 
 const meta: Meta<DropdownComponent> = {
   component: DropdownComponent,

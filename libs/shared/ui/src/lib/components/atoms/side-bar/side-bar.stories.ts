@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import { SideBarComponent } from './side-bar.component';
 
 const meta: Meta<SideBarComponent> = {

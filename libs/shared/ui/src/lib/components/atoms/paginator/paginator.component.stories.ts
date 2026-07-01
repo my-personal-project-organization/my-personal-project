@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { PaginatorComponent } from './paginator.component';
 
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 
 const meta: Meta<PaginatorComponent> = {
   component: PaginatorComponent,

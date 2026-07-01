@@ -1,6 +1,6 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import { ButtonComponent, IconComponent } from '../../atoms';
 import { SideBarComponent } from '../../atoms/side-bar/side-bar.component';
 import { NavBarComponent } from './nav-bar.component';
