@@ -4,7 +4,7 @@
   "sourceRoot": "libs/cv/feature-about/src",
   "prefix": "feature-about",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "domain:cv"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

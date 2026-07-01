@@ -4,7 +4,7 @@
   "sourceRoot": "libs/shared/util-error/src",
   "prefix": "util-error",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:util", "domain:shared"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

@@ -10,7 +10,7 @@
       "es": "apps/my-personal-project/src/locales/messages.es.json"
     }
   },
-  "tags": [],
+  "tags": ["type:app"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:application",

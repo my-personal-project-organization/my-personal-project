@@ -4,7 +4,7 @@
   "sourceRoot": "libs/scribo/feature-layout/src",
   "prefix": "scrb-layout",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "domain:scribo"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

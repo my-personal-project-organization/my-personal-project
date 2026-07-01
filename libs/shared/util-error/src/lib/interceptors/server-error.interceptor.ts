@@ -5,16 +5,15 @@ import {
   HttpInterceptorFn,
   HttpRequest,
 } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { ErrorHandler, inject } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { GlobalErrorHandlerService } from '../services';
 
 export const serverErrorInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn,
 ): Observable<HttpEvent<unknown>> => {
-  const globalErrorHandlerService = inject(GlobalErrorHandlerService);
+  const errorHandler = inject(ErrorHandler);
 
   return next(req).pipe(
     tap(() => console.log('Server Error Interceptor')),
@@ -26,7 +25,7 @@ export const serverErrorInterceptor: HttpInterceptorFn = (
         // Not Authorize
         console.error('You are not Authorize');
       }
-      globalErrorHandlerService.handleError(error);
+      errorHandler.handleError(error);
       return throwError(() => error);
     }),
   );

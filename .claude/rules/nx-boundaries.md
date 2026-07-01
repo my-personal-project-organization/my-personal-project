@@ -60,87 +60,135 @@ Each library should be tagged in its `project.json` to enforce dependency rules.
 - `lib:routable` — Can be lazy-loaded by router
 - `lib:internal` — Should not be imported outside its domain
 
-### Current State
-As of the most recent audit, tags arrays are empty in all `project.json` files. The linter rule `@nx/enforce-module-boundaries` is configured permissively (`sourceTag: '*'` depends on `onlyDependOnLibsWithTags: ['*']`), allowing any lib to depend on any other.
+### Current State (Implemented)
+All libraries and apps are tagged with `type:*` and `domain:*` labels as per the scheme above. The linter rule `@nx/enforce-module-boundaries` is configured and actively enforced via `eslint.config.cjs` with the constraint rules specified in the "Enforcing Boundaries" section below.
 
-## Intended Dependency Rules
+## Active Dependency Rules
 
-Once tagging is in place, these rules should be enforced:
+These rules are now enforced via ESLint module boundaries checks. Violations will cause `nx lint` to fail.
 
-### Feature → Data-Access (✅ Allowed)
-```
-@mpp/cv/feature-about → @mpp/cv/data-access
-@mpp/scribo/feature-landing → @mpp/scribo/data-access
-```
-Features orchestrate UI and call domain services.
+### Type-Based Rules (Layer Enforcement)
 
-### Feature → Shared/UI, Shared/Data-Access (✅ Allowed)
-```
-@mpp/cv/feature-about → @mpp/shared/ui
-@mpp/scribo/feature-layout → @mpp/shared/data-access (for auth)
-```
-Features use shared UI and auth from the shared domain.
+**Features** (`type:feature`) can depend on:
+- Other features (`type:feature`)
+- Data-access layers (`type:data-access`)
+- UI components (`type:ui`)
+- Utilities (`type:util`)
 
-### Data-Access → Shared/Data-Access (✅ Allowed)
-```
-@mpp/cv/data-access → @mpp/shared/data-access (for HTTP client, auth context)
-```
-Domain stores depend on shared infrastructure.
+**Data-Access** (`type:data-access`) can depend on:
+- Other data-access layers (`type:data-access`)
+- UI components (`type:ui`) — e.g., to display errors
+- Utilities (`type:util`)
+- ❌ NOT features
 
-### Feature ↔ Feature (⚠️ Caution)
-```
-@mpp/cv/feature-about → @mpp/scribo/feature-layout (✅ OK if unidirectional, e.g., for layout wrapper)
-```
-Inter-domain feature dependencies should be rare; prefer shared/ui or shared/data-access.
+**UI** (`type:ui`) can depend on:
+- Other UI components (`type:ui`)
+- Utilities (`type:util`)
+- ❌ NOT data-access or features
 
-### ❌ Disallowed (Should Be Caught)
+**Utilities** (`type:util`) can depend on:
+- Other utilities (`type:util`)
+- ❌ NOT UI, data-access, or features
+
+**App** (`type:app`) can depend on:
+- Features (`type:feature`)
+- Data-access (`type:data-access`)
+- UI (`type:ui`)
+- Utilities (`type:util`)
+- ❌ NOT other apps
+
+**E2E** (`type:e2e`) can depend on:
+- Other E2E tests only (`type:e2e`)
+
+### Domain-Based Rules (Cross-Domain Isolation)
+
+**CV domain** (`domain:cv`) can depend on:
+- Other CV libraries (`domain:cv`)
+- Shared libraries (`domain:shared`)
+- ❌ NOT Scribo
+
+**Scribo domain** (`domain:scribo`) can depend on:
+- Other Scribo libraries (`domain:scribo`)
+- Shared libraries (`domain:shared`)
+- ❌ NOT CV
+
+**Shared domain** (`domain:shared`) can depend on:
+- Other shared libraries (`domain:shared`)
+- ❌ NOT CV or Scribo
+
+### Examples
+
+✅ Allowed:
 ```
-@mpp/shared/ui → @mpp/cv/data-access (UI should not depend on domain logic)
-@mpp/scribo/data-access → @mpp/cv/data-access (No cross-domain data coupling)
-@mpp/cv/feature-about → @mpp/scribo/feature-landing (Features shouldn't directly depend on each other)
+@mpp/cv/feature-about → @mpp/cv/data-access → @mpp/shared/data-access
+@mpp/scribo/feature-landing → @mpp/shared/ui
+@mpp/shared/ui → @mpp/shared/utils
+my-personal-project (type:app) → @mpp/cv/feature-about, @mpp/scribo/feature-layout, @mpp/shared/ui
+```
+
+❌ Blocked (will fail lint):
+```
+@mpp/shared/ui → @mpp/cv/data-access (UI depends on domain logic)
+@mpp/scribo/data-access → @mpp/cv/data-access (cross-domain data coupling)
+@mpp/cv/feature-about → @mpp/scribo/feature-landing (cross-domain feature dependency)
+@mpp/shared/utils → @mpp/shared/ui (util depends on UI)
 ```
 
 ## Enforcing Boundaries
 
 ### ESLint Rule
-Located in `eslint.config.js`:
+Located in `eslint.config.cjs`:
 
 ```javascript
 '@nx/enforce-module-boundaries': [
   'error',
   {
     enforceBuildableLibDependency: true,
+    allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
     depConstraints: [
       {
         sourceTag: 'type:feature',
-        onlyDependOnLibsWithTags: ['type:feature', 'type:data-access', 'type:ui', 'type:util']
+        onlyDependOnLibsWithTags: ['type:feature', 'type:data-access', 'type:ui', 'type:util'],
       },
       {
         sourceTag: 'type:data-access',
-        onlyDependOnLibsWithTags: ['type:data-access', 'type:ui', 'type:util']
+        onlyDependOnLibsWithTags: ['type:data-access', 'type:ui', 'type:util'],
       },
       {
         sourceTag: 'type:ui',
-        onlyDependOnLibsWithTags: ['type:ui', 'type:util']
+        onlyDependOnLibsWithTags: ['type:ui', 'type:util'],
       },
-      // Domain isolation (if stricter rules desired):
+      {
+        sourceTag: 'type:util',
+        onlyDependOnLibsWithTags: ['type:util'],
+      },
+      {
+        sourceTag: 'type:app',
+        onlyDependOnLibsWithTags: ['type:feature', 'type:data-access', 'type:ui', 'type:util'],
+      },
+      {
+        sourceTag: 'type:e2e',
+        onlyDependOnLibsWithTags: ['type:e2e'],
+      },
       {
         sourceTag: 'domain:cv',
-        onlyDependOnLibsWithTags: ['domain:cv', 'domain:shared']
+        onlyDependOnLibsWithTags: ['domain:cv', 'domain:shared'],
       },
       {
         sourceTag: 'domain:scribo',
-        onlyDependOnLibsWithTags: ['domain:scribo', 'domain:shared']
-      }
+        onlyDependOnLibsWithTags: ['domain:scribo', 'domain:shared'],
+      },
+      {
+        sourceTag: 'domain:shared',
+        onlyDependOnLibsWithTags: ['domain:shared'],
+      },
     ]
   }
 ]
 ```
 
-To activate: Add tags to each `project.json`, then update `eslint.config.js` with the rules above. Run `nx lint` to verify.
-
 ### Dependency Checks
-`@nx/dependency-checks` rule in `eslint.config.js` ensures imports in `package.json` are declared and not duplicated across the monorepo.
+`@nx/dependency-checks` rule in `eslint.config.cjs` ensures imports in `package.json` are declared and not duplicated across the monorepo.
 
 ## Module Path Aliases
 

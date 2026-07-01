@@ -9,7 +9,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { GlobalErrorHandlerService } from '@mpp/shared/util-error';
+import { GlobalErrorHandlerService } from '@mpp/shared/ui';
 import { environment } from '../environments/environment';
 import { loadAppTranslations } from '../locales/translations/load-translations';
 import { appRoutes } from './app.routes';

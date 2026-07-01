@@ -1,6 +1,6 @@
 
 import { ChangeDetectionStrategy, Component, effect, HostBinding, inject, signal } from '@angular/core';
-import { LocalStorageService } from '@mpp/shared/data-access';
+import { LocalStorageService } from '@mpp/shared/utils';
 import { IconComponent } from '../icon';
 
 @Component({

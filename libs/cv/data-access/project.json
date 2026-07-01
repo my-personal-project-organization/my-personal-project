@@ -4,7 +4,7 @@
   "sourceRoot": "libs/cv/data-access/src",
   "prefix": "data-access",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:data-access", "domain:cv"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

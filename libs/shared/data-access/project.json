@@ -4,7 +4,7 @@
   "sourceRoot": "libs/shared/data-access/src",
   "prefix": "data-access",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:data-access", "domain:shared"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",

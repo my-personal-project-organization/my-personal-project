@@ -4,7 +4,7 @@
   "sourceRoot": "libs/scribo/feature-landing/src",
   "prefix": "scrb-landing",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:feature", "domain:scribo"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

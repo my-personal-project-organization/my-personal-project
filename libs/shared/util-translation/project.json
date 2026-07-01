@@ -4,7 +4,7 @@
   "sourceRoot": "libs/shared/util-translation/src",
   "prefix": "util-translation",
   "projectType": "library",
-  "tags": [],
+  "tags": ["type:util", "domain:shared"],
   "targets": {
     "build": {
       "executor": "@nx/angular:ng-packagr-lite",
