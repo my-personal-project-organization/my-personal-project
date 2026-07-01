@@ -1,0 +1,122 @@
+---
+# Conventions for my-personal-project
+# This file documents the architectural and code patterns enforced across the monorepo.
+
+# Monorepo Structure (Nx 21.1.0)
+# - apps/my-personal-project: Angular 19 standalone app
+# - apps/my-personal-project-e2e: Playwright e2e tests
+# - libs/cv/*, libs/scribo/*, libs/shared/*: domain libraries with tagging convention
+
+library_organization:
+  description: |
+    Each library follows a domain-driven structure:
+    - feature-*: Feature modules (routable, smart components, top-level orchestration)
+    - data-access: Store, services, state management (NgRx Signals, HTTP)
+    - ui: Shared UI components (atoms, molecules, organized by type)
+    - util-*: Utilities (util-error, util-translation, utils for general helpers)
+
+  domains:
+    cv: CV/about section, landing pages
+    scribo: Article/blog features (landing, articles, user profiles, layout)
+    shared: Cross-domain shared code (UI library, error handling, i18n, utilities)
+
+  import_alias: "@mpp"
+  example_imports:
+    - "@mpp/cv/feature-about: loads CV landing component"
+    - "@mpp/scribo/feature-layout: loads Scribo layout wrapper"
+    - "@mpp/shared/ui: shared UI components"
+    - "@mpp/shared/data-access: auth guards, global stores"
+
+# Angular Component Standards (19.2.9, standalone-first)
+component_conventions:
+  standalone: true
+  description: All new components must be standalone; no NgModule wrappers
+
+  dependency_injection:
+    pattern: "inject() function"
+    example: "private readonly store = inject(MyStore);"
+
+  change_detection:
+    strategy: "ChangeDetectionStrategy.OnPush"
+    reason: "Explicit change detection tracking, better performance"
+    when_to_apply: "Always, except rare one-off debugging scenarios"
+
+  state_management:
+    - "Signal-based (signal(), computed(), effect())"
+    - "NgRx Signals with @ngrx/signals + @ngrx/effects for async/side-effects"
+    - "inject(LOCALE_ID) for i18n state"
+
+  form_handling:
+    - "Angular typed forms (typed FormGroup, FormControl)"
+    - "Zod schema validation for runtime checks"
+
+  template_patterns:
+    - "Angular control flow (if, for, switch, defer)"
+    - "No *ngIf/*ngFor — use @if/@for"
+    - "defer @defer for lazy-loaded content"
+
+# File Organization & Sizing
+file_conventions:
+  max_lines: 400
+  reason: "Encourages single-responsibility, easier to reason about"
+
+  typical_file_layout:
+    component_ts: "Class def (2-3 signals), inject() DI, methods, ~50–100 lines for simple components"
+    component_html: "Template with @if/@for, no complex logic (push to TS)"
+    component_scss: "Component-scoped styles, no global state leaking"
+    service_ts: "Store class (NgRx) or singleton service, ~100–200 lines"
+    guard_ts: "Auth/permission checks, ~30–50 lines"
+
+# TypeScript Strictness
+typescript_rules:
+  no_any: true
+  enforce: "Strict typing required; use `unknown` if type is truly dynamic"
+  exceptions: "Only for framework internals where type is unavoidable; flag with `@ts-expect-error` + comment explaining why"
+  linter: "ESLint with @nx/enforce-module-boundaries, no @ts-ignore escape hatches allowed"
+
+# i18n / Localization
+i18n:
+  tool: "@angular/localize"
+  locales:
+    en-US: "Default; messages.json (shipped in code)"
+    es: "Spanish; messages.es.json"
+  workflow:
+    - "Mark strings with $localize`...` or i18n-friendly markup"
+    - "npm run localize builds separate bundles per locale"
+    - "Firebase rewrites /es/** to Spanish index.html, else /en-US/index.html"
+  injection: "Use inject(LOCALE_ID) in components to read current locale; switch via window.location redirect"
+
+# Git & Commits
+git_conventions:
+  format: "Conventional Commits"
+  scope: "Use branch name or domain (e.g., cv, scribo, shared, shared/ui)"
+  examples:
+    - "feat(cv): add CV section dark mode"
+    - "fix(scribo/feature-layout): correct header spacing"
+    - "refactor(shared/ui): extract button styles into utility"
+    - "docs(shared): update i18n setup"
+    - "test(scribo/feature-article): add article list tests"
+
+# Testing & Coverage
+testing:
+  unit: "Jest 29 with @nx/jest; run via npm test or nx test <lib>"
+  e2e: "Playwright with page objects; run via npm run e2e"
+  visual: "Storybook + Chromatic visual regression on libs/shared/ui"
+  coverage: "Enforce via CI; target >70% per lib (configurable per jest.config.ts)"
+
+# Build & Deployment
+deployment:
+  target: "Firebase Hosting + Firestore"
+  commands:
+    build: "npm run build"
+    serve_localized: "npm run localize (builds, then serves dist/apps/my-personal-project/browser)"
+    deploy: "npm run deploy (Firebase CLI)"
+  ci: "GitHub Actions: firebase-hosting-merge.yml (prod), firebase-hosting-pull-request.yml (preview)"
+  pre_push_check: "npm run run-before-pr (nx affected -t lint test build e2e)"
+
+# Import Boundaries
+module_boundaries:
+  rule: "@nx/enforce-module-boundaries enforces dependency graph"
+  current_state: "Permissive (sourceTag: '*' depends on onlyDependOnLibsWithTags: ['*'])"
+  intent: "Stricter tagging can be introduced as lib organization stabilizes"
+  recommendation: "Tag libs in project.json as they mature; update eslint.config.js depConstraints"
