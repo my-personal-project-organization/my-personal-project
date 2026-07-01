@@ -1,9 +1,9 @@
 ---
 name: angular-conventions
-description: Angular 19 patterns for this project - standalone components, signals, OnPush change detection, inject() DI, typed forms, modern control flow
+description: Angular 20 patterns for this project - zoneless change detection, signals (mature), signal outputs, OnPush, inject() DI, typed forms, modern control flow
 ---
 
-# Angular 19 Conventions
+# Angular 20 Conventions
 
 ## Core Architecture Principles
 
@@ -49,14 +49,18 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
   template: '...',
   styleUrls: ['./my-component.scss'],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush, // Always use OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush, // Best practice: explicit control
 })
 export class MyComponent {
   // ...
 }
 ```
 
-**Why OnPush**: Explicit and efficient. Reduces unnecessary change detection cycles, especially in large applications.
+**Why OnPush** (Angular 20): Explicit change detection strategy. While zoneless removes Zone.js overhead, OnPush is still recommended for:
+- Clear intent and predictability
+- Better performance in large component trees
+- Easier debugging and testing
+- Explicit signal reactivity
 
 ### Signals and Inputs
 
@@ -78,9 +82,30 @@ readonly data = input(null as any); // Nullable input (prefer typed generics)
 readonly displayName = computed(() => `${this.firstName()} ${this.lastName()}`);
 ```
 
+**Effect with Cleanup (Angular 20)**: Use `effect()` with better cleanup and dependency tracking:
+```typescript
+// Angular 20: effect() now supports better lifecycle and cleanup
+constructor() {
+  effect(() => {
+    const userId = this.userId(); // Tracked dependency
+    this.loadUserData(userId);
+  });
+}
+```
+
 **Two-Way Binding**: Use `model()` for parent-child sync:
 ```typescript
 readonly count = model(0);
+```
+
+**Component Outputs (Angular 20)**: Use `output()` for signal-based event emitters:
+```typescript
+// New Angular 20 way - cleaner, type-safe, and integrates with signals
+private readonly itemClicked = output<Item>();
+
+onItemClick(item: Item) {
+  this.itemClicked.emit(item);
+}
 ```
 
 ### Template Control Flow
@@ -232,14 +257,16 @@ export class HighlightDirective { }
 
 ## Error Handling
 
-Components should represent error states:
+Components should represent error states using signals:
 
 ```typescript
 error = signal<string | null>(null);
 isLoading = signal(false);
+data = signal<T | null>(null);
 
 loadData() {
   this.isLoading.set(true);
+  this.error.set(null);
   this.service.fetch().subscribe({
     next: (data) => { this.data.set(data); },
     error: (err) => { this.error.set(err.message); },
@@ -248,7 +275,18 @@ loadData() {
 }
 ```
 
-Services log errors and propagate typed error signals; components display error UI.
+### Improved Error Messages (Angular 20)
+Services log errors and propagate typed error signals; components display error UI in templates:
+
+```html
+@if (isLoading()) {
+  <p>Loading...</p>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+} @else {
+  <p>{{ data() }}</p>
+}
+```
 
 ## Testing
 
