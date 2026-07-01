@@ -39,7 +39,8 @@
         "port": 4400,
         "configDir": "libs/shared/ui/.storybook",
         "browserTarget": "shared/ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "experimentalZoneless": true
       },
       "configurations": {
         "ci": {
@@ -55,7 +56,8 @@
         "outputDir": "dist/storybook/shared/ui",
         "configDir": "libs/shared/ui/.storybook",
         "browserTarget": "shared/ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "experimentalZoneless": true
       },
       "configurations": {
         "ci": {
