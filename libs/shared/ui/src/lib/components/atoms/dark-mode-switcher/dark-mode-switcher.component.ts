@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { ChangeDetectionStrategy, Component, effect, HostBinding, inject, signal } from '@angular/core';
 import { LocalStorageService } from '@mpp/shared/data-access';
 import { IconComponent } from '../icon';
@@ -6,7 +6,7 @@ import { IconComponent } from '../icon';
 @Component({
   selector: 'ui-dark-mode-switcher',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [IconComponent],
   templateUrl: './dark-mode-switcher.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

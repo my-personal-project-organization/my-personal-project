@@ -4,13 +4,13 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
   selector: 'ui-dialog',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [ButtonComponent],
   templateUrl: './dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

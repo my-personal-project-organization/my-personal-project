@@ -2,7 +2,7 @@ import {
   ApplicationConfig,
   ErrorHandler,
   provideAppInitializer,
-  provideExperimentalZonelessChangeDetection,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -17,7 +17,7 @@ import { appRoutes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     // ? https://dev.to/danywalls/angular-19-and-zoneless-1of9 https://angularengineering.com/2024/05/27/angular-18-how-to-remove-zone-js/
-    provideExperimentalZonelessChangeDetection(),
+    provideZonelessChangeDetection(),
     // ? https://www.linkedin.com/posts/koustubhmishra_angular-angular-zone-activity-7249282431067840512-YJoY
     provideRouter(appRoutes, withComponentInputBinding()),
     // provideZoneChangeDetection({ eventCoalescing: true }),

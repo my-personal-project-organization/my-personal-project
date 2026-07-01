@@ -1,10 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { AuthStore } from '@mpp/shared/data-access'; // Import AuthStore
 
 @Component({
   selector: 'ui-auth-test',
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div>
       @if (authStore.loading()) {

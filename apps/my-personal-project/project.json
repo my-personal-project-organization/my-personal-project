@@ -108,7 +108,8 @@
       "dependsOn": ["create-environment"],
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/my-personal-project/jest.config.ts"
+        "jestConfig": "apps/my-personal-project/jest.config.ts",
+        "tsConfig": "apps/my-personal-project/tsconfig.spec.json"
       }
     },
     "serve-static": {

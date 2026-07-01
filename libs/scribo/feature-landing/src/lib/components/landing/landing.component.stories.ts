@@ -4,7 +4,7 @@ import { provideMockAuthService, provideMockFirebaseConfig } from '@mpp/shared/d
 import { clickOnBtnDataTestId } from '@mpp/shared/ui';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig, moduleMetadata } from '@storybook/angular';
-import { expect, within } from '@storybook/test';
+import { expect, within } from 'storybook/test';
 import { LandingComponent } from './landing.component';
 
 const meta: Meta<LandingComponent> = {

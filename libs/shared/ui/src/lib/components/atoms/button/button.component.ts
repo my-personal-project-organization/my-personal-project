@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +14,7 @@ import { ButtonService } from './button.service';
 @Component({
   selector: 'ui-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './button.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,

@@ -1,5 +1,5 @@
 // ...existing code...
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,6 +8,7 @@ import {
   LOCALE_ID,
   PLATFORM_ID,
   signal,
+  DOCUMENT
 } from '@angular/core';
 
 export const SUPPORTED_LANGUAGES = {

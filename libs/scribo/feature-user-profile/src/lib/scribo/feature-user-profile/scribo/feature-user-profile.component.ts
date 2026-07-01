@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 
 @Component({
   selector: 'scrb-user-profile-test',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './feature-user-profile.component.html',
   styleUrl: './feature-user-profile.component.css',
 })

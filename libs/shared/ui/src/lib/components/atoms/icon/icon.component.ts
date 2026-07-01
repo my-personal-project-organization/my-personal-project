@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,7 +14,7 @@ import { IconName, IconSize } from './icons.types';
 @Component({
   selector: 'ui-icon',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: '',
   styleUrls: ['./icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

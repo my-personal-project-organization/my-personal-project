@@ -12,7 +12,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   NG_VALUE_ACCESSOR,
   ControlValueAccessor,
@@ -23,7 +23,7 @@ import {
 @Component({
   selector: 'ui-dropdown',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

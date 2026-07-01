@@ -4,13 +4,13 @@ import { DialogComponent, IconComponent } from '@mpp/shared/ui';
 import { LandingService } from './landing.service';
 import { NgForTranslateDirective, TranslatePipe, TranslationService } from '@mpp/shared/util-translation';
 import { FooterComponent } from '../footer/footer.component';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from "@angular/forms";
 
 @Component({
   selector: 'feature-about-landing',
   standalone: true,
-  imports: [DialogComponent, TranslatePipe, NgForTranslateDirective, FooterComponent, IconComponent, CommonModule, FormsModule],
+  imports: [DialogComponent, TranslatePipe, NgForTranslateDirective, FooterComponent, IconComponent, FormsModule],
   providers: [LandingService],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',

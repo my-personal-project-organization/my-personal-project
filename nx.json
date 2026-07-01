@@ -1,10 +1,7 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
       "!{projectRoot}/.eslintrc.json",
@@ -18,21 +15,14 @@
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/tsconfig.storybook.json"
     ],
-    "sharedGlobals": [
-      "{workspaceRoot}/.github/workflows/ci.yml"
-    ]
+    "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
   "nxCloudId": "676d84add2d279433bd5d248",
   "targetDefaults": {
     "@angular-devkit/build-angular:application": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     },
     "@nx/eslint:lint": {
       "cache": true,
@@ -45,32 +35,22 @@
     },
     "@nx/jest:jest": {
       "cache": true,
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ],
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "options": {
         "passWithNoTests": true,
         "codeCoverage": true,
-        "coverageReporters": [
-          "lcov"
-        ]
+        "coverageReporters": ["lcov"]
       },
       "configurations": {
         "ci": {
           "ci": true,
           "codeCoverage": true,
-          "coverageReporters": [
-            "lcov"
-          ]
+          "coverageReporters": ["lcov"]
         }
       }
     },
     "e2e-ci--**/*": {
-      "dependsOn": [
-        "^build"
-      ]
+      "dependsOn": ["^build"]
     },
     "build-storybook": {
       "cache": true,
@@ -92,13 +72,8 @@
     },
     "@nx/angular:ng-packagr-lite": {
       "cache": true,
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
   "plugins": [
@@ -137,7 +112,59 @@
       "unitTestRunner": "jest"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "css",
+      "type": "component"
+    },
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@nx/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@nx/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@nx/angular:scam": {
+      "type": "component"
+    },
+    "@nx/angular:scam-directive": {
+      "type": "directive"
+    },
+    "@nx/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@nx/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@nx/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@nx/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@nx/angular:resolver": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

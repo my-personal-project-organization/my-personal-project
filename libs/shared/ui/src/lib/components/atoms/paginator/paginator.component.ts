@@ -5,14 +5,14 @@ import {
   model,
   output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'ui-paginator',
   standalone: true,
-  imports: [CommonModule, DropdownComponent, FormsModule, ReactiveFormsModule],
+  imports: [DropdownComponent, FormsModule, ReactiveFormsModule],
   templateUrl: './paginator.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
