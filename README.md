@@ -159,7 +159,7 @@ This project is organized as an Nx monorepo, containing multiple applications an
 - **data-access/**: CV-specific state management and services.
   - Portfolio data models
   - CV-related services
-  - Integration with shared/data-access
+  - Integration with shared/data-access.
 
 #### Scribo-Specific Libraries (`scribo/`)
 
