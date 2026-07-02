@@ -23,11 +23,11 @@ It consists of two main sections:
 - **Dark Mode:** Tailwind dark mode support.
 - **Component Documentation:** Storybook is used for documenting components, including interaction tests.
 - **Visual Regression Testing:** Chromatic is integrated for visual regression testing.
-- **End-to-End Testing:** Playwright is used for comprehensive end-to-end testing.
+- **End-to-End Testing:** Playwright is configured for end-to-end testing.
 
 ## Technologies Used
 
-- [Angular](https://angular.io/) (v19+) - Frontend framework
+- [Angular](https://angular.io/) (v20+) - Frontend framework
 - [Nx](https://nx.dev/) - Monorepo build system
 - [NgRx Signals](https://ngrx.io/guide/signals) - State management
 - [Firebase](https://firebase.google.com/) - Backend services (Authentication, Firestore)
@@ -137,18 +137,16 @@ This project is organized as an Nx monorepo, containing multiple applications an
 
 #### Shared Libraries (`shared/`)
 
-- **ui/**: Reusable UI components (Storybook-documented, standalone Angular 19 components).
+- **ui/**: Reusable UI components (Storybook-documented, standalone Angular components).
   - ToastContainer, dialogs, and other shared components
   - Tailwind CSS styling with dark mode support
   - Icon library
+  - Global error handling: `GlobalErrorHandlerService`, `ErrorService`, and the server error interceptor
 - **data-access/**: Shared data access layer
   - `AuthGuard` and route protection guards
   - Global services (Firebase integration, API clients)
   - Shared models and types
   - Global state management
-- **util-error/**: Global error handling
-  - `GlobalErrorHandler` service provider
-  - Error UI utilities
 - **util-translation/**: i18n utilities
   - `loadAppTranslations()` function for loading locale translations
   - Support for `en-US` (default) and `es` (Spanish)
@@ -201,8 +199,7 @@ my-personal-project/
     │   └── data-access/            # Article services & NgRx Signals store
     └── shared/                     # Cross-domain utilities
         ├── data-access/            # Global state, guards, services, Firebase integration
-        ├── ui/                     # Component library with Storybook
-        ├── util-error/             # Global error handling
+        ├── ui/                     # Component library with Storybook, global error handling
         ├── util-translation/       # i18n utilities
         └── utils/                  # Helper functions, validators, formatters
 ```
