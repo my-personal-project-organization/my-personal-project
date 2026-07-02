@@ -2,7 +2,7 @@
   "name": "@mpp/shared/util-translation",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/core": "19.2.9"
+    "@angular/core": "20.3.9"
   },
   "sideEffects": false
 }

@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ArticleStore } from '@mpp/scribo/data-access';
 
 @Component({
-  selector: 'scrb-article-list',
+  selector: 'scrb-article-list-main',
   templateUrl: './article-list.component.html',
   styleUrls: ['./article-list.component.scss'],
   standalone: true,
