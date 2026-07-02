@@ -27,7 +27,8 @@
       "Bash(npx nx *)",
       "Read(//tmp/**)",
       "Bash(grep *)",
-      "Bash(sed *)"
+      "Bash(sed *)",
+      "WebFetch(*)"
     ]
   },
   "hooks": {
