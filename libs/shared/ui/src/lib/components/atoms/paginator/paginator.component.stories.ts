@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { PaginatorComponent } from './paginator.component';
 
-import { expect, within } from 'storybook/test';
+import { expect, within, waitFor } from 'storybook/test';
 
 const meta: Meta<PaginatorComponent> = {
   component: PaginatorComponent,
@@ -48,8 +48,12 @@ export const WithCurrentPage: Story = {
     expect(canvas.getByTestId('paginator-pagination')).toBeTruthy();
     expect(canvas.getByTestId('paginator-pagination-current-page')).toHaveTextContent('3');
     expect(canvas.getByTestId('paginator-go-first-page-btn')).toBeTruthy();
-    expect(canvas.getByTestId('paginator-page-size-dropdown')).toBeTruthy();
-    expect(canvas.getByTestId('paginator-page-size-dropdown')).toHaveTextContent('10');
+
+    const dropdownButton = canvasElement.querySelector('[data-testid="paginator-page-size-dropdown"] [data-testid="dropdown-button"]');
+    expect(dropdownButton).toBeTruthy();
+    await waitFor(() => {
+      expect(dropdownButton).toHaveTextContent('10');
+    });
   },
 };
 
@@ -69,6 +73,11 @@ export const WithPageSize: Story = {
     expect(canvas.getByTestId('paginator-pagination')).toBeTruthy();
     expect(canvas.getByTestId('paginator-go-first-page-btn')).toBeTruthy();
     expect(canvas.getByTestId('paginator-page-size-dropdown')).toBeTruthy();
-    expect(canvas.getByTestId('paginator-page-size-dropdown')).toHaveTextContent('20');
+    
+    const dropdownButton = canvasElement.querySelector('[data-testid="paginator-page-size-dropdown"] [data-testid="dropdown-button"]');
+    expect(dropdownButton).toBeTruthy();
+    await waitFor(() => {
+      expect(dropdownButton).toHaveTextContent('20');
+    });
   },
 };

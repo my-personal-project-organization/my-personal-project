@@ -137,9 +137,9 @@
     <div>
       <ui-dropdown
         [options]="pageSizeOptions"
-        [(ngModel)]="pageSize"
+        [ngModel]="pageSize()"
+        (ngModelChange)="onPageSizeStringChange($event)"
         placeholder="Page size"
-        (selectionChange)="onPageSizeChange($event)"
         data-testid="paginator-page-size-dropdown"
       ></ui-dropdown>
     </div>

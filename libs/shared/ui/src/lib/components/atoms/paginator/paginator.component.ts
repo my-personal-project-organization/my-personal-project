@@ -84,9 +84,8 @@ export class PaginatorComponent {
    * with a smooth animation.
    * @param {string} newPageSize - The new page size that is selected by the user.
    */
-  onPageSizeChange(newPageSize: string) {
-    console.log(newPageSize);
-    // this.pageSizeChange.emit(parseInt(newPageSize, 10));
+  onPageSizeStringChange(newPageSize: string) {
+    this.pageSize.set(parseInt(newPageSize, 10));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 

@@ -84,6 +84,7 @@ export class DropdownComponent implements ControlValueAccessor {
   onCLickToggleDropdown() {
     this.isOpen = !this.isOpen;
     this.onTouched();
+    this.cd.markForCheck();
   }
 
   /**
