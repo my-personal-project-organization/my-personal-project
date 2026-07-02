@@ -4,7 +4,7 @@ import { FooterComponent } from '../footer/footer.component';
 import { NavComponent } from '../nav/nav.component';
 
 @Component({
-  selector: 'scrb-layout',
+  selector: 'scrb-layout-main',
   imports: [RouterOutlet, FooterComponent, RouterModule, NavComponent],
   templateUrl: './layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

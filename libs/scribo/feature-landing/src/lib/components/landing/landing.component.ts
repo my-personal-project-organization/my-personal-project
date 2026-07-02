@@ -6,7 +6,7 @@ import { ButtonComponent } from '@mpp/shared/ui';
 import { features } from './landing.features';
 
 @Component({
-  selector: 'scrb-landing',
+  selector: 'scrb-landing-main',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss'],
   imports: [ButtonComponent, TranslatePipe],

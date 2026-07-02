@@ -51,9 +51,9 @@ export const Default: Story = {
       ...args,
     },
     template: `
-    <scrb-layout>
+    <scrb-layout-main>
         <router-outlet></router-outlet>
-    </scrb-layout>
+    </scrb-layout-main>
   `,
     // TODO: Uncomment the following lines to enable routing in the story. NOT WORKING
     // moduleMetadata: {
