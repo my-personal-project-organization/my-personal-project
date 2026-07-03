@@ -30,6 +30,7 @@ jobs:
             red flags and the "Security" checklist section most heavily.
             Report back whether the PR has any blocking issue.
           claude_args: |
+            --model haiku
             --allowedTools "Task,Bash(git diff:*),Bash(git log:*)"
             --json-schema '{"type":"object","required":["blocking","summary"],"properties":{"blocking":{"type":"boolean"},"summary":{"type":"string"}}}'
       - name: Fail on blocking findings
