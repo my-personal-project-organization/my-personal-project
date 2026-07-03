@@ -34,8 +34,10 @@ jobs:
             --json-schema '{"type":"object","required":["blocking","summary"],"properties":{"blocking":{"type":"boolean"},"summary":{"type":"string"}}}'
       - name: Fail on blocking findings
         if: fromJSON(steps.review.outputs.structured_output).blocking == true
+        env:
+          REVIEW_SUMMARY: ${{ fromJSON(steps.review.outputs.structured_output).summary }}
         run: |
-          echo "${{ fromJSON(steps.review.outputs.structured_output).summary }}"
+          echo "$REVIEW_SUMMARY"
           exit 1
 
   build_and_preview:

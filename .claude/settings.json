@@ -30,9 +30,7 @@
       "Bash(sed *)",
       "WebFetch(*)",
       "Bash(python3 *)",
-      "Bash(node -e ' *)",
-      "Bash(gh secret *)",
-      "Bash(xargs -I{} echo {})"
+      "Bash(node -e ' *)"
     ]
   },
   "hooks": {
