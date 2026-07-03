@@ -8,7 +8,34 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
+  claude_review:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history so Claude can diff against main
+      - id: review
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Use the `code-reviewer` subagent to review the diff between this
+            PR branch and `origin/main` (use `git diff origin/main...HEAD`).
+            Apply its full checklist, but weigh the "Critical — Block merge"
+            red flags and the "Security" checklist section most heavily.
+            Report back whether the PR has any blocking issue.
+          claude_args: |
+            --allowedTools "Task,Bash(git diff:*),Bash(git log:*)"
+            --json-schema '{"type":"object","required":["blocking","summary"],"properties":{"blocking":{"type":"boolean"},"summary":{"type":"string"}}}'
+      - name: Fail on blocking findings
+        if: fromJSON(steps.review.outputs.structured_output).blocking == true
+        run: |
+          echo "${{ fromJSON(steps.review.outputs.structured_output).summary }}"
+          exit 1
+
   build_and_preview:
+    needs: claude_review
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
