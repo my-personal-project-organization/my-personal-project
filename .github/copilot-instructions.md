@@ -22,7 +22,7 @@ This document defines the development environment and conventions for the **my-p
 | **NgRx Effects** | 19.0.1  | Side effects handling                |
 | **AngularFire**  | 19.0.0  | Firebase integration                 |
 | **Zod**          | 3.24.1  | Schema validation                    |
-| **Tailwind CSS** | 3.0.2   | Utility-first styling                |
+| **Tailwind CSS** | 4       | Utility-first styling                |
 | **Jest**         | 29.7.0  | Unit/integration testing             |
 | **Playwright**   | 1.36.0  | E2E testing (multi-browser)          |
 | **Storybook**    | 8.6.14  | Component documentation              |
@@ -43,7 +43,6 @@ apps/
 │   │   ├── main.ts               # Bootstrap
 │   │   ├── styles.scss           # Global styles
 │   │   └── test-setup.ts         # Jest setup
-│   ├── tailwind.config.js
 │   ├── public/
 │   └── project.json
 └── my-personal-project-e2e/      # Playwright E2E tests
