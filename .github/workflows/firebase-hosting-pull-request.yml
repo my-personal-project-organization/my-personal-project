@@ -8,7 +8,41 @@ permissions:
   contents: read
   pull-requests: write
 jobs:
+  claude_review:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history so Claude can diff against main
+      - id: review
+        uses: anthropics/claude-code-action@558b1d6cab4085c7753fe402c10bef0fbb92ac7a # v1.0.165
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          prompt: |
+            Use the `code-reviewer` subagent to review the diff between this
+            PR branch and `origin/main` (use `git diff origin/main...HEAD`).
+            Apply its full checklist, but weigh the "Critical — Block merge"
+            red flags and the "Security" checklist section most heavily.
+            Report back whether the PR has any blocking issue.
+          claude_args: |
+            --model haiku
+            --allowedTools "Task,Bash(git diff:*),Bash(git log:*)"
+            --json-schema '{"type":"object","required":["blocking","summary"],"properties":{"blocking":{"type":"boolean"},"summary":{"type":"string"}}}'
+      - name: Fail on blocking findings
+        if: fromJSON(steps.review.outputs.structured_output).blocking == true
+        env:
+          REVIEW_SUMMARY: ${{ fromJSON(steps.review.outputs.structured_output).summary }}
+        run: |
+          echo "$REVIEW_SUMMARY"
+          exit 1
+
   build_and_preview:
+    needs: claude_review
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
@@ -19,7 +53,7 @@ jobs:
       - run: npm ci && npx nx run my-personal-project:build --configuration=production
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: ${{ secrets.G_HUB_TOKEN }}
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MY_PERSONAL_PROJECT_7C70D }}
           projectId: my-personal-project-7c70d
           # ? We tried a solution with gemini with does not work. I create a GitHub Page and these 2 secrets are not used.
