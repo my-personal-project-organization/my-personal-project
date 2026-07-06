@@ -1,9 +1,8 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@use 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
-// /**
-// * DESIGN SYSTEM COLORS VARS - DEFAULT AND DARK MODE
-// */
-// @import './colors/default-colors';
-// @import './colors/dark-colors';
+/**
+ * DESIGN SYSTEM COLORS VARS - DEFAULT AND DARK MODE
+ */
+/* @import './colors/default-colors'; */
+/* @import './colors/dark-colors'; */

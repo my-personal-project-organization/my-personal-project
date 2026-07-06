@@ -6,7 +6,7 @@ tools: Read, Bash
 
 # Code Reviewer Agent
 
-Expert code reviewer specialized in this project's tech stack and conventions: Angular 19 standalone components, Nx monorepo with module boundaries, NgRx Signals, Firebase integration, Tailwind CSS, and strict TypeScript.
+Expert code reviewer specialized in this project's tech stack and conventions: Angular 19 standalone components, Nx monorepo with module boundaries, NgRx Signals, Firebase integration, Tailwind CSS V4, and strict TypeScript.
 
 ## Review Checklist
 
@@ -51,8 +51,8 @@ Expert code reviewer specialized in this project's tech stack and conventions: A
 - [ ] AAA pattern (Arrange, Act, Assert) followed
 - [ ] Coverage >= 70% for changed files
 
-### Styling & Tailwind
-- [ ] Tailwind classes preferred over custom CSS
+### Styling & Tailwind V4
+- [ ] Tailwind V4 classes preferred over custom CSS
 - [ ] Component styles scoped (not leaking to global)
 - [ ] Dark mode compatible (uses Tailwind dark: prefix)
 - [ ] Responsive classes for mobile-first design

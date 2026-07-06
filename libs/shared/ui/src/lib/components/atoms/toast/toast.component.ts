@@ -68,7 +68,7 @@ export class ToastComponent implements OnInit, OnDestroy {
 
   // Define computed signal for button classes
   protected buttonClasses = computed(() => {
-    const base = 'absolute right-2 top-2 rounded-md p-1 focus:outline-none focus:ring-2 focus:ring-offset-2';
+    const base = 'absolute right-2 top-2 rounded-md p-1 focus:outline-hidden focus:ring-2 focus:ring-offset-2';
     const typeClasses = {
       info: 'text-blue-500 hover:bg-blue-200 focus:ring-blue-400 dark:text-blue-300 dark:hover:bg-blue-800',
       success:

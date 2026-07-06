@@ -2,7 +2,7 @@
   [type]="type()"
   (click)="btnClick.emit()"
   [disabled]="disabled()"
-  class="flex w-full flex-row items-center justify-center rounded bg-blue-500 font-bold text-white transition duration-300 hover:bg-blue-700 active:bg-blue-800 active:bg-opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
+  class="flex w-full flex-row items-center justify-center rounded-sm bg-blue-500 font-bold text-white transition duration-300 hover:bg-blue-700 active:bg-blue-800/75 disabled:cursor-not-allowed disabled:opacity-50"
   [class]="buttonClasses()"
 >
   <ng-content></ng-content>
