@@ -9,6 +9,7 @@ permissions:
   pull-requests: write
 jobs:
   claude_review:
+    name: Claude Code Review
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     permissions:
@@ -43,6 +44,7 @@ jobs:
 
   build_and_preview:
     needs: claude_review
+    name: Build Production
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
