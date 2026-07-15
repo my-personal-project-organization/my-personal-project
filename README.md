@@ -177,7 +177,7 @@ This structure ensures modularity, reusability, and scalability, making it easie
 ```bash
 my-personal-project/
 ├── apps/
-│   ├── my-personal-project/        # Main web application (Angular 19 standalone)
+│   ├── my-personal-project/        # Main web application (Angular 20 standalone)
 │   │   └── src/
 │   │       ├── app/                # Feature modules (cv, scribo, auth)
 │   │       ├── environments/       # Environment configurations
