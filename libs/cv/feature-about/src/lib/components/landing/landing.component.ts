@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogComponent, IconComponent } from '@mpp/shared/ui';
 import { LandingService } from './landing.service';
@@ -20,18 +20,18 @@ export class LandingComponent {
   private readonly translationService = inject(TranslationService);
   private readonly router = inject(Router);
 
-  dialogOpen = false;
-  dialogTitle: string | undefined;
-  listKey = '';
+  readonly dialogOpen = signal(false);
+  readonly dialogTitle = signal<string | undefined>(undefined);
+  readonly listKey = signal('');
 
   openDialog(experience: string, listKey: string) {
-    this.dialogTitle = this.translationService.translate(experience);
-    this.listKey = listKey;
-    this.dialogOpen = true;
+    this.dialogTitle.set(this.translationService.translate(experience));
+    this.listKey.set(listKey);
+    this.dialogOpen.set(true);
   }
 
   closeDialog() {
-    this.dialogOpen = false;
+    this.dialogOpen.set(false);
   }
 
   onCLickScriboProject() {
