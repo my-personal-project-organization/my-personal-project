@@ -22,16 +22,16 @@
         </div>
       }
     </div>
-    @if (dialogOpen) {
+    @if (dialogOpen()) {
       <ui-dialog
-        [isOpen]="dialogOpen"
-        [title]="dialogTitle"
+        [isOpen]="dialogOpen()"
+        [title]="dialogTitle()"
         (confirm)="closeDialog()"
         [confirmButtonText]="'Cerrar'"
         [hideCancelButton]="true"
         >
         <ul class="mt-2 list-inside list-disc text-gray-700 dark:text-gray-400">
-          <li *ngForTranslate="let keyPoint; from: listKey; let keyPointKey = index">
+          <li *ngForTranslate="let keyPoint; from: listKey(); let keyPointKey = index">
             {{ keyPoint }}
           </li>
         </ul>
