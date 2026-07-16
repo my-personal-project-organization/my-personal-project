@@ -18,14 +18,14 @@
       "executor": "@nx/eslint:lint"
     },
     "storybook": {
-      "executor": "@storybook/angular:start-storybook",
+      "executor": "@storybook/angular-vite:start-storybook",
       "options": {
-        "styles": ["libs/scribo/feature-layout/.storybook/styles.scss"],
+        "styles": [".storybook/styles.scss"],
         "port": 4400,
         "configDir": "libs/scribo/feature-layout/.storybook",
         "browserTarget": "scribo/feature-layout:build-storybook",
         "compodoc": false,
-        "experimentalZoneless": true
+        "zoneless": true
       },
       "configurations": {
         "ci": {
@@ -34,15 +34,15 @@
       }
     },
     "build-storybook": {
-      "executor": "@storybook/angular:build-storybook",
+      "executor": "@storybook/angular-vite:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "styles": ["libs/scribo/feature-layout/.storybook/styles.scss"],
+        "styles": [".storybook/styles.scss"],
         "outputDir": "dist/storybook/scribo/feature-layout",
         "configDir": "libs/scribo/feature-layout/.storybook",
         "browserTarget": "scribo/feature-layout:build-storybook",
         "compodoc": false,
-        "experimentalZoneless": true
+        "zoneless": true
       },
       "configurations": {
         "ci": {
@@ -53,7 +53,7 @@
     "test-storybook": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "test-storybook -c libs/scribo/feature-layout/.storybook --url=http://localhost:4400"
+        "command": "vitest run --config libs/scribo/feature-layout/vitest.config.ts --project=storybook"
       }
     },
     "static-storybook": {

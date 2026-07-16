@@ -1,3 +1,9 @@
 const nxPreset = require('@nx/jest/preset').default;
 
-module.exports = { ...nxPreset };
+module.exports = {
+  ...nxPreset,
+  modulePathIgnorePatterns: [
+    '<rootDir>/dist/',
+    '<rootDir>/.claude/worktrees/',
+  ],
+};

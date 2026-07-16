@@ -69,7 +69,6 @@ npm install
 ```
 
 **Do NOT**:
-- Update `packages/shared/` submodules
 - Modify workspace config manually before running `nx migrate`
 
 ## Step 4: Execute Migration for Each Version
@@ -253,11 +252,8 @@ If migration path is multi-step (v20→v21→v22):
 # Remove migration.json if present
 rm -f migration.json
 
-# Verify packages/shared/ was NOT modified
-git status packages/shared/
-
 # Commit changes (with .claude folder updates included)
-git add package.json package-lock.json angular.json tsconfig.json nx.json
+git add package.json package-lock.json tsconfig.base.json nx.json
 git add .claude/  # Include .claude folder changes
 git commit -m "chore(nx): migrate from vX.Y to vA.B
 

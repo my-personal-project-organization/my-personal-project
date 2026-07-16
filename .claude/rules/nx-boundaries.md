@@ -5,10 +5,10 @@ description: Nx monorepo structure, module tagging scheme, and dependency bounda
 
 # Nx Module Boundaries
 
-## Monorepo Structure (Nx 21.1.0)
+## Monorepo Structure (Nx 22.7.6)
 
 ### Apps
-- `apps/my-personal-project` — Main Angular 20 application
+- `apps/my-personal-project` — Main Angular 21 application
 - `apps/my-personal-project-e2e` — Playwright e2e test suite for the main app
 
 ### Libraries

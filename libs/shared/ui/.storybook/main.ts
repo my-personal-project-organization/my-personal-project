@@ -1,15 +1,45 @@
-import type { StorybookConfig } from '@storybook/angular';
+// This file has been automatically migrated to valid ESM format by Storybook.
+import type { StorybookConfig } from '@storybook/angular-vite';
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import { mergeConfig } from 'vite';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { workspaceRoot } from '@nx/devkit';
 
 const require = createRequire(import.meta.url);
+const configDirname = dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
   stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
-  addons: [getAbsolutePath("@storybook/addon-docs")],
+  addons: [
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-vitest"),
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-mcp")
+  ],
   framework: {
-    name: getAbsolutePath("@storybook/angular"),
-    options: {},
+    name: getAbsolutePath("@storybook/angular-vite"),
+    options: {
+      compodoc: false,
+      // Absolute path: the framework's default ("./.storybook/tsconfig.json")
+      // resolves against process.cwd(), which is the workspace root when
+      // running under the Vitest addon, not this lib's directory.
+      tsconfig: join(configDirname, 'tsconfig.json'),
+    },
+  },
+  async viteFinal(viteConfig) {
+    return mergeConfig(viteConfig, {
+      plugins: [nxViteTsPaths()],
+      css: {
+        // Vite's postcss config search stops at the nearest ancestor
+        // package.json (libs/shared/ui/package.json) because this repo has
+        // no npm/pnpm workspaces marker, so it never reaches the root
+        // .postcssrc.json that wires up @tailwindcss/postcss. Point the
+        // search explicitly at the workspace root to pick it up.
+        postcss: workspaceRoot,
+      },
+    });
   },
 };
 

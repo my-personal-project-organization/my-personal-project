@@ -1,30 +1,30 @@
 # Version History
 
-## Current Versions (as of 2026-07-01)
+## Current Versions (as of 2026-07-16)
 
 ### Core Frameworks
-- **Nx**: 21.6.11 (migrated from 21.1.0)
-- **Angular**: 20.3.9 (upgraded from 19.2.9)
-- **TypeScript**: 5.9.3 (upgraded from 5.7.3)
-- **Jest**: 29.7.0
+- **Nx**: 22.7.6 (migrated from 21.6.11)
+- **Angular**: 21.2.9 (upgraded from 20.3.9)
+- **TypeScript**: 5.9.3
+- **Jest**: 30.4.2 (upgraded from 29.7.0)
 - **Playwright**: 1.36.0
 
 ### Angular-related
-- **@angular/cli**: ~20.3.0
-- **@angular/devkit**: 20.3.9
-- **@schematics/angular**: 20.3.9
-- **ng-packagr**: 20.3.2
-- **jest-preset-angular**: 14.6.2
-- **angular-eslint**: 20.7.0
+- **@angular/cli**: 21.2.9
+- **@angular/devkit**: 21.2.9
+- **@schematics/angular**: 21.2.9
+- **ng-packagr**: 21.2.5
+- **jest-preset-angular**: 16.0.0
+- **angular-eslint**: 21.4.0
 
 ### Build & Linting
-- **ESLint**: 9.8.0 (flat config format)
-- **Storybook**: 9.1.9 (upgraded from 8.6.14)
-- **TypeScript-ESLint**: 8.62.1
+- **ESLint**: 9.28.0 (flat config format)
+- **Storybook**: 10.5.0 (upgraded from 9.1.9; `@storybook/angular-vite` executor, Vite-based build)
+- **TypeScript-ESLint**: 8.33.1
 
 ### State Management
-- **@ngrx/effects**: 19.0.1 (compatible with Angular 20)
-- **@ngrx/signals**: 19.0.1
+- **@ngrx/effects**: 21.0.1 (compatible with Angular 21)
+- **@ngrx/signals**: 21.0.1
 - **RxJS**: 7.8.0
 
 ## Migration Log
@@ -57,6 +57,23 @@
 - ✅ Lint: Passes with some warnings (pre-existing)
 - ⚠️ Some ESLint dependency-check errors in libraries (pre-migration issues)
 
+### 2026-07-16: Nx 21.6.11 → 22.7.6 (includes Angular 20 → 21, Jest 29 → 30, Storybook 9 → 10)
+
+**Why the paired bump was required:** the issue's peer-range check suggested Angular 20 could stay as-is, but running the migration proved otherwise — Angular 21's own bundled migration schematics don't exist in the v20 package, and `jest-preset-angular@14.x`/`@storybook/angular@9.x` both hard-cap their peer range below Angular 21. So `nx migrate` carried Angular, Jest, and Storybook along with it.
+
+**What Changed:**
+- `nx`/`@nx/*` → 22.7.6, `@angular/*` → 21.2.9, `jest` → 30, `storybook` → 10 (new `@nx/vite` plugin added)
+- Storybook migrated to `@storybook/angular-vite` (Vite-based build/start executors, replacing `@storybook/angular`); added `@storybook/addon-vitest`, `@storybook/addon-a11y`, `@storybook/addon-mcp`; `test-storybook` now runs via `vitest run --config <lib>/vitest.config.ts --project=storybook` instead of the old `test-storybook` CLI
+- Jest config converted to CJS; tsconfig `module`/`moduleResolution`/`isolatedModules` updated per-project; `tsconfig.base.json` paths made relative and gained `esModuleInterop`
+- New `@mpp/shared/ui/testing` entry point (`libs/shared/ui/src/lib/mocks/index.ts`) — Storybook-only test helpers were removed from `@mpp/shared/ui`'s production barrel (they imported ESM-only `storybook/test`, which broke Jest for consumers)
+
+**Manual Fixes Applied:**
+- Lib `package.json` peer version pins bumped to Angular 21.2.9 (shared/ui, utils, util-translation, data-access) — `@nx/dependency-checks` lint failed otherwise
+- `scroll-end.directive.ts`: dropped unused `'$event'` arg — Angular 21's `@HostListener` typing now checks args against the handler's parameter count
+- Scribo libs' `.storybook/main.ts`: fixed workspace-root-relative `styles` paths, wired up `@nx/vite`'s `nxViteTsPaths()` plugin for `@mpp/*` aliases, removed a stray `zone.js` import in `feature-layout` (project is `zoneless: true`)
+
+**Build Status:** `npm run run-before-pr`, `build-storybook`, both Scribo Storybook builds, and the production build all pass. PR: [#79](https://github.com/my-personal-project-organization/my-personal-project/pull/79), closes issue [#74](https://github.com/my-personal-project-organization/my-personal-project/issues/74).
+
 ## Known Issues
 
 1. **Bundle Size Warning**: Initial bundle exceeds budget by ~105KB (may need performance optimization)
@@ -66,6 +83,6 @@
 ## Next Steps
 
 - Monitor application performance in staging/production
-- Update component selectors if needed (Angular 20 strict mode)
+- Update component selectors if needed (Angular 21 strict mode)
 - Consider addressing bundle size optimization
 - Review and fix remaining ESLint dependency-check errors if needed

@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(git status *)",
@@ -30,7 +33,17 @@
       "Bash(sed *)",
       "WebFetch(*)",
       "Bash(python3 *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(git check-ignore *)",
+      "Bash(git worktree *)",
+      "Bash(git commit -m ' *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git -C /home/mario/repos/my-personal-project log --all --oneline -- package-lock.json)",
+      "Bash(curl -s http://localhost:6097/iframe.html -o /tmp/claude-1000/-home-mario-repos-my-personal-project/86bf06d3-25de-4ab2-ad8a-67244160a273/scratchpad/iframe.html)",
+      "Bash(kill %1)",
+      "Bash(wait)",
+      "Edit(/.claude/**)",
+      "WebSearch"
     ]
   },
   "hooks": {
@@ -66,8 +79,5 @@
         ]
       }
     ]
-  },
-  "env": {
-    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
   }
 }

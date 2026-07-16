@@ -1,9 +1,9 @@
 import { provideHttpClient } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockAuthService, provideMockFirebaseConfig } from '@mpp/shared/data-access';
-import { clickOnBtnDataTestId } from '@mpp/shared/ui';
-import type { Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig, moduleMetadata } from '@storybook/angular';
+import { clickOnBtnDataTestId } from '@mpp/shared/ui/testing';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
+import { applicationConfig, moduleMetadata } from '@storybook/angular-vite';
 import { expect, within } from 'storybook/test';
 import { ScriboFeatureLayoutComponent } from './layout.component';
 

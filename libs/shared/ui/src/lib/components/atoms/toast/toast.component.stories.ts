@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import type { ArgTypes, Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig, moduleMetadata } from '@storybook/angular';
+import type { ArgTypes, Meta, StoryObj } from '@storybook/angular-vite';
+import { applicationConfig, moduleMetadata } from '@storybook/angular-vite';
 import { expect, screen, userEvent, waitFor, within } from 'storybook/test';
 import { ToastComponent, ToastTypes } from './toast.component';
 

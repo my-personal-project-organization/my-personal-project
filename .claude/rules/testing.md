@@ -18,7 +18,7 @@ This project uses a multi-layered testing strategy: Jest for unit tests, Playwri
 
 ## Unit Testing (Jest)
 
-**Framework**: Jest 29 with `jest-preset-angular` for Angular-specific setup.
+**Framework**: Jest 30 with `jest-preset-angular` for Angular-specific setup.
 
 **Run**: `npm test` or `nx test <lib>`
 
@@ -231,7 +231,7 @@ test.describe('Article List', () => {
 
 ## Component Documentation (Storybook)
 
-**Framework**: Storybook 8.6 on `libs/shared/ui`.
+**Framework**: Storybook 10.5 (`@storybook/angular-vite`, Vite-based) on `libs/shared/ui`.
 
 **Run**: `npm run storybook`
 
@@ -243,7 +243,7 @@ Stories live alongside components:
 
 ```typescript
 // libs/shared/ui/src/lib/components/atoms/button/button.stories.ts
-import type { Meta, StoryObj } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { ButtonComponent } from './button.component';
 
 const meta: Meta<ButtonComponent> = {

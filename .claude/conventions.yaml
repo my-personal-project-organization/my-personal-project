@@ -2,8 +2,8 @@
 # Conventions for my-personal-project
 # This file documents the architectural and code patterns enforced across the monorepo.
 
-# Monorepo Structure (Nx 21.6.11, Angular 20.3.9)
-# - apps/my-personal-project: Angular 20 standalone app
+# Monorepo Structure (Nx 22.7.6, Angular 21.2.9)
+# - apps/my-personal-project: Angular 21 standalone app
 # - apps/my-personal-project-e2e: Playwright e2e tests
 # - libs/cv/*, libs/scribo/*, libs/shared/*: domain libraries with tagging convention
 
@@ -27,7 +27,7 @@ library_organization:
     - "@mpp/shared/ui: shared UI components"
     - "@mpp/shared/data-access: auth guards, global stores"
 
-# Angular Component Standards (20.3.9, standalone-first)
+# Angular Component Standards (21.2.9, standalone-first)
 component_conventions:
   standalone: true
   description: All new components must be standalone; no NgModule wrappers
@@ -99,9 +99,9 @@ git_conventions:
 
 # Testing & Coverage
 testing:
-  unit: "Jest 29.7 with @nx/jest; run via npm test or nx test <lib>"
+  unit: "Jest 30.4 with @nx/jest; run via npm test or nx test <lib>"
   e2e: "Playwright 1.36+ with page objects; run via npm run e2e"
-  visual: "Storybook 9.1.9 + Chromatic visual regression on libs/shared/ui"
+  visual: "Storybook 10.5.0 (Vite-based) + Chromatic visual regression on libs/shared/ui"
   coverage: "Enforce via CI; target >70% per lib (configurable per jest.config.ts)"
 
 # Build & Deployment

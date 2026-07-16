@@ -4,8 +4,8 @@
     "rootDir": ".",
     "sourceMap": true,
     "declaration": false,
+    "esModuleInterop": true,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
@@ -16,40 +16,42 @@
     ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
     "paths": {
       "@mpp/cv/data-access": [
-        "libs/cv/data-access/src/index.ts"
+        "./libs/cv/data-access/src/index.ts"
       ],
       "@mpp/cv/feature-about": [
-        "libs/cv/feature-about/src/index.ts"
+        "./libs/cv/feature-about/src/index.ts"
       ],
       "@mpp/scribo/data-access": [
-        "libs/scribo/data-access/src/index.ts"
+        "./libs/scribo/data-access/src/index.ts"
       ],
       "@mpp/scribo/feature-article-list": [
-        "libs/scribo/feature-article-list/src/index.ts"
+        "./libs/scribo/feature-article-list/src/index.ts"
       ],
       "@mpp/scribo/feature-landing": [
-        "libs/scribo/feature-landing/src/index.ts"
+        "./libs/scribo/feature-landing/src/index.ts"
       ],
       "@mpp/scribo/feature-layout": [
-        "libs/scribo/feature-layout/src/index.ts"
+        "./libs/scribo/feature-layout/src/index.ts"
       ],
       "@mpp/scribo/feature-user-profile": [
-        "libs/scribo/feature-user-profile/src/index.ts"
+        "./libs/scribo/feature-user-profile/src/index.ts"
       ],
       "@mpp/shared/data-access": [
-        "libs/shared/data-access/src/index.ts"
+        "./libs/shared/data-access/src/index.ts"
       ],
       "@mpp/shared/ui": [
-        "libs/shared/ui/src/index.ts"
+        "./libs/shared/ui/src/index.ts"
+      ],
+      "@mpp/shared/ui/testing": [
+        "./libs/shared/ui/src/lib/mocks/index.ts"
       ],
       "@mpp/shared/util-translation": [
-        "libs/shared/util-translation/src/index.ts"
+        "./libs/shared/util-translation/src/index.ts"
       ],
       "@mpp/shared/utils": [
-        "libs/shared/utils/src/index.ts"
+        "./libs/shared/utils/src/index.ts"
       ]
     }
   },

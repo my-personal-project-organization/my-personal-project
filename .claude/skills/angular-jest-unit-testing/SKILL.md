@@ -1,10 +1,10 @@
 ---
-description: Expert Angular 20 unit testing with Jest for shared libraries. Write comprehensive specs for components (TestBed, fixture detection, async, ChangeDetectionStrategy.OnPush), services (injection, observables, mocks), directives, and utilities. Use when writing tests, debugging test failures, implementing test coverage, testing reactive forms, mocking services, testing observables, or ensuring component behavior verification. Covers Jest setup, mocking strategies, async patterns, snapshot testing, and Angular-specific testing conventions.
+description: Expert Angular 21 unit testing with Jest for shared libraries. Write comprehensive specs for components (TestBed, fixture detection, async, ChangeDetectionStrategy.OnPush), services (injection, observables, mocks), directives, and utilities. Use when writing tests, debugging test failures, implementing test coverage, testing reactive forms, mocking services, testing observables, or ensuring component behavior verification. Covers Jest setup, mocking strategies, async patterns, snapshot testing, and Angular-specific testing conventions.
 ---
 
 # Angular Jest Unit Testing
 
-Expert guide for writing, debugging, and maintaining unit tests for Angular 20 components and services using Jest. Focused on testing shared libraries and monorepo projects with signals, standalone components, and modern patterns.
+Expert guide for writing, debugging, and maintaining unit tests for Angular 21 components and services using Jest. Focused on testing shared libraries and monorepo projects with signals, standalone components, and modern patterns.
 
 ## When to Use This Skill
 
@@ -23,7 +23,7 @@ Expert guide for writing, debugging, and maintaining unit tests for Angular 20 c
 
 ## Prerequisites
 
-- Angular 20.3.9 understanding (standalone components, signals, `inject()`)
+- Angular 21.2.9 understanding (standalone components, signals, `inject()`)
 - Jest fundamentals (`test`, `expect`, `beforeEach`, `afterEach`, mocks)
 - Angular testing utilities: `TestBed`, `ComponentFixture`, `fakeAsync`, `tick`
 - Monorepo structure: `libs/` layout with `@mpp/*` import aliases
