@@ -2,13 +2,13 @@
   "name": "@mpp/shared/ui",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "20.3.9",
-    "@angular/core": "20.3.9",
-    "@angular/forms": "20.3.9",
-    "@angular/animations": "20.3.9",
+    "@angular/common": "21.2.9",
+    "@angular/core": "21.2.9",
+    "@angular/forms": "21.2.9",
+    "@angular/animations": "21.2.9",
     "@mpp/shared/utils": "0.0.1",
     "rxjs": "~7.8.0",
-    "storybook": "9.1.9"
+    "storybook": "10.5.0"
   },
   "sideEffects": false
 }

@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/angular';
+import { Meta, StoryObj } from '@storybook/angular-vite';
 import { expect, within } from 'storybook/test';
 import { SideBarComponent } from './side-bar.component';
 

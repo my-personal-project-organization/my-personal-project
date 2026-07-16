@@ -1,15 +1,26 @@
-import type { StorybookConfig } from '@storybook/angular';
+// This file has been automatically migrated to valid ESM format by Storybook.
+import type { StorybookConfig } from '@storybook/angular-vite';
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
+import { mergeConfig } from 'vite';
+import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 const require = createRequire(import.meta.url);
 
 const config: StorybookConfig = {
   stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
-  addons: [getAbsolutePath("@storybook/addon-docs")],
+  addons: [
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-mcp")
+  ],
   framework: {
-    name: getAbsolutePath("@storybook/angular"),
+    name: getAbsolutePath("@storybook/angular-vite"),
     options: {},
+  },
+  async viteFinal(viteConfig) {
+    return mergeConfig(viteConfig, {
+      plugins: [nxViteTsPaths()],
+    });
   },
 };
 

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { PaginatorComponent } from './paginator.component';
 
 import { expect, within, waitFor } from 'storybook/test';

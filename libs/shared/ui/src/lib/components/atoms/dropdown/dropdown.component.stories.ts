@@ -1,5 +1,5 @@
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { expect, waitFor, within } from 'storybook/test';
 import { DropdownComponent } from './dropdown.component';
 

@@ -1,8 +1,8 @@
 // libs/scribo/feature-layout/src/lib/components/footer/footer.component.stories.ts
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing'; // <-- Import
-import type { Meta, StoryObj } from '@storybook/angular';
-import { moduleMetadata } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
+import { moduleMetadata } from '@storybook/angular-vite';
 import { expect, within } from 'storybook/test';
 import { FooterComponent } from './footer.component';
 

@@ -1,4 +1,4 @@
-import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular';
+import { moduleMetadata, type Meta, type StoryObj } from '@storybook/angular-vite';
 import { DarkModeSwitcherComponent } from './dark-mode-switcher.component';
 
 import { expect, within, waitFor } from 'storybook/test';

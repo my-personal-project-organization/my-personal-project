@@ -33,14 +33,14 @@
       "executor": "@nx/eslint:lint"
     },
     "storybook": {
-      "executor": "@storybook/angular:start-storybook",
+      "executor": "@storybook/angular-vite:start-storybook",
       "options": {
-        "styles": ["libs/shared/ui/src/styles/styles.scss"],
+        "styles": ["src/styles/styles.scss"],
         "port": 4400,
         "configDir": "libs/shared/ui/.storybook",
         "browserTarget": "shared/ui:build-storybook",
         "compodoc": false,
-        "experimentalZoneless": true
+        "zoneless": true
       },
       "configurations": {
         "ci": {
@@ -49,15 +49,15 @@
       }
     },
     "build-storybook": {
-      "executor": "@storybook/angular:build-storybook",
+      "executor": "@storybook/angular-vite:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "styles": ["libs/shared/ui/src/styles/styles.scss"],
+        "styles": ["src/styles/styles.scss"],
         "outputDir": "dist/storybook/shared/ui",
         "configDir": "libs/shared/ui/.storybook",
         "browserTarget": "shared/ui:build-storybook",
         "compodoc": false,
-        "experimentalZoneless": true
+        "zoneless": true
       },
       "configurations": {
         "ci": {

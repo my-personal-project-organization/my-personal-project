@@ -45,6 +45,9 @@
       "@mpp/shared/ui": [
         "libs/shared/ui/src/index.ts"
       ],
+      "@mpp/shared/ui/testing": [
+        "libs/shared/ui/src/lib/mocks/index.ts"
+      ],
       "@mpp/shared/util-translation": [
         "libs/shared/util-translation/src/index.ts"
       ],

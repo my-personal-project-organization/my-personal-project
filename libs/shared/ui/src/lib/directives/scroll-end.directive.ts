@@ -11,7 +11,7 @@ export class ScrollEndDirective {
    * This TypeScript function detects when the user has scrolled to the bottom of the page and emits
    * an event.
    */
-  @HostListener('window:scroll', ['$event'])
+  @HostListener('window:scroll')
   onWindowScroll() {
     if (
       window.innerHeight + window.scrollY >=

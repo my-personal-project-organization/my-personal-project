@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/angular';
+import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { DialogComponent } from './dialog.component';
 
 import { expect, within } from 'storybook/test';
