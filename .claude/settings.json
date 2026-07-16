@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
+  },
   "permissions": {
     "allow": [
       "Bash(git status *)",
@@ -30,7 +33,12 @@
       "Bash(sed *)",
       "WebFetch(*)",
       "Bash(python3 *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(git check-ignore *)",
+      "Bash(git worktree *)",
+      "Bash(git commit -m ' *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git -C /home/mario/repos/my-personal-project log --all --oneline -- package-lock.json)"
     ]
   },
   "hooks": {
@@ -66,8 +74,5 @@
         ]
       }
     ]
-  },
-  "env": {
-    "CLAUDE_CODE_ENABLE_AUTO_MODE": "1"
   }
 }
