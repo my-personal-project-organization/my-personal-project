@@ -27,7 +27,7 @@ It consists of two main sections:
 
 ## Technologies Used
 
-- [Angular](https://angular.io/) (v20+) - Frontend framework
+- [Angular](https://angular.io/) (v21+) - Frontend framework
 - [Nx](https://nx.dev/) - Monorepo build system
 - [NgRx Signals](https://ngrx.io/guide/signals) - State management
 - [Firebase](https://firebase.google.com/) - Backend services (Authentication, Firestore)
@@ -177,7 +177,7 @@ This structure ensures modularity, reusability, and scalability, making it easie
 ```bash
 my-personal-project/
 ├── apps/
-│   ├── my-personal-project/        # Main web application (Angular 20 standalone)
+│   ├── my-personal-project/        # Main web application (Angular 21 standalone)
 │   │   └── src/
 │   │       ├── app/                # Feature modules (cv, scribo, auth)
 │   │       ├── environments/       # Environment configurations

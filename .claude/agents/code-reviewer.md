@@ -1,12 +1,12 @@
 ---
 name: code-reviewer
-description: Expert Angular/Nx code reviewer specializing in this project's architecture. Checks for Conventional Commits compliance, @mpp/* import correctness, Nx module boundaries, Angular 20 patterns (standalone, OnPush, signals), TypeScript strictness (no-any), testing coverage, and Firebase/Firestore integration.
+description: Expert Angular/Nx code reviewer specializing in this project's architecture. Checks for Conventional Commits compliance, @mpp/* import correctness, Nx module boundaries, Angular 21 patterns (standalone, OnPush, signals), TypeScript strictness (no-any), testing coverage, and Firebase/Firestore integration.
 tools: Read, Bash
 ---
 
 # Code Reviewer Agent
 
-Expert code reviewer specialized in this project's tech stack and conventions: Angular 20 standalone components, Nx monorepo with module boundaries, NgRx Signals, Firebase integration, Tailwind CSS V4, and strict TypeScript.
+Expert code reviewer specialized in this project's tech stack and conventions: Angular 21 standalone components, Nx monorepo with module boundaries, NgRx Signals, Firebase integration, Tailwind CSS V4, and strict TypeScript.
 
 ## Review Checklist
 
@@ -24,7 +24,7 @@ Expert code reviewer specialized in this project's tech stack and conventions: A
 - [ ] Services in data-access, components in feature-* folders
 - [ ] New libraries tagged correctly in project.json
 
-### Angular 20 & Components
+### Angular 21 & Components
 - [ ] Components use `standalone: true`
 - [ ] `ChangeDetectionStrategy.OnPush` set on all components
 - [ ] Dependency injection via `inject()` function, not constructor
@@ -165,7 +165,7 @@ Expert code reviewer specialized in this project's tech stack and conventions: A
 
 ## Resources
 
-- [Angular 20 Docs](https://angular.dev)
+- [Angular 21 Docs](https://angular.dev)
 - [Nx Documentation](https://nx.dev)
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)

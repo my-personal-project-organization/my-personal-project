@@ -1,9 +1,9 @@
 ---
 name: angular-conventions
-description: Angular 20 patterns for this project - zoneless change detection, signals (mature), signal outputs, OnPush, inject() DI, typed forms, modern control flow
+description: Angular 21 patterns for this project - zoneless change detection, signals (mature), signal outputs, OnPush, inject() DI, typed forms, modern control flow
 ---
 
-# Angular 20 Conventions
+# Angular 21 Conventions
 
 ## Core Architecture Principles
 
@@ -56,7 +56,7 @@ export class MyComponent {
 }
 ```
 
-**Why OnPush** (Angular 20): Explicit change detection strategy. While zoneless removes Zone.js overhead, OnPush is still recommended for:
+**Why OnPush**: Explicit change detection strategy. Zoneless (this project's mode since Angular 20, and the framework default as of Angular 21) removes Zone.js overhead, but OnPush is still recommended for:
 - Clear intent and predictability
 - Better performance in large component trees
 - Easier debugging and testing
@@ -159,6 +159,8 @@ export class MyComponent {
   }
 }
 ```
+
+**Signal Forms**: Angular 21 introduced Signal Forms (signal-based form models, schema-based validation) as an **experimental** API. Do not adopt it in this project yet — keep using typed reactive forms above until it stabilizes.
 
 ## File Organization
 
