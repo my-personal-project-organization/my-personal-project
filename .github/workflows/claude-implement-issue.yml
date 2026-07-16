@@ -8,18 +8,46 @@ permissions:
   issues: write
   pull-requests: write
 
+concurrency:
+  group: claude-implement-${{ github.event.issue.number }}
+  cancel-in-progress: true
+
 jobs:
   claude-implement:
     if: |
       github.event.issue.pull_request == null &&
       contains(github.event.comment.body, '@claude implement')
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # full history so Claude can branch and diff cleanly
+          fetch-depth: 0 # full history so Claude can branch, diff, and nx affected cleanly
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
       - uses: anthropics/claude-code-action@558b1d6cab4085c7753fe402c10bef0fbb92ac7a # v1.0.165
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           trigger_phrase: "@claude implement"
+          claude_args: |
+            --allowedTools "Bash(npm:*),Bash(npx nx:*),Bash(npx playwright:*),Bash(git:*),Bash(gh pr create:*),Bash(gh pr view:*)"
+            --system-prompt "Before opening a pull request, run 'npm run run-before-pr' (lint, test, build, and e2e on affected projects). If it fails, fix the underlying issue and re-run it until it passes, then push your branch and run 'gh pr create' to open the pull request, filling in a clear title and description of the change. If e2e tests fail for reasons unrelated to your change, note that clearly in the PR description instead of trying to fix unrelated flaky tests."

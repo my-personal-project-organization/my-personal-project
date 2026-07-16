@@ -2,22 +2,30 @@
 import type { StorybookConfig } from '@storybook/angular-vite';
 import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { mergeConfig } from 'vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 import { workspaceRoot } from '@nx/devkit';
 
 const require = createRequire(import.meta.url);
+const configDirname = dirname(fileURLToPath(import.meta.url));
 
 const config: StorybookConfig = {
   stories: ['../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   addons: [
     getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-vitest"),
+    getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("@storybook/addon-mcp")
   ],
   framework: {
     name: getAbsolutePath("@storybook/angular-vite"),
     options: {
       compodoc: false,
+      // Absolute path: the framework's default ("./.storybook/tsconfig.json")
+      // resolves against process.cwd(), which is the workspace root when
+      // running under the Vitest addon, not this lib's directory.
+      tsconfig: join(configDirname, 'tsconfig.json'),
     },
   },
   async viteFinal(viteConfig) {

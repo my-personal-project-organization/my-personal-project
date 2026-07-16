@@ -55,7 +55,6 @@
     "@nx/workspace": "22.7.6",
     "@playwright/test": "^1.36.0",
     "@schematics/angular": "21.2.9",
-    "@storybook/test-runner": "0.24.4",
     "@swc-node/register": "1.12.0",
     "@swc/core": "1.15.8",
     "@swc/helpers": "0.5.23",

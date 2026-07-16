@@ -8,7 +8,11 @@
     "@angular/animations": "21.2.9",
     "@mpp/shared/utils": "0.0.1",
     "rxjs": "~7.8.0",
-    "storybook": "10.5.0"
+    "storybook": "10.5.0",
+    "vitest": "^4.1.10",
+    "@storybook/addon-vitest": "10.5.0",
+    "@storybook/angular-vite": "10.5.0",
+    "@vitest/browser-playwright": "^4.1.10"
   },
   "sideEffects": false
 }

@@ -53,7 +53,7 @@
     "test-storybook": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "test-storybook -c libs/scribo/feature-landing/.storybook --url=http://localhost:4400"
+        "command": "vitest run --config libs/scribo/feature-landing/vitest.config.ts --project=storybook"
       }
     },
     "static-storybook": {
