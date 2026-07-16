@@ -38,7 +38,10 @@
       "Bash(git worktree *)",
       "Bash(git commit -m ' *)",
       "Bash(echo \"exit: $?\")",
-      "Bash(git -C /home/mario/repos/my-personal-project log --all --oneline -- package-lock.json)"
+      "Bash(git -C /home/mario/repos/my-personal-project log --all --oneline -- package-lock.json)",
+      "Bash(curl -s http://localhost:6097/iframe.html -o /tmp/claude-1000/-home-mario-repos-my-personal-project/86bf06d3-25de-4ab2-ad8a-67244160a273/scratchpad/iframe.html)",
+      "Bash(kill %1)",
+      "Bash(wait)"
     ]
   },
   "hooks": {

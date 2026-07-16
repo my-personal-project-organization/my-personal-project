@@ -4,6 +4,7 @@ import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { mergeConfig } from 'vite';
 import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
+import { workspaceRoot } from '@nx/devkit';
 
 const require = createRequire(import.meta.url);
 
@@ -15,11 +16,21 @@ const config: StorybookConfig = {
   ],
   framework: {
     name: getAbsolutePath("@storybook/angular-vite"),
-    options: {},
+    options: {
+      compodoc: false,
+    },
   },
   async viteFinal(viteConfig) {
     return mergeConfig(viteConfig, {
       plugins: [nxViteTsPaths()],
+      css: {
+        // Vite's postcss config search stops at the nearest ancestor
+        // package.json (libs/shared/ui/package.json) because this repo has
+        // no npm/pnpm workspaces marker, so it never reaches the root
+        // .postcssrc.json that wires up @tailwindcss/postcss. Point the
+        // search explicitly at the workspace root to pick it up.
+        postcss: workspaceRoot,
+      },
     });
   },
 };
